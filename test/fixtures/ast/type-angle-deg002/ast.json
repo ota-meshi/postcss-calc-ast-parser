@@ -1,0 +1,44 @@
+[
+    {
+        "parent": null,
+        "type": "Root",
+        "nodes": [
+            {
+                "parent": "Root",
+                "type": "Angle",
+                "value": 80,
+                "unit": "deg",
+                "raws": {
+                    "before": "",
+                    "value": {
+                        "raw": "80",
+                        "value": 80
+                    },
+                    "unit": {
+                        "raw": "DEG",
+                        "value": "deg"
+                    }
+                },
+                "source": {
+                    "start": {
+                        "index": 0
+                    },
+                    "end": {
+                        "index": 5
+                    }
+                }
+            }
+        ],
+        "raws": {
+            "after": ""
+        },
+        "source": {
+            "start": {
+                "index": 0
+            },
+            "end": {
+                "index": 5
+            }
+        }
+    }
+]

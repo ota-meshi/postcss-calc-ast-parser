@@ -1,0 +1,44 @@
+[
+    {
+        "parent": null,
+        "type": "Root",
+        "nodes": [
+            {
+                "parent": "Root",
+                "type": "Time",
+                "value": 80,
+                "unit": "ms",
+                "raws": {
+                    "before": "",
+                    "value": {
+                        "raw": "80",
+                        "value": 80
+                    },
+                    "unit": {
+                        "raw": "MS",
+                        "value": "ms"
+                    }
+                },
+                "source": {
+                    "start": {
+                        "index": 0
+                    },
+                    "end": {
+                        "index": 4
+                    }
+                }
+            }
+        ],
+        "raws": {
+            "after": ""
+        },
+        "source": {
+            "start": {
+                "index": 0
+            },
+            "end": {
+                "index": 4
+            }
+        }
+    }
+]

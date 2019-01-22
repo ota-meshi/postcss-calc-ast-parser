@@ -1,0 +1,73 @@
+[
+    {
+        "errors": [
+            {
+                "code": "unexpected-calc-token",
+                "index": 8
+            }
+        ]
+    },
+    {
+        "errors": [
+            {
+                "code": "unexpected-calc-token",
+                "index": 8
+            },
+            {
+                "code": "unexpected-calc-token",
+                "index": 10
+            }
+        ]
+    },
+    {
+        "errors": [
+            {
+                "code": "unexpected-calc-token",
+                "index": 12
+            }
+        ]
+    },
+    {
+        "errors": [
+            {
+                "code": "unexpected-calc-token",
+                "index": 12
+            },
+            {
+                "code": "unexpected-calc-token",
+                "index": 14
+            }
+        ]
+    },
+    {
+        "errors": []
+    },
+    {
+        "errors": [
+            {
+                "code": "unexpected-calc-token",
+                "index": 8
+            }
+        ]
+    },
+    {
+        "errors": [
+            {
+                "code": "unexpected-calc-token",
+                "index": 8
+            }
+        ]
+    },
+    {
+        "errors": [
+            {
+                "code": "unexpected-calc-token",
+                "index": 8
+            },
+            {
+                "code": "unexpected-calc-token",
+                "index": 10
+            }
+        ]
+    }
+]

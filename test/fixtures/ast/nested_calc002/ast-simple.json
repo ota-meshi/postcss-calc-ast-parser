@@ -1,0 +1,55 @@
+[
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "type": "MathExpression",
+                        "left": {
+                            "type": "Length",
+                            "value": 100,
+                            "unit": "px"
+                        },
+                        "operator": "-",
+                        "right": {
+                            "type": "Parentheses",
+                            "nodes": [
+                                {
+                                    "type": "MathExpression",
+                                    "left": {
+                                        "type": "Length",
+                                        "value": 80,
+                                        "unit": "px"
+                                    },
+                                    "operator": "+",
+                                    "right": {
+                                        "type": "Function",
+                                        "name": "calc",
+                                        "nodes": [
+                                            {
+                                                "type": "MathExpression",
+                                                "left": {
+                                                    "type": "Length",
+                                                    "value": 80,
+                                                    "unit": "px"
+                                                },
+                                                "operator": "*",
+                                                "right": {
+                                                    "type": "Number",
+                                                    "value": 2
+                                                }
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+]

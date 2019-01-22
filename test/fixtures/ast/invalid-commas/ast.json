@@ -1,0 +1,836 @@
+[
+    {
+        "parent": null,
+        "type": "Root",
+        "nodes": [
+            {
+                "parent": "Root",
+                "type": "Function",
+                "name": "clamp",
+                "nodes": [
+                    {
+                        "parent": "Function",
+                        "type": "Number",
+                        "value": 1,
+                        "raws": {
+                            "before": "",
+                            "value": {
+                                "raw": "1",
+                                "value": 1
+                            }
+                        },
+                        "source": {
+                            "start": {
+                                "index": 6
+                            },
+                            "end": {
+                                "index": 7
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Punctuator",
+                        "value": ",",
+                        "raws": {
+                            "before": " "
+                        },
+                        "source": {
+                            "start": {
+                                "index": 8
+                            },
+                            "end": {
+                                "index": 9
+                            }
+                        }
+                    }
+                ],
+                "raws": {
+                    "before": ""
+                },
+                "source": {
+                    "start": {
+                        "index": 0
+                    },
+                    "end": {
+                        "index": 10
+                    }
+                }
+            }
+        ],
+        "raws": {
+            "after": ""
+        },
+        "source": {
+            "start": {
+                "index": 0
+            },
+            "end": {
+                "index": 10
+            }
+        }
+    },
+    {
+        "parent": null,
+        "type": "Root",
+        "nodes": [
+            {
+                "parent": "Root",
+                "type": "Function",
+                "name": "clamp",
+                "nodes": [
+                    {
+                        "parent": "Function",
+                        "type": "Number",
+                        "value": 1,
+                        "raws": {
+                            "before": "",
+                            "value": {
+                                "raw": "1",
+                                "value": 1
+                            }
+                        },
+                        "source": {
+                            "start": {
+                                "index": 6
+                            },
+                            "end": {
+                                "index": 7
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Operator",
+                        "value": "-",
+                        "raws": {
+                            "before": " "
+                        },
+                        "source": {
+                            "start": {
+                                "index": 8
+                            },
+                            "end": {
+                                "index": 9
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Punctuator",
+                        "value": ",",
+                        "raws": {
+                            "before": " "
+                        },
+                        "source": {
+                            "start": {
+                                "index": 10
+                            },
+                            "end": {
+                                "index": 11
+                            }
+                        }
+                    }
+                ],
+                "raws": {
+                    "before": ""
+                },
+                "source": {
+                    "start": {
+                        "index": 0
+                    },
+                    "end": {
+                        "index": 12
+                    }
+                }
+            }
+        ],
+        "raws": {
+            "after": ""
+        },
+        "source": {
+            "start": {
+                "index": 0
+            },
+            "end": {
+                "index": 12
+            }
+        }
+    },
+    {
+        "parent": null,
+        "type": "Root",
+        "nodes": [
+            {
+                "parent": "Root",
+                "type": "Function",
+                "name": "clamp",
+                "nodes": [
+                    {
+                        "parent": "Function",
+                        "type": "MathExpression",
+                        "left": {
+                            "parent": "MathExpression",
+                            "type": "Number",
+                            "value": 1,
+                            "raws": {
+                                "before": "",
+                                "value": {
+                                    "raw": "1",
+                                    "value": 1
+                                }
+                            },
+                            "source": {
+                                "start": {
+                                    "index": 6
+                                },
+                                "end": {
+                                    "index": 7
+                                }
+                            }
+                        },
+                        "operator": "-",
+                        "right": {
+                            "parent": "MathExpression",
+                            "type": "Number",
+                            "value": 1,
+                            "raws": {
+                                "before": " ",
+                                "value": {
+                                    "raw": "1",
+                                    "value": 1
+                                }
+                            },
+                            "source": {
+                                "start": {
+                                    "index": 10
+                                },
+                                "end": {
+                                    "index": 11
+                                }
+                            }
+                        },
+                        "raws": {
+                            "before": "",
+                            "between": " "
+                        },
+                        "source": {
+                            "start": {
+                                "index": 6
+                            },
+                            "operator": {
+                                "start": {
+                                    "index": 8
+                                },
+                                "end": {
+                                    "index": 9
+                                }
+                            },
+                            "end": {
+                                "index": 11
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Punctuator",
+                        "value": ",",
+                        "raws": {
+                            "before": " "
+                        },
+                        "source": {
+                            "start": {
+                                "index": 12
+                            },
+                            "end": {
+                                "index": 13
+                            }
+                        }
+                    }
+                ],
+                "raws": {
+                    "before": ""
+                },
+                "source": {
+                    "start": {
+                        "index": 0
+                    },
+                    "end": {
+                        "index": 14
+                    }
+                }
+            }
+        ],
+        "raws": {
+            "after": ""
+        },
+        "source": {
+            "start": {
+                "index": 0
+            },
+            "end": {
+                "index": 14
+            }
+        }
+    },
+    {
+        "parent": null,
+        "type": "Root",
+        "nodes": [
+            {
+                "parent": "Root",
+                "type": "Function",
+                "name": "clamp",
+                "nodes": [
+                    {
+                        "parent": "Function",
+                        "type": "MathExpression",
+                        "left": {
+                            "parent": "MathExpression",
+                            "type": "Number",
+                            "value": 1,
+                            "raws": {
+                                "before": "",
+                                "value": {
+                                    "raw": "1",
+                                    "value": 1
+                                }
+                            },
+                            "source": {
+                                "start": {
+                                    "index": 6
+                                },
+                                "end": {
+                                    "index": 7
+                                }
+                            }
+                        },
+                        "operator": "-",
+                        "right": {
+                            "parent": "MathExpression",
+                            "type": "Number",
+                            "value": 1,
+                            "raws": {
+                                "before": " ",
+                                "value": {
+                                    "raw": "1",
+                                    "value": 1
+                                }
+                            },
+                            "source": {
+                                "start": {
+                                    "index": 10
+                                },
+                                "end": {
+                                    "index": 11
+                                }
+                            }
+                        },
+                        "raws": {
+                            "before": "",
+                            "between": " "
+                        },
+                        "source": {
+                            "start": {
+                                "index": 6
+                            },
+                            "operator": {
+                                "start": {
+                                    "index": 8
+                                },
+                                "end": {
+                                    "index": 9
+                                }
+                            },
+                            "end": {
+                                "index": 11
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Operator",
+                        "value": "-",
+                        "raws": {
+                            "before": " "
+                        },
+                        "source": {
+                            "start": {
+                                "index": 12
+                            },
+                            "end": {
+                                "index": 13
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Punctuator",
+                        "value": ",",
+                        "raws": {
+                            "before": " "
+                        },
+                        "source": {
+                            "start": {
+                                "index": 14
+                            },
+                            "end": {
+                                "index": 15
+                            }
+                        }
+                    }
+                ],
+                "raws": {
+                    "before": ""
+                },
+                "source": {
+                    "start": {
+                        "index": 0
+                    },
+                    "end": {
+                        "index": 16
+                    }
+                }
+            }
+        ],
+        "raws": {
+            "after": ""
+        },
+        "source": {
+            "start": {
+                "index": 0
+            },
+            "end": {
+                "index": 16
+            }
+        }
+    },
+    {
+        "parent": null,
+        "type": "Root",
+        "nodes": [
+            {
+                "parent": "Root",
+                "type": "Function",
+                "name": "clamp",
+                "nodes": [
+                    {
+                        "parent": "Function",
+                        "type": "Number",
+                        "value": 1,
+                        "raws": {
+                            "before": "",
+                            "value": {
+                                "raw": "1",
+                                "value": 1
+                            }
+                        },
+                        "source": {
+                            "start": {
+                                "index": 6
+                            },
+                            "end": {
+                                "index": 7
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Punctuator",
+                        "value": ",",
+                        "raws": {
+                            "before": " "
+                        },
+                        "source": {
+                            "start": {
+                                "index": 8
+                            },
+                            "end": {
+                                "index": 9
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Number",
+                        "value": 1,
+                        "raws": {
+                            "before": " ",
+                            "value": {
+                                "raw": "1",
+                                "value": 1
+                            }
+                        },
+                        "source": {
+                            "start": {
+                                "index": 10
+                            },
+                            "end": {
+                                "index": 11
+                            }
+                        }
+                    }
+                ],
+                "raws": {
+                    "before": ""
+                },
+                "source": {
+                    "start": {
+                        "index": 0
+                    },
+                    "end": {
+                        "index": 12
+                    }
+                }
+            }
+        ],
+        "raws": {
+            "after": ""
+        },
+        "source": {
+            "start": {
+                "index": 0
+            },
+            "end": {
+                "index": 12
+            }
+        }
+    },
+    {
+        "parent": null,
+        "type": "Root",
+        "nodes": [
+            {
+                "parent": "Root",
+                "type": "Function",
+                "name": "clamp",
+                "nodes": [
+                    {
+                        "parent": "Function",
+                        "type": "Number",
+                        "value": 1,
+                        "raws": {
+                            "before": "",
+                            "value": {
+                                "raw": "1",
+                                "value": 1
+                            }
+                        },
+                        "source": {
+                            "start": {
+                                "index": 6
+                            },
+                            "end": {
+                                "index": 7
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Punctuator",
+                        "value": ",",
+                        "raws": {
+                            "before": " "
+                        },
+                        "source": {
+                            "start": {
+                                "index": 8
+                            },
+                            "end": {
+                                "index": 9
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Operator",
+                        "value": "-",
+                        "raws": {
+                            "before": " "
+                        },
+                        "source": {
+                            "start": {
+                                "index": 10
+                            },
+                            "end": {
+                                "index": 11
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Number",
+                        "value": 1,
+                        "raws": {
+                            "before": " ",
+                            "value": {
+                                "raw": "1",
+                                "value": 1
+                            }
+                        },
+                        "source": {
+                            "start": {
+                                "index": 12
+                            },
+                            "end": {
+                                "index": 13
+                            }
+                        }
+                    }
+                ],
+                "raws": {
+                    "before": ""
+                },
+                "source": {
+                    "start": {
+                        "index": 0
+                    },
+                    "end": {
+                        "index": 14
+                    }
+                }
+            }
+        ],
+        "raws": {
+            "after": ""
+        },
+        "source": {
+            "start": {
+                "index": 0
+            },
+            "end": {
+                "index": 14
+            }
+        }
+    },
+    {
+        "parent": null,
+        "type": "Root",
+        "nodes": [
+            {
+                "parent": "Root",
+                "type": "Function",
+                "name": "clamp",
+                "nodes": [
+                    {
+                        "parent": "Function",
+                        "type": "Number",
+                        "value": 1,
+                        "raws": {
+                            "before": "",
+                            "value": {
+                                "raw": "1",
+                                "value": 1
+                            }
+                        },
+                        "source": {
+                            "start": {
+                                "index": 6
+                            },
+                            "end": {
+                                "index": 7
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Punctuator",
+                        "value": ",",
+                        "raws": {
+                            "before": " "
+                        },
+                        "source": {
+                            "start": {
+                                "index": 8
+                            },
+                            "end": {
+                                "index": 9
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Punctuator",
+                        "value": ",",
+                        "raws": {
+                            "before": " "
+                        },
+                        "source": {
+                            "start": {
+                                "index": 10
+                            },
+                            "end": {
+                                "index": 11
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Number",
+                        "value": 1,
+                        "raws": {
+                            "before": " ",
+                            "value": {
+                                "raw": "1",
+                                "value": 1
+                            }
+                        },
+                        "source": {
+                            "start": {
+                                "index": 12
+                            },
+                            "end": {
+                                "index": 13
+                            }
+                        }
+                    }
+                ],
+                "raws": {
+                    "before": ""
+                },
+                "source": {
+                    "start": {
+                        "index": 0
+                    },
+                    "end": {
+                        "index": 14
+                    }
+                }
+            }
+        ],
+        "raws": {
+            "after": ""
+        },
+        "source": {
+            "start": {
+                "index": 0
+            },
+            "end": {
+                "index": 14
+            }
+        }
+    },
+    {
+        "parent": null,
+        "type": "Root",
+        "nodes": [
+            {
+                "parent": "Root",
+                "type": "Function",
+                "name": "clamp",
+                "nodes": [
+                    {
+                        "parent": "Function",
+                        "type": "Number",
+                        "value": 1,
+                        "raws": {
+                            "before": "",
+                            "value": {
+                                "raw": "1",
+                                "value": 1
+                            }
+                        },
+                        "source": {
+                            "start": {
+                                "index": 6
+                            },
+                            "end": {
+                                "index": 7
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Punctuator",
+                        "value": ",",
+                        "raws": {
+                            "before": " "
+                        },
+                        "source": {
+                            "start": {
+                                "index": 8
+                            },
+                            "end": {
+                                "index": 9
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Punctuator",
+                        "value": ",",
+                        "raws": {
+                            "before": " "
+                        },
+                        "source": {
+                            "start": {
+                                "index": 10
+                            },
+                            "end": {
+                                "index": 11
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Operator",
+                        "value": "-",
+                        "raws": {
+                            "before": " "
+                        },
+                        "source": {
+                            "start": {
+                                "index": 12
+                            },
+                            "end": {
+                                "index": 13
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Number",
+                        "value": 1,
+                        "raws": {
+                            "before": " ",
+                            "value": {
+                                "raw": "1",
+                                "value": 1
+                            }
+                        },
+                        "source": {
+                            "start": {
+                                "index": 14
+                            },
+                            "end": {
+                                "index": 15
+                            }
+                        }
+                    }
+                ],
+                "raws": {
+                    "before": ""
+                },
+                "source": {
+                    "start": {
+                        "index": 0
+                    },
+                    "end": {
+                        "index": 16
+                    }
+                }
+            }
+        ],
+        "raws": {
+            "after": ""
+        },
+        "source": {
+            "start": {
+                "index": 0
+            },
+            "end": {
+                "index": 16
+            }
+        }
+    }
+]

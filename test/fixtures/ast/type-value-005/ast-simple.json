@@ -1,0 +1,11 @@
+[
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Number",
+                "value": 1000
+            }
+        ]
+    }
+]

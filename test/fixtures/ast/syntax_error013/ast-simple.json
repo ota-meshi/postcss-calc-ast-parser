@@ -1,0 +1,25 @@
+[
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "type": "Word",
+                        "value": "X"
+                    },
+                    {
+                        "type": "Punctuator",
+                        "value": ","
+                    },
+                    {
+                        "type": "Operator",
+                        "value": "-"
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -1,0 +1,167 @@
+[
+    {
+        "parent": null,
+        "type": "Root",
+        "nodes": [
+            {
+                "parent": "Root",
+                "type": "Function",
+                "name": "CALC",
+                "nodes": [
+                    {
+                        "parent": "Function",
+                        "type": "MathExpression",
+                        "left": {
+                            "parent": "MathExpression",
+                            "type": "MathExpression",
+                            "left": {
+                                "parent": "MathExpression",
+                                "type": "Percentage",
+                                "value": 100,
+                                "unit": "%",
+                                "raws": {
+                                    "before": "",
+                                    "value": {
+                                        "raw": "100",
+                                        "value": 100
+                                    }
+                                },
+                                "source": {
+                                    "start": {
+                                        "index": 5
+                                    },
+                                    "end": {
+                                        "index": 9
+                                    }
+                                }
+                            },
+                            "operator": "-",
+                            "right": {
+                                "parent": "MathExpression",
+                                "type": "Length",
+                                "value": 80,
+                                "unit": "px",
+                                "raws": {
+                                    "before": " ",
+                                    "value": {
+                                        "raw": "80",
+                                        "value": 80
+                                    },
+                                    "unit": {
+                                        "raw": "PX",
+                                        "value": "px"
+                                    }
+                                },
+                                "source": {
+                                    "start": {
+                                        "index": 12
+                                    },
+                                    "end": {
+                                        "index": 16
+                                    }
+                                }
+                            },
+                            "raws": {
+                                "before": "",
+                                "between": " "
+                            },
+                            "source": {
+                                "start": {
+                                    "index": 5
+                                },
+                                "operator": {
+                                    "start": {
+                                        "index": 10
+                                    },
+                                    "end": {
+                                        "index": 11
+                                    }
+                                },
+                                "end": {
+                                    "index": 16
+                                }
+                            }
+                        },
+                        "operator": "+",
+                        "right": {
+                            "parent": "MathExpression",
+                            "type": "Function",
+                            "name": "VAR",
+                            "nodes": [
+                                {
+                                    "parent": "Function",
+                                    "type": "Word",
+                                    "value": "--FOO",
+                                    "raws": {
+                                        "before": ""
+                                    },
+                                    "source": {
+                                        "start": {
+                                            "index": 23
+                                        },
+                                        "end": {
+                                            "index": 28
+                                        }
+                                    }
+                                }
+                            ],
+                            "raws": {
+                                "before": " "
+                            },
+                            "source": {
+                                "start": {
+                                    "index": 19
+                                },
+                                "end": {
+                                    "index": 29
+                                }
+                            }
+                        },
+                        "raws": {
+                            "before": "",
+                            "between": " "
+                        },
+                        "source": {
+                            "start": {
+                                "index": 5
+                            },
+                            "operator": {
+                                "start": {
+                                    "index": 17
+                                },
+                                "end": {
+                                    "index": 18
+                                }
+                            },
+                            "end": {
+                                "index": 29
+                            }
+                        }
+                    }
+                ],
+                "raws": {
+                    "before": ""
+                },
+                "source": {
+                    "start": {
+                        "index": 0
+                    },
+                    "end": {
+                        "index": 30
+                    }
+                }
+            }
+        ],
+        "raws": {
+            "after": ""
+        },
+        "source": {
+            "start": {
+                "index": 0
+            },
+            "end": {
+                "index": 30
+            }
+        }
+    }
+]

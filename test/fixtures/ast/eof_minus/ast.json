@@ -1,0 +1,75 @@
+[
+    {
+        "parent": null,
+        "type": "Root",
+        "nodes": [
+            {
+                "parent": "Root",
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "parent": "Function",
+                        "type": "Percentage",
+                        "value": 100,
+                        "unit": "%",
+                        "raws": {
+                            "before": "",
+                            "value": {
+                                "raw": "100",
+                                "value": 100
+                            }
+                        },
+                        "source": {
+                            "start": {
+                                "index": 5
+                            },
+                            "end": {
+                                "index": 9
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Operator",
+                        "value": "-",
+                        "raws": {
+                            "before": " "
+                        },
+                        "source": {
+                            "start": {
+                                "index": 10
+                            },
+                            "end": {
+                                "index": 11
+                            }
+                        }
+                    }
+                ],
+                "raws": {
+                    "before": ""
+                },
+                "source": {
+                    "start": {
+                        "index": 0
+                    },
+                    "end": {
+                        "index": 11
+                    }
+                },
+                "unclosed": true
+            }
+        ],
+        "raws": {
+            "after": ""
+        },
+        "source": {
+            "start": {
+                "index": 0
+            },
+            "end": {
+                "index": 11
+            }
+        }
+    }
+]

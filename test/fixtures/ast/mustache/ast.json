@@ -1,0 +1,122 @@
+[
+    {
+        "parent": null,
+        "type": "Root",
+        "nodes": [
+            {
+                "parent": "Root",
+                "type": "MathExpression",
+                "left": {
+                    "parent": "MathExpression",
+                    "type": "Length",
+                    "value": 50,
+                    "unit": "px",
+                    "raws": {
+                        "before": "",
+                        "value": {
+                            "raw": "50",
+                            "value": 50
+                        }
+                    },
+                    "source": {
+                        "start": {
+                            "index": 0
+                        },
+                        "end": {
+                            "index": 4
+                        }
+                    }
+                },
+                "operator": "+",
+                "right": {
+                    "parent": "MathExpression",
+                    "type": "MathExpression",
+                    "left": {
+                        "parent": "MathExpression",
+                        "type": "Word",
+                        "value": "{{ a + b - c * d / e + (f + g)}}",
+                        "raws": {
+                            "before": ""
+                        },
+                        "source": {
+                            "start": {
+                                "index": 7
+                            },
+                            "end": {
+                                "index": 39
+                            }
+                        }
+                    },
+                    "operator": "*",
+                    "right": {
+                        "parent": "MathExpression",
+                        "type": "Word",
+                        "value": "{{{a-b*(c/d)}}}",
+                        "raws": {
+                            "before": " "
+                        },
+                        "source": {
+                            "start": {
+                                "index": 42
+                            },
+                            "end": {
+                                "index": 57
+                            }
+                        }
+                    },
+                    "raws": {
+                        "before": " ",
+                        "between": " "
+                    },
+                    "source": {
+                        "start": {
+                            "index": 7
+                        },
+                        "operator": {
+                            "start": {
+                                "index": 40
+                            },
+                            "end": {
+                                "index": 41
+                            }
+                        },
+                        "end": {
+                            "index": 57
+                        }
+                    }
+                },
+                "raws": {
+                    "before": "",
+                    "between": " "
+                },
+                "source": {
+                    "start": {
+                        "index": 0
+                    },
+                    "operator": {
+                        "start": {
+                            "index": 5
+                        },
+                        "end": {
+                            "index": 6
+                        }
+                    },
+                    "end": {
+                        "index": 57
+                    }
+                }
+            }
+        ],
+        "raws": {
+            "after": ""
+        },
+        "source": {
+            "start": {
+                "index": 0
+            },
+            "end": {
+                "index": 57
+            }
+        }
+    }
+]

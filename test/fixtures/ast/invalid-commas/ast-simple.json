@@ -1,0 +1,210 @@
+[
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "clamp",
+                "nodes": [
+                    {
+                        "type": "Number",
+                        "value": 1
+                    },
+                    {
+                        "type": "Punctuator",
+                        "value": ","
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "clamp",
+                "nodes": [
+                    {
+                        "type": "Number",
+                        "value": 1
+                    },
+                    {
+                        "type": "Operator",
+                        "value": "-"
+                    },
+                    {
+                        "type": "Punctuator",
+                        "value": ","
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "clamp",
+                "nodes": [
+                    {
+                        "type": "MathExpression",
+                        "left": {
+                            "type": "Number",
+                            "value": 1
+                        },
+                        "operator": "-",
+                        "right": {
+                            "type": "Number",
+                            "value": 1
+                        }
+                    },
+                    {
+                        "type": "Punctuator",
+                        "value": ","
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "clamp",
+                "nodes": [
+                    {
+                        "type": "MathExpression",
+                        "left": {
+                            "type": "Number",
+                            "value": 1
+                        },
+                        "operator": "-",
+                        "right": {
+                            "type": "Number",
+                            "value": 1
+                        }
+                    },
+                    {
+                        "type": "Operator",
+                        "value": "-"
+                    },
+                    {
+                        "type": "Punctuator",
+                        "value": ","
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "clamp",
+                "nodes": [
+                    {
+                        "type": "Number",
+                        "value": 1
+                    },
+                    {
+                        "type": "Punctuator",
+                        "value": ","
+                    },
+                    {
+                        "type": "Number",
+                        "value": 1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "clamp",
+                "nodes": [
+                    {
+                        "type": "Number",
+                        "value": 1
+                    },
+                    {
+                        "type": "Punctuator",
+                        "value": ","
+                    },
+                    {
+                        "type": "Operator",
+                        "value": "-"
+                    },
+                    {
+                        "type": "Number",
+                        "value": 1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "clamp",
+                "nodes": [
+                    {
+                        "type": "Number",
+                        "value": 1
+                    },
+                    {
+                        "type": "Punctuator",
+                        "value": ","
+                    },
+                    {
+                        "type": "Punctuator",
+                        "value": ","
+                    },
+                    {
+                        "type": "Number",
+                        "value": 1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "clamp",
+                "nodes": [
+                    {
+                        "type": "Number",
+                        "value": 1
+                    },
+                    {
+                        "type": "Punctuator",
+                        "value": ","
+                    },
+                    {
+                        "type": "Punctuator",
+                        "value": ","
+                    },
+                    {
+                        "type": "Operator",
+                        "value": "-"
+                    },
+                    {
+                        "type": "Number",
+                        "value": 1
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -1,0 +1,124 @@
+[
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "type": "Word",
+                        "value": "a-a"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "type": "Word",
+                        "value": "a"
+                    },
+                    {
+                        "type": "Word",
+                        "value": "-a"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "type": "Word",
+                        "value": "a-"
+                    },
+                    {
+                        "type": "Word",
+                        "value": "a"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "type": "MathExpression",
+                        "left": {
+                            "type": "Word",
+                            "value": "a"
+                        },
+                        "operator": "+",
+                        "right": {
+                            "type": "Word",
+                            "value": "a"
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "type": "MathExpression",
+                        "left": {
+                            "type": "Word",
+                            "value": "a"
+                        },
+                        "operator": "+",
+                        "right": {
+                            "type": "Word",
+                            "value": "a"
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "type": "MathExpression",
+                        "left": {
+                            "type": "Word",
+                            "value": "a"
+                        },
+                        "operator": "+",
+                        "right": {
+                            "type": "Word",
+                            "value": "a"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+]

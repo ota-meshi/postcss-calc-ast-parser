@@ -1,0 +1,37 @@
+[
+    {
+        "parent": null,
+        "type": "Root",
+        "nodes": [
+            {
+                "parent": "Root",
+                "type": "Function",
+                "name": "calc",
+                "nodes": [],
+                "raws": {
+                    "before": ""
+                },
+                "source": {
+                    "start": {
+                        "index": 0
+                    },
+                    "end": {
+                        "index": 5
+                    }
+                },
+                "unclosed": true
+            }
+        ],
+        "raws": {
+            "after": "/*c2"
+        },
+        "source": {
+            "start": {
+                "index": 0
+            },
+            "end": {
+                "index": 9
+            }
+        }
+    }
+]

@@ -1,0 +1,12 @@
+[
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Frequency",
+                "value": 80,
+                "unit": "Hz"
+            }
+        ]
+    }
+]

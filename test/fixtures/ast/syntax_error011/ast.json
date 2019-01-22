@@ -1,0 +1,115 @@
+[
+    {
+        "parent": null,
+        "type": "Root",
+        "nodes": [
+            {
+                "parent": "Root",
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "parent": "Function",
+                        "type": "MathExpression",
+                        "left": {
+                            "parent": "MathExpression",
+                            "type": "Percentage",
+                            "value": 100,
+                            "unit": "%",
+                            "raws": {
+                                "before": "",
+                                "value": {
+                                    "raw": "100",
+                                    "value": 100
+                                }
+                            },
+                            "source": {
+                                "start": {
+                                    "index": 5
+                                },
+                                "end": {
+                                    "index": 9
+                                }
+                            }
+                        },
+                        "operator": "-",
+                        "right": {
+                            "parent": "MathExpression",
+                            "type": "Word",
+                            "value": "-foo",
+                            "raws": {
+                                "before": " "
+                            },
+                            "source": {
+                                "start": {
+                                    "index": 12
+                                },
+                                "end": {
+                                    "index": 16
+                                }
+                            }
+                        },
+                        "raws": {
+                            "before": "",
+                            "between": " "
+                        },
+                        "source": {
+                            "start": {
+                                "index": 5
+                            },
+                            "operator": {
+                                "start": {
+                                    "index": 10
+                                },
+                                "end": {
+                                    "index": 11
+                                }
+                            },
+                            "end": {
+                                "index": 16
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Parentheses",
+                        "nodes": [],
+                        "raws": {
+                            "before": " "
+                        },
+                        "source": {
+                            "start": {
+                                "index": 17
+                            },
+                            "end": {
+                                "index": 19
+                            }
+                        }
+                    }
+                ],
+                "raws": {
+                    "before": ""
+                },
+                "source": {
+                    "start": {
+                        "index": 0
+                    },
+                    "end": {
+                        "index": 20
+                    }
+                }
+            }
+        ],
+        "raws": {
+            "after": ""
+        },
+        "source": {
+            "start": {
+                "index": 0
+            },
+            "end": {
+                "index": 20
+            }
+        }
+    }
+]

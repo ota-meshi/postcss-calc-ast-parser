@@ -1,0 +1,23 @@
+[
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "type": "Percentage",
+                        "value": 100,
+                        "unit": "%"
+                    },
+                    {
+                        "type": "Operator",
+                        "value": "/"
+                    }
+                ],
+                "unclosed": true
+            }
+        ]
+    }
+]

@@ -1,0 +1,14 @@
+[
+    {
+        "errors": [
+            {
+                "code": "eof-in-comment",
+                "index": 9
+            },
+            {
+                "code": "eof-in-bracket",
+                "index": 9
+            }
+        ]
+    }
+]

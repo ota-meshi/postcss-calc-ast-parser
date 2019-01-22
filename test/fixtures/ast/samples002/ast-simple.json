@@ -1,0 +1,121 @@
+[
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "max",
+                "nodes": [
+                    {
+                        "type": "MathExpression",
+                        "left": {
+                            "type": "MathExpression",
+                            "left": {
+                                "type": "Number",
+                                "value": 10
+                            },
+                            "operator": "*",
+                            "right": {
+                                "type": "Parentheses",
+                                "nodes": [
+                                    {
+                                        "type": "MathExpression",
+                                        "left": {
+                                            "type": "Length",
+                                            "value": 1,
+                                            "unit": "vw"
+                                        },
+                                        "operator": "+",
+                                        "right": {
+                                            "type": "Length",
+                                            "value": 1,
+                                            "unit": "vh"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        "operator": "/",
+                        "right": {
+                            "type": "Number",
+                            "value": 2
+                        }
+                    },
+                    {
+                        "type": "Punctuator",
+                        "value": ","
+                    },
+                    {
+                        "type": "Length",
+                        "value": 12,
+                        "unit": "px"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "clamp",
+                "nodes": [
+                    {
+                        "type": "Length",
+                        "value": 12,
+                        "unit": "px"
+                    },
+                    {
+                        "type": "Punctuator",
+                        "value": ","
+                    },
+                    {
+                        "type": "MathExpression",
+                        "left": {
+                            "type": "MathExpression",
+                            "left": {
+                                "type": "Number",
+                                "value": 10
+                            },
+                            "operator": "*",
+                            "right": {
+                                "type": "Parentheses",
+                                "nodes": [
+                                    {
+                                        "type": "MathExpression",
+                                        "left": {
+                                            "type": "Length",
+                                            "value": 1,
+                                            "unit": "vw"
+                                        },
+                                        "operator": "+",
+                                        "right": {
+                                            "type": "Length",
+                                            "value": 1,
+                                            "unit": "vh"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        "operator": "/",
+                        "right": {
+                            "type": "Number",
+                            "value": 2
+                        }
+                    },
+                    {
+                        "type": "Punctuator",
+                        "value": ","
+                    },
+                    {
+                        "type": "Length",
+                        "value": 100,
+                        "unit": "px"
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -1,0 +1,31 @@
+[
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "type": "Function",
+                        "name": "foo",
+                        "nodes": [
+                            {
+                                "type": "Word",
+                                "value": "@bar"
+                            },
+                            {
+                                "type": "Punctuator",
+                                "value": ","
+                            },
+                            {
+                                "type": "Word",
+                                "value": "@baz"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]

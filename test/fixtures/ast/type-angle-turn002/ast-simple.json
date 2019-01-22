@@ -1,0 +1,12 @@
+[
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Angle",
+                "value": 80,
+                "unit": "turn"
+            }
+        ]
+    }
+]

@@ -1,0 +1,39 @@
+[
+    {
+        "parent": null,
+        "type": "Root",
+        "nodes": [
+            {
+                "parent": "Root",
+                "type": "Number",
+                "value": 0.5,
+                "raws": {
+                    "before": "",
+                    "value": {
+                        "raw": ".5",
+                        "value": 0.5
+                    }
+                },
+                "source": {
+                    "start": {
+                        "index": 0
+                    },
+                    "end": {
+                        "index": 2
+                    }
+                }
+            }
+        ],
+        "raws": {
+            "after": ""
+        },
+        "source": {
+            "start": {
+                "index": 0
+            },
+            "end": {
+                "index": 2
+            }
+        }
+    }
+]

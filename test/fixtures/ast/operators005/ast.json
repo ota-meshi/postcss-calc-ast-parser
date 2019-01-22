@@ -1,0 +1,511 @@
+[
+    {
+        "parent": null,
+        "type": "Root",
+        "nodes": [
+            {
+                "parent": "Root",
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "parent": "Function",
+                        "type": "Word",
+                        "value": "-a-10px",
+                        "raws": {
+                            "before": ""
+                        },
+                        "source": {
+                            "start": {
+                                "index": 5
+                            },
+                            "end": {
+                                "index": 12
+                            }
+                        }
+                    }
+                ],
+                "raws": {
+                    "before": ""
+                },
+                "source": {
+                    "start": {
+                        "index": 0
+                    },
+                    "end": {
+                        "index": 13
+                    }
+                }
+            }
+        ],
+        "raws": {
+            "after": ""
+        },
+        "source": {
+            "start": {
+                "index": 0
+            },
+            "end": {
+                "index": 13
+            }
+        }
+    },
+    {
+        "parent": null,
+        "type": "Root",
+        "nodes": [
+            {
+                "parent": "Root",
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "parent": "Function",
+                        "type": "Word",
+                        "value": "-a",
+                        "raws": {
+                            "before": ""
+                        },
+                        "source": {
+                            "start": {
+                                "index": 5
+                            },
+                            "end": {
+                                "index": 7
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Length",
+                        "value": -10,
+                        "unit": "px",
+                        "raws": {
+                            "before": " ",
+                            "value": {
+                                "raw": "-10",
+                                "value": -10
+                            }
+                        },
+                        "source": {
+                            "start": {
+                                "index": 8
+                            },
+                            "end": {
+                                "index": 13
+                            }
+                        }
+                    }
+                ],
+                "raws": {
+                    "before": ""
+                },
+                "source": {
+                    "start": {
+                        "index": 0
+                    },
+                    "end": {
+                        "index": 14
+                    }
+                }
+            }
+        ],
+        "raws": {
+            "after": ""
+        },
+        "source": {
+            "start": {
+                "index": 0
+            },
+            "end": {
+                "index": 14
+            }
+        }
+    },
+    {
+        "parent": null,
+        "type": "Root",
+        "nodes": [
+            {
+                "parent": "Root",
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "parent": "Function",
+                        "type": "Word",
+                        "value": "-a-",
+                        "raws": {
+                            "before": ""
+                        },
+                        "source": {
+                            "start": {
+                                "index": 5
+                            },
+                            "end": {
+                                "index": 8
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Length",
+                        "value": 10,
+                        "unit": "px",
+                        "raws": {
+                            "before": " ",
+                            "value": {
+                                "raw": "10",
+                                "value": 10
+                            }
+                        },
+                        "source": {
+                            "start": {
+                                "index": 9
+                            },
+                            "end": {
+                                "index": 13
+                            }
+                        }
+                    }
+                ],
+                "raws": {
+                    "before": ""
+                },
+                "source": {
+                    "start": {
+                        "index": 0
+                    },
+                    "end": {
+                        "index": 14
+                    }
+                }
+            }
+        ],
+        "raws": {
+            "after": ""
+        },
+        "source": {
+            "start": {
+                "index": 0
+            },
+            "end": {
+                "index": 14
+            }
+        }
+    },
+    {
+        "parent": null,
+        "type": "Root",
+        "nodes": [
+            {
+                "parent": "Root",
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "parent": "Function",
+                        "type": "Operator",
+                        "value": "+",
+                        "raws": {
+                            "before": ""
+                        },
+                        "source": {
+                            "start": {
+                                "index": 5
+                            },
+                            "end": {
+                                "index": 6
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "MathExpression",
+                        "left": {
+                            "parent": "MathExpression",
+                            "type": "Word",
+                            "value": "a",
+                            "raws": {
+                                "before": ""
+                            },
+                            "source": {
+                                "start": {
+                                    "index": 6
+                                },
+                                "end": {
+                                    "index": 7
+                                }
+                            }
+                        },
+                        "operator": "+",
+                        "right": {
+                            "parent": "MathExpression",
+                            "type": "Length",
+                            "value": 10,
+                            "unit": "px",
+                            "raws": {
+                                "before": "",
+                                "value": {
+                                    "raw": "10",
+                                    "value": 10
+                                }
+                            },
+                            "source": {
+                                "start": {
+                                    "index": 8
+                                },
+                                "end": {
+                                    "index": 12
+                                }
+                            }
+                        },
+                        "raws": {
+                            "before": "",
+                            "between": ""
+                        },
+                        "source": {
+                            "start": {
+                                "index": 6
+                            },
+                            "operator": {
+                                "start": {
+                                    "index": 7
+                                },
+                                "end": {
+                                    "index": 8
+                                }
+                            },
+                            "end": {
+                                "index": 12
+                            }
+                        }
+                    }
+                ],
+                "raws": {
+                    "before": ""
+                },
+                "source": {
+                    "start": {
+                        "index": 0
+                    },
+                    "end": {
+                        "index": 13
+                    }
+                }
+            }
+        ],
+        "raws": {
+            "after": ""
+        },
+        "source": {
+            "start": {
+                "index": 0
+            },
+            "end": {
+                "index": 13
+            }
+        }
+    },
+    {
+        "parent": null,
+        "type": "Root",
+        "nodes": [
+            {
+                "parent": "Root",
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "parent": "Function",
+                        "type": "Operator",
+                        "value": "+",
+                        "raws": {
+                            "before": ""
+                        },
+                        "source": {
+                            "start": {
+                                "index": 5
+                            },
+                            "end": {
+                                "index": 6
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Word",
+                        "value": "a",
+                        "raws": {
+                            "before": ""
+                        },
+                        "source": {
+                            "start": {
+                                "index": 6
+                            },
+                            "end": {
+                                "index": 7
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Length",
+                        "value": 10,
+                        "unit": "px",
+                        "raws": {
+                            "before": " ",
+                            "value": {
+                                "raw": "+10",
+                                "value": 10
+                            }
+                        },
+                        "source": {
+                            "start": {
+                                "index": 8
+                            },
+                            "end": {
+                                "index": 13
+                            }
+                        }
+                    }
+                ],
+                "raws": {
+                    "before": ""
+                },
+                "source": {
+                    "start": {
+                        "index": 0
+                    },
+                    "end": {
+                        "index": 14
+                    }
+                }
+            }
+        ],
+        "raws": {
+            "after": ""
+        },
+        "source": {
+            "start": {
+                "index": 0
+            },
+            "end": {
+                "index": 14
+            }
+        }
+    },
+    {
+        "parent": null,
+        "type": "Root",
+        "nodes": [
+            {
+                "parent": "Root",
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "parent": "Function",
+                        "type": "Operator",
+                        "value": "+",
+                        "raws": {
+                            "before": ""
+                        },
+                        "source": {
+                            "start": {
+                                "index": 5
+                            },
+                            "end": {
+                                "index": 6
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "MathExpression",
+                        "left": {
+                            "parent": "MathExpression",
+                            "type": "Word",
+                            "value": "a",
+                            "raws": {
+                                "before": ""
+                            },
+                            "source": {
+                                "start": {
+                                    "index": 6
+                                },
+                                "end": {
+                                    "index": 7
+                                }
+                            }
+                        },
+                        "operator": "+",
+                        "right": {
+                            "parent": "MathExpression",
+                            "type": "Length",
+                            "value": 10,
+                            "unit": "px",
+                            "raws": {
+                                "before": " ",
+                                "value": {
+                                    "raw": "10",
+                                    "value": 10
+                                }
+                            },
+                            "source": {
+                                "start": {
+                                    "index": 9
+                                },
+                                "end": {
+                                    "index": 13
+                                }
+                            }
+                        },
+                        "raws": {
+                            "before": "",
+                            "between": ""
+                        },
+                        "source": {
+                            "start": {
+                                "index": 6
+                            },
+                            "operator": {
+                                "start": {
+                                    "index": 7
+                                },
+                                "end": {
+                                    "index": 8
+                                }
+                            },
+                            "end": {
+                                "index": 13
+                            }
+                        }
+                    }
+                ],
+                "raws": {
+                    "before": ""
+                },
+                "source": {
+                    "start": {
+                        "index": 0
+                    },
+                    "end": {
+                        "index": 14
+                    }
+                }
+            }
+        ],
+        "raws": {
+            "after": ""
+        },
+        "source": {
+            "start": {
+                "index": 0
+            },
+            "end": {
+                "index": 14
+            }
+        }
+    }
+]

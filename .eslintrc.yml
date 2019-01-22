@@ -1,0 +1,23 @@
+extends:
+  - plugin:@mysticatea/es2015
+  - plugin:@mysticatea/+node
+  - plugin:@mysticatea/+modules
+rules:
+  no-warning-comments: warn
+  prefer-destructuring: [warn, {"array": false}]
+overrides:
+  - files: "*.ts"
+    rules:
+      "require-jsdoc": ["error", {
+          "require": {
+              "FunctionDeclaration": true,
+              "MethodDefinition": true,
+              "ClassDeclaration": true,
+              "ArrowFunctionExpression": false,
+              "FunctionExpression": false
+          }
+      }]
+      "@mysticatea/ts/no-use-before-define": "off"
+  - files: "*.js"
+    parserOptions:
+        sourceType: "script"

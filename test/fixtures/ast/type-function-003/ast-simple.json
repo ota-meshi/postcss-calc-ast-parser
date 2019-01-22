@@ -1,0 +1,17 @@
+[
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "VAR",
+                "nodes": [
+                    {
+                        "type": "Word",
+                        "value": "--bar"
+                    }
+                ]
+            }
+        ]
+    }
+]
