@@ -1,6 +1,23 @@
 # postcss-calc-ast-parser
 
-Parses `calc()` of CSS, and converts it to AST.
+[![NPM license](https://img.shields.io/npm/l/postcss-calc-ast-parser.svg)](https://www.npmjs.com/package/postcss-calc-ast-parser)
+[![NPM version](https://img.shields.io/npm/v/postcss-calc-ast-parser.svg)](https://www.npmjs.com/package/postcss-calc-ast-parser)
+[![NPM downloads](https://img.shields.io/npm/dw/postcss-calc-ast-parser.svg)](http://www.npmtrends.com/postcss-calc-ast-parser)
+[![NPM downloads](https://img.shields.io/npm/dm/postcss-calc-ast-parser.svg)](http://www.npmtrends.com/postcss-calc-ast-parser)
+[![NPM downloads](https://img.shields.io/npm/dy/postcss-calc-ast-parser.svg)](http://www.npmtrends.com/postcss-calc-ast-parser)
+[![NPM downloads](https://img.shields.io/npm/dt/postcss-calc-ast-parser.svg)](http://www.npmtrends.com/postcss-calc-ast-parser)
+[![Build Status](https://travis-ci.org/ota-meshi/postcss-calc-ast-parser.svg?branch=master)](https://travis-ci.org/ota-meshi/postcss-calc-ast-parser)
+[![Coverage Status](https://coveralls.io/repos/github/ota-meshi/postcss-calc-ast-parser/badge.svg?branch=master)](https://coveralls.io/github/ota-meshi/postcss-calc-ast-parser?branch=master)
+
+Parse the `calc()` function defined in CSS and convert it to AST.
+
+## Why?
+
+There are already various parsers of CSS and values ​​defined in CSS.
+However, these parser do not have the information of calc function AST. Also, it may not be possible to use it combination with SCSS or Less.
+`postcss-calc-ast-parser` is a parser specialized for the `calc()` (`max`, `min` and `clamp`) functions.
+We are aiming to work even when used in combination with SCSS or Less.
+
 
 ## :cd: Installation
 
