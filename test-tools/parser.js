@@ -1,6 +1,6 @@
 "use strict"
 
-const index = require("../../dist/index")
+const index = require("..")
 const options = require("./options")
 
 module.exports = (value, fileName) => {

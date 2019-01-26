@@ -1,5 +1,11 @@
 import * as AST from "./types/ast"
-import { Parser, Tokenizer, Stringifier, getResolvedType } from "./css-calc"
+import {
+    Parser,
+    Tokenizer,
+    Stringifier,
+    getResolvedType,
+    reduceMathExpression,
+} from "./css-calc"
 import { Options, StringifyOptions } from "./types/options"
 
 /**
@@ -29,4 +35,11 @@ export function stringify(
     return stringifier.stringify(node)
 }
 
-export { getResolvedType, Parser, Tokenizer, Stringifier, AST }
+export {
+    getResolvedType,
+    reduceMathExpression,
+    Parser,
+    Tokenizer,
+    Stringifier,
+    AST,
+}

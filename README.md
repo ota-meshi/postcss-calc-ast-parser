@@ -106,21 +106,59 @@ const calcAstParser = require("postcss-calc-ast-parser")
 const parsed = calcAstParser.parse("calc(100% - 20px)")
 ```
 
-### calcAstParser.parse(code: string, options?: Options): AST.Root
+### calcAstParser.parse(code, options)
 
 Parse the given source code.
 
-### calcAstParser.stringify(node: AST.Node): string
+```ts
+calcAstParser.parse(code: string, options?: Options): AST.Root
+
+type Options = {
+    /**
+     * Allow inline comments. default `true`
+     */
+    allowInlineCommnets: boolean
+}
+```
+
+### calcAstParser.stringify(node)
 
 Stringifies the given node.
 
-### calcAstParser.getResolvedType(expr: AST.MathExpression): "Number" | "Length" | "Angle" | "Time" | "Frequency" | "Resolution" | "Percentage" | "Flex" | "Unknown" | "invalid"
+```ts
+calcAstParser.stringify(node: AST.Node): string
+```
+
+### calcAstParser.getResolvedType(expr)
 
 Get the resolved type of the given math expression.
 > https://drafts.csswg.org/css-values-3/#calc-type-checking
 
-### parsed.walk(type: string | RegExp, callback: (node) => boolean | void): boolean | void
+```ts
+calcAstParser.getResolvedType(expr: AST.MathExpression):
+    | "Number" | "Length" | "Angle" | "Time" | "Frequency" | "Resolution" | "Percentage" | "Flex"
+    | "Unknown" // Is includes unknown values and SCSS interpolation etc.
+    | "invalid" // Type can not be resolved.
+```
+
+### calcAstParser.reduceMathExpression(expr)
+
+Returns the calculated value of `MathExpression`. Returns `null` if it can not be resolved.
+
+```ts
+calcAstParser.reduceMathExpression(expr: AST.MathExpression):
+    | {
+        value: number,
+        type: "Number" | "Length" | "Angle" | "Time" | "Frequency" | "Resolution" | "Percentage" | "Flex",
+        unit?: string
+    }
+    | null
+```
+
+### parsed.walk(type, callback)
 
 Walks each node of the given type inside parsed.nodes.
 
-
+```ts
+parsed.walk(type: string | RegExp, callback: (node) => boolean | void): boolean | void
+```

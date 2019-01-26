@@ -7,10 +7,10 @@
 const assert = require("assert")
 const fs = require("fs")
 const path = require("path")
-const findValues = require("./tools/find-values")
-const tokenizer = require("./tools/tokenizer")
-const parser = require("./tools/parser")
-const stringifier = require("./tools/stringifier")
+const findValues = require("../test-tools/find-values")
+const tokenizer = require("../test-tools/tokenizer")
+const parser = require("../test-tools/parser")
+const stringifier = require("../test-tools/stringifier")
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -121,21 +121,12 @@ describe("AST", () => {
 
                 it("should be parsed to valid ast.source", () => {
                     parsed.forEach((ast, i) => {
-                        check(ast, cssValues[i])
+                        ast.walk(/.*/u, node => {
+                            check(node, cssValues[i])
+                        })
                     })
 
                     function check(node, cssValue) {
-                        if (node.nodes) {
-                            for (const c of node.nodes) {
-                                check(c, cssValue)
-                            }
-                        }
-                        if (node.left) {
-                            check(node.left, cssValue)
-                        }
-                        if (node.right) {
-                            check(node.right, cssValue)
-                        }
                         const expected = cssValue.slice(
                             node.source.start.index -
                                 (node.raws.before || "").length,
@@ -147,6 +138,7 @@ describe("AST", () => {
                             expected,
                             node.type
                         )
+                        assert.strictEqual(`${node}`, expected, node.type)
                     }
                 })
                 it("should be parsed to valid errors.", () => {

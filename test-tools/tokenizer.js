@@ -1,7 +1,7 @@
 "use strict"
 
 const options = require("./options")
-const index = require("../../dist/index")
+const index = require("..")
 const { Tokenizer } = index
 module.exports = (value, fileName) => {
     const tokenizer = new Tokenizer(value, options(fileName))

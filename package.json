@@ -35,7 +35,7 @@
     "create-fixtures": "node scripts/create-fixtures-ast.js",
     "watch:tsc": "tsc --watch",
     "test:cov": "npm test && npm run coverage-open",
-    "_mocha": "_mocha \"test/*.js\" --reporter dot --timeout 10000",
+    "_mocha": "_mocha \"test/**/*.js\" --reporter dot --timeout 10000",
     "clean": "rimraf .nyc_output dist coverage",
     "coverage": "nyc report --reporter lcov",
     "coverage-open": "opener ./coverage/lcov-report/index.html",

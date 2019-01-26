@@ -1,4 +1,4 @@
 "use strict"
 
-const index = require("../../dist/index")
+const index = require("..")
 module.exports = node => index.stringify(node)
