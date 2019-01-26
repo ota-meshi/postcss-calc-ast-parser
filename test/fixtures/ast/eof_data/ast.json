@@ -1,0 +1,18 @@
+[
+    {
+        "parent": null,
+        "type": "Root",
+        "nodes": [],
+        "raws": {
+            "after": " /**/    "
+        },
+        "source": {
+            "start": {
+                "index": 0
+            },
+            "end": {
+                "index": 9
+            }
+        }
+    }
+]

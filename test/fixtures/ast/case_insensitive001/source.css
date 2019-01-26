@@ -1,0 +1,3 @@
+a {
+    width: CALC(100% - 80PX + VAR(--FOO));
+}

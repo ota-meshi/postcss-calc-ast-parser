@@ -1,0 +1,191 @@
+[
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Word",
+                "value": "left"
+            }
+        ]
+    },
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Length",
+                "value": 1,
+                "unit": "em"
+            }
+        ]
+    },
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Word",
+                "value": "solid"
+            },
+            {
+                "type": "Length",
+                "value": 1,
+                "unit": "px"
+            }
+        ]
+    },
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "type": "MathExpression",
+                        "left": {
+                            "type": "MathExpression",
+                            "left": {
+                                "type": "Percentage",
+                                "value": 100,
+                                "unit": "%"
+                            },
+                            "operator": "/",
+                            "right": {
+                                "type": "Number",
+                                "value": 3
+                            }
+                        },
+                        "operator": "-",
+                        "right": {
+                            "type": "MathExpression",
+                            "left": {
+                                "type": "MathExpression",
+                                "left": {
+                                    "type": "Number",
+                                    "value": 2
+                                },
+                                "operator": "*",
+                                "right": {
+                                    "type": "Length",
+                                    "value": 1,
+                                    "unit": "em"
+                                }
+                            },
+                            "operator": "-",
+                            "right": {
+                                "type": "MathExpression",
+                                "left": {
+                                    "type": "Number",
+                                    "value": 2
+                                },
+                                "operator": "*",
+                                "right": {
+                                    "type": "Length",
+                                    "value": 1,
+                                    "unit": "px"
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "linear-gradient",
+                "nodes": [
+                    {
+                        "type": "Word",
+                        "value": "silver"
+                    },
+                    {
+                        "type": "Percentage",
+                        "value": 0,
+                        "unit": "%"
+                    },
+                    {
+                        "type": "Punctuator",
+                        "value": ","
+                    },
+                    {
+                        "type": "Word",
+                        "value": "white"
+                    },
+                    {
+                        "type": "Length",
+                        "value": 20,
+                        "unit": "px"
+                    },
+                    {
+                        "type": "Punctuator",
+                        "value": ","
+                    },
+                    {
+                        "type": "Word",
+                        "value": "white"
+                    },
+                    {
+                        "type": "Function",
+                        "name": "calc",
+                        "nodes": [
+                            {
+                                "type": "MathExpression",
+                                "left": {
+                                    "type": "Percentage",
+                                    "value": 100,
+                                    "unit": "%"
+                                },
+                                "operator": "-",
+                                "right": {
+                                    "type": "Length",
+                                    "value": 20,
+                                    "unit": "px"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Punctuator",
+                        "value": ","
+                    },
+                    {
+                        "type": "Word",
+                        "value": "silver"
+                    },
+                    {
+                        "type": "Percentage",
+                        "value": 100,
+                        "unit": "%"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "type": "MathExpression",
+                        "left": {
+                            "type": "Length",
+                            "value": 100,
+                            "unit": "vw"
+                        },
+                        "operator": "/",
+                        "right": {
+                            "type": "Number",
+                            "value": 35
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+]

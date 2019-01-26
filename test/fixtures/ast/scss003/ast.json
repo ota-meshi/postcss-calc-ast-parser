@@ -1,0 +1,103 @@
+[
+    {
+        "parent": null,
+        "type": "Root",
+        "nodes": [
+            {
+                "parent": "Root",
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "parent": "Function",
+                        "type": "Function",
+                        "name": "foo",
+                        "nodes": [
+                            {
+                                "parent": "Function",
+                                "type": "Word",
+                                "value": "$bar",
+                                "raws": {
+                                    "before": ""
+                                },
+                                "source": {
+                                    "start": {
+                                        "index": 9
+                                    },
+                                    "end": {
+                                        "index": 13
+                                    }
+                                }
+                            },
+                            {
+                                "parent": "Function",
+                                "type": "Punctuator",
+                                "value": ",",
+                                "raws": {
+                                    "before": ""
+                                },
+                                "source": {
+                                    "start": {
+                                        "index": 13
+                                    },
+                                    "end": {
+                                        "index": 14
+                                    }
+                                }
+                            },
+                            {
+                                "parent": "Function",
+                                "type": "Word",
+                                "value": "$baz",
+                                "raws": {
+                                    "before": " "
+                                },
+                                "source": {
+                                    "start": {
+                                        "index": 15
+                                    },
+                                    "end": {
+                                        "index": 19
+                                    }
+                                }
+                            }
+                        ],
+                        "raws": {
+                            "before": ""
+                        },
+                        "source": {
+                            "start": {
+                                "index": 5
+                            },
+                            "end": {
+                                "index": 20
+                            }
+                        }
+                    }
+                ],
+                "raws": {
+                    "before": ""
+                },
+                "source": {
+                    "start": {
+                        "index": 0
+                    },
+                    "end": {
+                        "index": 21
+                    }
+                }
+            }
+        ],
+        "raws": {
+            "after": ""
+        },
+        "source": {
+            "start": {
+                "index": 0
+            },
+            "end": {
+                "index": 21
+            }
+        }
+    }
+]

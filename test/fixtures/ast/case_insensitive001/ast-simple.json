@@ -1,0 +1,41 @@
+[
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "CALC",
+                "nodes": [
+                    {
+                        "type": "MathExpression",
+                        "left": {
+                            "type": "MathExpression",
+                            "left": {
+                                "type": "Percentage",
+                                "value": 100,
+                                "unit": "%"
+                            },
+                            "operator": "-",
+                            "right": {
+                                "type": "Length",
+                                "value": 80,
+                                "unit": "px"
+                            }
+                        },
+                        "operator": "+",
+                        "right": {
+                            "type": "Function",
+                            "name": "VAR",
+                            "nodes": [
+                                {
+                                    "type": "Word",
+                                    "value": "--FOO"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+]

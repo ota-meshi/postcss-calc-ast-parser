@@ -1,0 +1,13 @@
+[
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "calc",
+                "nodes": [],
+                "unclosed": true
+            }
+        ]
+    }
+]

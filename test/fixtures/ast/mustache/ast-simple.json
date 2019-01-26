@@ -1,0 +1,28 @@
+[
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "MathExpression",
+                "left": {
+                    "type": "Length",
+                    "value": 50,
+                    "unit": "px"
+                },
+                "operator": "+",
+                "right": {
+                    "type": "MathExpression",
+                    "left": {
+                        "type": "Word",
+                        "value": "{{ a + b - c * d / e + (f + g)}}"
+                    },
+                    "operator": "*",
+                    "right": {
+                        "type": "Word",
+                        "value": "{{{a-b*(c/d)}}}"
+                    }
+                }
+            }
+        ]
+    }
+]

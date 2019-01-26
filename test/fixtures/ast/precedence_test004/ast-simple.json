@@ -1,0 +1,41 @@
+[
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "type": "MathExpression",
+                        "left": {
+                            "type": "Percentage",
+                            "value": 100,
+                            "unit": "%"
+                        },
+                        "operator": "+",
+                        "right": {
+                            "type": "Parentheses",
+                            "nodes": [
+                                {
+                                    "type": "MathExpression",
+                                    "left": {
+                                        "type": "Length",
+                                        "value": 80,
+                                        "unit": "px"
+                                    },
+                                    "operator": "-",
+                                    "right": {
+                                        "type": "Length",
+                                        "value": 70,
+                                        "unit": "px"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+]

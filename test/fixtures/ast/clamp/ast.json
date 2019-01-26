@@ -1,0 +1,269 @@
+[
+    {
+        "parent": null,
+        "type": "Root",
+        "nodes": [
+            {
+                "parent": "Root",
+                "type": "Function",
+                "name": "clamp",
+                "nodes": [
+                    {
+                        "parent": "Function",
+                        "type": "MathExpression",
+                        "left": {
+                            "parent": "MathExpression",
+                            "type": "Percentage",
+                            "value": 10,
+                            "unit": "%",
+                            "raws": {
+                                "before": "",
+                                "value": {
+                                    "raw": "10",
+                                    "value": 10
+                                }
+                            },
+                            "source": {
+                                "start": {
+                                    "index": 6
+                                },
+                                "end": {
+                                    "index": 9
+                                }
+                            }
+                        },
+                        "operator": "-",
+                        "right": {
+                            "parent": "MathExpression",
+                            "type": "Length",
+                            "value": 1,
+                            "unit": "px",
+                            "raws": {
+                                "before": " ",
+                                "value": {
+                                    "raw": "1",
+                                    "value": 1
+                                }
+                            },
+                            "source": {
+                                "start": {
+                                    "index": 12
+                                },
+                                "end": {
+                                    "index": 15
+                                }
+                            }
+                        },
+                        "raws": {
+                            "before": "",
+                            "between": " "
+                        },
+                        "source": {
+                            "start": {
+                                "index": 6
+                            },
+                            "operator": {
+                                "start": {
+                                    "index": 10
+                                },
+                                "end": {
+                                    "index": 11
+                                }
+                            },
+                            "end": {
+                                "index": 15
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Punctuator",
+                        "value": ",",
+                        "raws": {
+                            "before": ""
+                        },
+                        "source": {
+                            "start": {
+                                "index": 15
+                            },
+                            "end": {
+                                "index": 16
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "MathExpression",
+                        "left": {
+                            "parent": "MathExpression",
+                            "type": "Percentage",
+                            "value": 20,
+                            "unit": "%",
+                            "raws": {
+                                "before": "",
+                                "value": {
+                                    "raw": "20",
+                                    "value": 20
+                                }
+                            },
+                            "source": {
+                                "start": {
+                                    "index": 17
+                                },
+                                "end": {
+                                    "index": 20
+                                }
+                            }
+                        },
+                        "operator": "+",
+                        "right": {
+                            "parent": "MathExpression",
+                            "type": "Length",
+                            "value": 2,
+                            "unit": "px",
+                            "raws": {
+                                "before": " ",
+                                "value": {
+                                    "raw": "2",
+                                    "value": 2
+                                }
+                            },
+                            "source": {
+                                "start": {
+                                    "index": 23
+                                },
+                                "end": {
+                                    "index": 26
+                                }
+                            }
+                        },
+                        "raws": {
+                            "before": " ",
+                            "between": " "
+                        },
+                        "source": {
+                            "start": {
+                                "index": 17
+                            },
+                            "operator": {
+                                "start": {
+                                    "index": 21
+                                },
+                                "end": {
+                                    "index": 22
+                                }
+                            },
+                            "end": {
+                                "index": 26
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Punctuator",
+                        "value": ",",
+                        "raws": {
+                            "before": ""
+                        },
+                        "source": {
+                            "start": {
+                                "index": 26
+                            },
+                            "end": {
+                                "index": 27
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "MathExpression",
+                        "left": {
+                            "parent": "MathExpression",
+                            "type": "Percentage",
+                            "value": 30,
+                            "unit": "%",
+                            "raws": {
+                                "before": "",
+                                "value": {
+                                    "raw": "30",
+                                    "value": 30
+                                }
+                            },
+                            "source": {
+                                "start": {
+                                    "index": 28
+                                },
+                                "end": {
+                                    "index": 31
+                                }
+                            }
+                        },
+                        "operator": "*",
+                        "right": {
+                            "parent": "MathExpression",
+                            "type": "Number",
+                            "value": 3,
+                            "raws": {
+                                "before": " ",
+                                "value": {
+                                    "raw": "3",
+                                    "value": 3
+                                }
+                            },
+                            "source": {
+                                "start": {
+                                    "index": 34
+                                },
+                                "end": {
+                                    "index": 35
+                                }
+                            }
+                        },
+                        "raws": {
+                            "before": " ",
+                            "between": " "
+                        },
+                        "source": {
+                            "start": {
+                                "index": 28
+                            },
+                            "operator": {
+                                "start": {
+                                    "index": 32
+                                },
+                                "end": {
+                                    "index": 33
+                                }
+                            },
+                            "end": {
+                                "index": 35
+                            }
+                        }
+                    }
+                ],
+                "raws": {
+                    "before": ""
+                },
+                "source": {
+                    "start": {
+                        "index": 0
+                    },
+                    "end": {
+                        "index": 36
+                    }
+                }
+            }
+        ],
+        "raws": {
+            "after": ""
+        },
+        "source": {
+            "start": {
+                "index": 0
+            },
+            "end": {
+                "index": 36
+            }
+        }
+    }
+]

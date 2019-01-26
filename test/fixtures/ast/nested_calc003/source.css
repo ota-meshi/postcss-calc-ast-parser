@@ -1,0 +1,3 @@
+a {
+    width: calc(100px - (80px + fn(calc(80px * 2))));
+}

@@ -1,0 +1,12 @@
+/* https://www.w3.org/TR/css-values-4/#calc-notation */
+
+.type {
+    /* Set font-size to 10x the average of vw and vh,
+       but don’t let it go below 12px. */
+    font-size: max(10 * (1vw + 1vh) / 2, 12px);
+}
+
+.type {
+    /* Force the font-size to stay between 12px and 100px */
+    font-size: clamp(12px, 10 * (1vw + 1vh) / 2, 100px);
+}

@@ -1,0 +1,62 @@
+[
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "clamp",
+                "nodes": [
+                    {
+                        "type": "MathExpression",
+                        "left": {
+                            "type": "Percentage",
+                            "value": 10,
+                            "unit": "%"
+                        },
+                        "operator": "-",
+                        "right": {
+                            "type": "Length",
+                            "value": 1,
+                            "unit": "px"
+                        }
+                    },
+                    {
+                        "type": "Punctuator",
+                        "value": ","
+                    },
+                    {
+                        "type": "MathExpression",
+                        "left": {
+                            "type": "Percentage",
+                            "value": 20,
+                            "unit": "%"
+                        },
+                        "operator": "+",
+                        "right": {
+                            "type": "Length",
+                            "value": 2,
+                            "unit": "px"
+                        }
+                    },
+                    {
+                        "type": "Punctuator",
+                        "value": ","
+                    },
+                    {
+                        "type": "MathExpression",
+                        "left": {
+                            "type": "Percentage",
+                            "value": 30,
+                            "unit": "%"
+                        },
+                        "operator": "*",
+                        "right": {
+                            "type": "Number",
+                            "value": 3
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+]

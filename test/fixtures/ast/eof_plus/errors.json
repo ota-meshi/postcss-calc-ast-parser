@@ -1,0 +1,14 @@
+[
+    {
+        "errors": [
+            {
+                "code": "unexpected-calc-token",
+                "index": 10
+            },
+            {
+                "code": "eof-in-bracket",
+                "index": 11
+            }
+        ]
+    }
+]

@@ -1,0 +1,384 @@
+[
+    {
+        "parent": null,
+        "type": "Root",
+        "nodes": [
+            {
+                "parent": "Root",
+                "type": "Operator",
+                "value": "/",
+                "raws": {
+                    "before": ""
+                },
+                "source": {
+                    "start": {
+                        "index": 0
+                    },
+                    "end": {
+                        "index": 1
+                    }
+                }
+            },
+            {
+                "parent": "Root",
+                "type": "Operator",
+                "value": "/",
+                "raws": {
+                    "before": ""
+                },
+                "source": {
+                    "start": {
+                        "index": 1
+                    },
+                    "end": {
+                        "index": 2
+                    }
+                }
+            },
+            {
+                "parent": "Root",
+                "type": "Word",
+                "value": "c1",
+                "raws": {
+                    "before": ""
+                },
+                "source": {
+                    "start": {
+                        "index": 2
+                    },
+                    "end": {
+                        "index": 4
+                    }
+                }
+            },
+            {
+                "parent": "Root",
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "parent": "Function",
+                        "type": "Operator",
+                        "value": "/",
+                        "raws": {
+                            "before": ""
+                        },
+                        "source": {
+                            "start": {
+                                "index": 14
+                            },
+                            "end": {
+                                "index": 15
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Operator",
+                        "value": "/",
+                        "raws": {
+                            "before": ""
+                        },
+                        "source": {
+                            "start": {
+                                "index": 15
+                            },
+                            "end": {
+                                "index": 16
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Word",
+                        "value": "c2",
+                        "raws": {
+                            "before": ""
+                        },
+                        "source": {
+                            "start": {
+                                "index": 16
+                            },
+                            "end": {
+                                "index": 18
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Percentage",
+                        "value": 100,
+                        "unit": "%",
+                        "raws": {
+                            "before": "\n    ",
+                            "value": {
+                                "raw": "100",
+                                "value": 100
+                            }
+                        },
+                        "source": {
+                            "start": {
+                                "index": 23
+                            },
+                            "end": {
+                                "index": 27
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Operator",
+                        "value": "/",
+                        "raws": {
+                            "before": ""
+                        },
+                        "source": {
+                            "start": {
+                                "index": 27
+                            },
+                            "end": {
+                                "index": 28
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Operator",
+                        "value": "/",
+                        "raws": {
+                            "before": ""
+                        },
+                        "source": {
+                            "start": {
+                                "index": 28
+                            },
+                            "end": {
+                                "index": 29
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Word",
+                        "value": "c3",
+                        "raws": {
+                            "before": ""
+                        },
+                        "source": {
+                            "start": {
+                                "index": 29
+                            },
+                            "end": {
+                                "index": 31
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Operator",
+                        "value": "-",
+                        "raws": {
+                            "before": "\n    "
+                        },
+                        "source": {
+                            "start": {
+                                "index": 36
+                            },
+                            "end": {
+                                "index": 37
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Operator",
+                        "value": "/",
+                        "raws": {
+                            "before": ""
+                        },
+                        "source": {
+                            "start": {
+                                "index": 37
+                            },
+                            "end": {
+                                "index": 38
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Operator",
+                        "value": "/",
+                        "raws": {
+                            "before": ""
+                        },
+                        "source": {
+                            "start": {
+                                "index": 38
+                            },
+                            "end": {
+                                "index": 39
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Word",
+                        "value": "c4",
+                        "raws": {
+                            "before": ""
+                        },
+                        "source": {
+                            "start": {
+                                "index": 39
+                            },
+                            "end": {
+                                "index": 41
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Length",
+                        "value": 10,
+                        "unit": "px",
+                        "raws": {
+                            "before": "\n    ",
+                            "value": {
+                                "raw": "10",
+                                "value": 10
+                            }
+                        },
+                        "source": {
+                            "start": {
+                                "index": 46
+                            },
+                            "end": {
+                                "index": 50
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Operator",
+                        "value": "/",
+                        "raws": {
+                            "before": ""
+                        },
+                        "source": {
+                            "start": {
+                                "index": 50
+                            },
+                            "end": {
+                                "index": 51
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Operator",
+                        "value": "/",
+                        "raws": {
+                            "before": ""
+                        },
+                        "source": {
+                            "start": {
+                                "index": 51
+                            },
+                            "end": {
+                                "index": 52
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Word",
+                        "value": "c5",
+                        "raws": {
+                            "before": ""
+                        },
+                        "source": {
+                            "start": {
+                                "index": 52
+                            },
+                            "end": {
+                                "index": 54
+                            }
+                        }
+                    }
+                ],
+                "raws": {
+                    "before": "\n    ",
+                    "beforeClose": "\n    "
+                },
+                "source": {
+                    "start": {
+                        "index": 9
+                    },
+                    "end": {
+                        "index": 60
+                    }
+                }
+            },
+            {
+                "parent": "Root",
+                "type": "Operator",
+                "value": "/",
+                "raws": {
+                    "before": ""
+                },
+                "source": {
+                    "start": {
+                        "index": 60
+                    },
+                    "end": {
+                        "index": 61
+                    }
+                }
+            },
+            {
+                "parent": "Root",
+                "type": "Operator",
+                "value": "/",
+                "raws": {
+                    "before": ""
+                },
+                "source": {
+                    "start": {
+                        "index": 61
+                    },
+                    "end": {
+                        "index": 62
+                    }
+                }
+            },
+            {
+                "parent": "Root",
+                "type": "Word",
+                "value": "c6",
+                "raws": {
+                    "before": ""
+                },
+                "source": {
+                    "start": {
+                        "index": 62
+                    },
+                    "end": {
+                        "index": 64
+                    }
+                }
+            }
+        ],
+        "raws": {
+            "after": "\n    "
+        },
+        "source": {
+            "start": {
+                "index": 0
+            },
+            "end": {
+                "index": 69
+            }
+        }
+    }
+]

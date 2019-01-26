@@ -1,0 +1,531 @@
+[
+    {
+        "parent": null,
+        "type": "Root",
+        "nodes": [
+            {
+                "parent": "Root",
+                "type": "Function",
+                "name": "max",
+                "nodes": [
+                    {
+                        "parent": "Function",
+                        "type": "MathExpression",
+                        "left": {
+                            "parent": "MathExpression",
+                            "type": "MathExpression",
+                            "left": {
+                                "parent": "MathExpression",
+                                "type": "Number",
+                                "value": 10,
+                                "raws": {
+                                    "before": "",
+                                    "value": {
+                                        "raw": "10",
+                                        "value": 10
+                                    }
+                                },
+                                "source": {
+                                    "start": {
+                                        "index": 4
+                                    },
+                                    "end": {
+                                        "index": 6
+                                    }
+                                }
+                            },
+                            "operator": "*",
+                            "right": {
+                                "parent": "MathExpression",
+                                "type": "Parentheses",
+                                "nodes": [
+                                    {
+                                        "parent": "Parentheses",
+                                        "type": "MathExpression",
+                                        "left": {
+                                            "parent": "MathExpression",
+                                            "type": "Length",
+                                            "value": 1,
+                                            "unit": "vw",
+                                            "raws": {
+                                                "before": "",
+                                                "value": {
+                                                    "raw": "1",
+                                                    "value": 1
+                                                }
+                                            },
+                                            "source": {
+                                                "start": {
+                                                    "index": 10
+                                                },
+                                                "end": {
+                                                    "index": 13
+                                                }
+                                            }
+                                        },
+                                        "operator": "+",
+                                        "right": {
+                                            "parent": "MathExpression",
+                                            "type": "Length",
+                                            "value": 1,
+                                            "unit": "vh",
+                                            "raws": {
+                                                "before": " ",
+                                                "value": {
+                                                    "raw": "1",
+                                                    "value": 1
+                                                }
+                                            },
+                                            "source": {
+                                                "start": {
+                                                    "index": 16
+                                                },
+                                                "end": {
+                                                    "index": 19
+                                                }
+                                            }
+                                        },
+                                        "raws": {
+                                            "before": "",
+                                            "between": " "
+                                        },
+                                        "source": {
+                                            "start": {
+                                                "index": 10
+                                            },
+                                            "operator": {
+                                                "start": {
+                                                    "index": 14
+                                                },
+                                                "end": {
+                                                    "index": 15
+                                                }
+                                            },
+                                            "end": {
+                                                "index": 19
+                                            }
+                                        }
+                                    }
+                                ],
+                                "raws": {
+                                    "before": " "
+                                },
+                                "source": {
+                                    "start": {
+                                        "index": 9
+                                    },
+                                    "end": {
+                                        "index": 20
+                                    }
+                                }
+                            },
+                            "raws": {
+                                "before": "",
+                                "between": " "
+                            },
+                            "source": {
+                                "start": {
+                                    "index": 4
+                                },
+                                "operator": {
+                                    "start": {
+                                        "index": 7
+                                    },
+                                    "end": {
+                                        "index": 8
+                                    }
+                                },
+                                "end": {
+                                    "index": 20
+                                }
+                            }
+                        },
+                        "operator": "/",
+                        "right": {
+                            "parent": "MathExpression",
+                            "type": "Number",
+                            "value": 2,
+                            "raws": {
+                                "before": " ",
+                                "value": {
+                                    "raw": "2",
+                                    "value": 2
+                                }
+                            },
+                            "source": {
+                                "start": {
+                                    "index": 23
+                                },
+                                "end": {
+                                    "index": 24
+                                }
+                            }
+                        },
+                        "raws": {
+                            "before": "",
+                            "between": " "
+                        },
+                        "source": {
+                            "start": {
+                                "index": 4
+                            },
+                            "operator": {
+                                "start": {
+                                    "index": 21
+                                },
+                                "end": {
+                                    "index": 22
+                                }
+                            },
+                            "end": {
+                                "index": 24
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Punctuator",
+                        "value": ",",
+                        "raws": {
+                            "before": ""
+                        },
+                        "source": {
+                            "start": {
+                                "index": 24
+                            },
+                            "end": {
+                                "index": 25
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Length",
+                        "value": 12,
+                        "unit": "px",
+                        "raws": {
+                            "before": " ",
+                            "value": {
+                                "raw": "12",
+                                "value": 12
+                            }
+                        },
+                        "source": {
+                            "start": {
+                                "index": 26
+                            },
+                            "end": {
+                                "index": 30
+                            }
+                        }
+                    }
+                ],
+                "raws": {
+                    "before": ""
+                },
+                "source": {
+                    "start": {
+                        "index": 0
+                    },
+                    "end": {
+                        "index": 31
+                    }
+                }
+            }
+        ],
+        "raws": {
+            "after": ""
+        },
+        "source": {
+            "start": {
+                "index": 0
+            },
+            "end": {
+                "index": 31
+            }
+        }
+    },
+    {
+        "parent": null,
+        "type": "Root",
+        "nodes": [
+            {
+                "parent": "Root",
+                "type": "Function",
+                "name": "clamp",
+                "nodes": [
+                    {
+                        "parent": "Function",
+                        "type": "Length",
+                        "value": 12,
+                        "unit": "px",
+                        "raws": {
+                            "before": "",
+                            "value": {
+                                "raw": "12",
+                                "value": 12
+                            }
+                        },
+                        "source": {
+                            "start": {
+                                "index": 6
+                            },
+                            "end": {
+                                "index": 10
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Punctuator",
+                        "value": ",",
+                        "raws": {
+                            "before": ""
+                        },
+                        "source": {
+                            "start": {
+                                "index": 10
+                            },
+                            "end": {
+                                "index": 11
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "MathExpression",
+                        "left": {
+                            "parent": "MathExpression",
+                            "type": "MathExpression",
+                            "left": {
+                                "parent": "MathExpression",
+                                "type": "Number",
+                                "value": 10,
+                                "raws": {
+                                    "before": "",
+                                    "value": {
+                                        "raw": "10",
+                                        "value": 10
+                                    }
+                                },
+                                "source": {
+                                    "start": {
+                                        "index": 12
+                                    },
+                                    "end": {
+                                        "index": 14
+                                    }
+                                }
+                            },
+                            "operator": "*",
+                            "right": {
+                                "parent": "MathExpression",
+                                "type": "Parentheses",
+                                "nodes": [
+                                    {
+                                        "parent": "Parentheses",
+                                        "type": "MathExpression",
+                                        "left": {
+                                            "parent": "MathExpression",
+                                            "type": "Length",
+                                            "value": 1,
+                                            "unit": "vw",
+                                            "raws": {
+                                                "before": "",
+                                                "value": {
+                                                    "raw": "1",
+                                                    "value": 1
+                                                }
+                                            },
+                                            "source": {
+                                                "start": {
+                                                    "index": 18
+                                                },
+                                                "end": {
+                                                    "index": 21
+                                                }
+                                            }
+                                        },
+                                        "operator": "+",
+                                        "right": {
+                                            "parent": "MathExpression",
+                                            "type": "Length",
+                                            "value": 1,
+                                            "unit": "vh",
+                                            "raws": {
+                                                "before": " ",
+                                                "value": {
+                                                    "raw": "1",
+                                                    "value": 1
+                                                }
+                                            },
+                                            "source": {
+                                                "start": {
+                                                    "index": 24
+                                                },
+                                                "end": {
+                                                    "index": 27
+                                                }
+                                            }
+                                        },
+                                        "raws": {
+                                            "before": "",
+                                            "between": " "
+                                        },
+                                        "source": {
+                                            "start": {
+                                                "index": 18
+                                            },
+                                            "operator": {
+                                                "start": {
+                                                    "index": 22
+                                                },
+                                                "end": {
+                                                    "index": 23
+                                                }
+                                            },
+                                            "end": {
+                                                "index": 27
+                                            }
+                                        }
+                                    }
+                                ],
+                                "raws": {
+                                    "before": " "
+                                },
+                                "source": {
+                                    "start": {
+                                        "index": 17
+                                    },
+                                    "end": {
+                                        "index": 28
+                                    }
+                                }
+                            },
+                            "raws": {
+                                "before": "",
+                                "between": " "
+                            },
+                            "source": {
+                                "start": {
+                                    "index": 12
+                                },
+                                "operator": {
+                                    "start": {
+                                        "index": 15
+                                    },
+                                    "end": {
+                                        "index": 16
+                                    }
+                                },
+                                "end": {
+                                    "index": 28
+                                }
+                            }
+                        },
+                        "operator": "/",
+                        "right": {
+                            "parent": "MathExpression",
+                            "type": "Number",
+                            "value": 2,
+                            "raws": {
+                                "before": " ",
+                                "value": {
+                                    "raw": "2",
+                                    "value": 2
+                                }
+                            },
+                            "source": {
+                                "start": {
+                                    "index": 31
+                                },
+                                "end": {
+                                    "index": 32
+                                }
+                            }
+                        },
+                        "raws": {
+                            "before": " ",
+                            "between": " "
+                        },
+                        "source": {
+                            "start": {
+                                "index": 12
+                            },
+                            "operator": {
+                                "start": {
+                                    "index": 29
+                                },
+                                "end": {
+                                    "index": 30
+                                }
+                            },
+                            "end": {
+                                "index": 32
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Punctuator",
+                        "value": ",",
+                        "raws": {
+                            "before": ""
+                        },
+                        "source": {
+                            "start": {
+                                "index": 32
+                            },
+                            "end": {
+                                "index": 33
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Length",
+                        "value": 100,
+                        "unit": "px",
+                        "raws": {
+                            "before": " ",
+                            "value": {
+                                "raw": "100",
+                                "value": 100
+                            }
+                        },
+                        "source": {
+                            "start": {
+                                "index": 34
+                            },
+                            "end": {
+                                "index": 39
+                            }
+                        }
+                    }
+                ],
+                "raws": {
+                    "before": ""
+                },
+                "source": {
+                    "start": {
+                        "index": 0
+                    },
+                    "end": {
+                        "index": 40
+                    }
+                }
+            }
+        ],
+        "raws": {
+            "after": ""
+        },
+        "source": {
+            "start": {
+                "index": 0
+            },
+            "end": {
+                "index": 40
+            }
+        }
+    }
+]

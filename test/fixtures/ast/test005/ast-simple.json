@@ -1,0 +1,18 @@
+[
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "type": "Length",
+                        "value": 80,
+                        "unit": "px"
+                    }
+                ]
+            }
+        ]
+    }
+]

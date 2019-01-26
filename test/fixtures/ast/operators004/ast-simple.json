@@ -1,0 +1,144 @@
+[
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "type": "MathExpression",
+                        "left": {
+                            "type": "Length",
+                            "value": -20,
+                            "unit": "px"
+                        },
+                        "operator": "-",
+                        "right": {
+                            "type": "Length",
+                            "value": 10,
+                            "unit": "px"
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "type": "Length",
+                        "value": -20,
+                        "unit": "px"
+                    },
+                    {
+                        "type": "Length",
+                        "value": -10,
+                        "unit": "px"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "type": "MathExpression",
+                        "left": {
+                            "type": "Length",
+                            "value": -20,
+                            "unit": "px"
+                        },
+                        "operator": "-",
+                        "right": {
+                            "type": "Length",
+                            "value": 10,
+                            "unit": "px"
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "type": "MathExpression",
+                        "left": {
+                            "type": "Length",
+                            "value": 20,
+                            "unit": "px"
+                        },
+                        "operator": "+",
+                        "right": {
+                            "type": "Length",
+                            "value": 10,
+                            "unit": "px"
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "type": "Length",
+                        "value": 20,
+                        "unit": "px"
+                    },
+                    {
+                        "type": "Length",
+                        "value": 10,
+                        "unit": "px"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "type": "MathExpression",
+                        "left": {
+                            "type": "Length",
+                            "value": 20,
+                            "unit": "px"
+                        },
+                        "operator": "+",
+                        "right": {
+                            "type": "Length",
+                            "value": 10,
+                            "unit": "px"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+]

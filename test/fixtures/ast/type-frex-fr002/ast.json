@@ -1,0 +1,44 @@
+[
+    {
+        "parent": null,
+        "type": "Root",
+        "nodes": [
+            {
+                "parent": "Root",
+                "type": "Flex",
+                "value": 80,
+                "unit": "fr",
+                "raws": {
+                    "before": "",
+                    "value": {
+                        "raw": "80",
+                        "value": 80
+                    },
+                    "unit": {
+                        "raw": "FR",
+                        "value": "fr"
+                    }
+                },
+                "source": {
+                    "start": {
+                        "index": 0
+                    },
+                    "end": {
+                        "index": 4
+                    }
+                }
+            }
+        ],
+        "raws": {
+            "after": ""
+        },
+        "source": {
+            "start": {
+                "index": 0
+            },
+            "end": {
+                "index": 4
+            }
+        }
+    }
+]

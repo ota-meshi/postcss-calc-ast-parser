@@ -1,0 +1,103 @@
+[
+    {
+        "parent": null,
+        "type": "Root",
+        "nodes": [
+            {
+                "parent": "Root",
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "parent": "Function",
+                        "type": "MathExpression",
+                        "left": {
+                            "parent": "MathExpression",
+                            "type": "Length",
+                            "value": -100,
+                            "unit": "px",
+                            "raws": {
+                                "before": "",
+                                "value": {
+                                    "raw": "-100",
+                                    "value": -100
+                                }
+                            },
+                            "source": {
+                                "start": {
+                                    "index": 5
+                                },
+                                "end": {
+                                    "index": 11
+                                }
+                            }
+                        },
+                        "operator": "*",
+                        "right": {
+                            "parent": "MathExpression",
+                            "type": "Number",
+                            "value": -2,
+                            "raws": {
+                                "before": " ",
+                                "value": {
+                                    "raw": "-2",
+                                    "value": -2
+                                }
+                            },
+                            "source": {
+                                "start": {
+                                    "index": 14
+                                },
+                                "end": {
+                                    "index": 16
+                                }
+                            }
+                        },
+                        "raws": {
+                            "before": "",
+                            "between": " "
+                        },
+                        "source": {
+                            "start": {
+                                "index": 5
+                            },
+                            "operator": {
+                                "start": {
+                                    "index": 12
+                                },
+                                "end": {
+                                    "index": 13
+                                }
+                            },
+                            "end": {
+                                "index": 16
+                            }
+                        }
+                    }
+                ],
+                "raws": {
+                    "before": ""
+                },
+                "source": {
+                    "start": {
+                        "index": 0
+                    },
+                    "end": {
+                        "index": 17
+                    }
+                }
+            }
+        ],
+        "raws": {
+            "after": ""
+        },
+        "source": {
+            "start": {
+                "index": 0
+            },
+            "end": {
+                "index": 17
+            }
+        }
+    }
+]

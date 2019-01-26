@@ -1,0 +1,30 @@
+[
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "type": "MathExpression",
+                        "left": {
+                            "type": "Percentage",
+                            "value": 100,
+                            "unit": "%"
+                        },
+                        "operator": "-",
+                        "right": {
+                            "type": "Word",
+                            "value": "-foo"
+                        }
+                    },
+                    {
+                        "type": "Parentheses",
+                        "nodes": []
+                    }
+                ]
+            }
+        ]
+    }
+]

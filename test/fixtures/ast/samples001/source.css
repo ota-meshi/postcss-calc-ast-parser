@@ -1,0 +1,16 @@
+/* https://www.w3.org/TR/css-values-4/#calc-notation */
+
+section {
+    float: left;
+    margin: 1em; border: solid 1px;
+    width: calc(100%/3 - 2*1em - 2*1px);
+}
+
+.fade {
+    background-image: linear-gradient(silver 0%, white 20px,
+                                      white calc(100% - 20px), silver 100%);
+}
+
+:root {
+    font-size: calc(100vw / 35);
+}

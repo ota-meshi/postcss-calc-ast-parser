@@ -1,0 +1,19 @@
+[
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "MathExpression",
+                "left": {
+                    "type": "Number",
+                    "value": 10
+                },
+                "operator": "+",
+                "right": {
+                    "type": "Number",
+                    "value": 20
+                }
+            }
+        ]
+    }
+]

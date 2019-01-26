@@ -1,0 +1,230 @@
+[
+    {
+        "parent": null,
+        "type": "Root",
+        "nodes": [
+            {
+                "parent": "Root",
+                "type": "Function",
+                "name": "calc",
+                "nodes": [
+                    {
+                        "parent": "Function",
+                        "type": "MathExpression",
+                        "left": {
+                            "parent": "MathExpression",
+                            "type": "Length",
+                            "value": 100,
+                            "unit": "px",
+                            "raws": {
+                                "before": "",
+                                "value": {
+                                    "raw": "100",
+                                    "value": 100
+                                }
+                            },
+                            "source": {
+                                "start": {
+                                    "index": 5
+                                },
+                                "end": {
+                                    "index": 10
+                                }
+                            }
+                        },
+                        "operator": "-",
+                        "right": {
+                            "parent": "MathExpression",
+                            "type": "Parentheses",
+                            "nodes": [
+                                {
+                                    "parent": "Parentheses",
+                                    "type": "MathExpression",
+                                    "left": {
+                                        "parent": "MathExpression",
+                                        "type": "Length",
+                                        "value": 80,
+                                        "unit": "px",
+                                        "raws": {
+                                            "before": "",
+                                            "value": {
+                                                "raw": "80",
+                                                "value": 80
+                                            }
+                                        },
+                                        "source": {
+                                            "start": {
+                                                "index": 14
+                                            },
+                                            "end": {
+                                                "index": 18
+                                            }
+                                        }
+                                    },
+                                    "operator": "+",
+                                    "right": {
+                                        "parent": "MathExpression",
+                                        "type": "Function",
+                                        "name": "calc",
+                                        "nodes": [
+                                            {
+                                                "parent": "Function",
+                                                "type": "MathExpression",
+                                                "left": {
+                                                    "parent": "MathExpression",
+                                                    "type": "Length",
+                                                    "value": 80,
+                                                    "unit": "px",
+                                                    "raws": {
+                                                        "before": "",
+                                                        "value": {
+                                                            "raw": "80",
+                                                            "value": 80
+                                                        }
+                                                    },
+                                                    "source": {
+                                                        "start": {
+                                                            "index": 26
+                                                        },
+                                                        "end": {
+                                                            "index": 30
+                                                        }
+                                                    }
+                                                },
+                                                "operator": "*",
+                                                "right": {
+                                                    "parent": "MathExpression",
+                                                    "type": "Number",
+                                                    "value": 2,
+                                                    "raws": {
+                                                        "before": " ",
+                                                        "value": {
+                                                            "raw": "2",
+                                                            "value": 2
+                                                        }
+                                                    },
+                                                    "source": {
+                                                        "start": {
+                                                            "index": 33
+                                                        },
+                                                        "end": {
+                                                            "index": 34
+                                                        }
+                                                    }
+                                                },
+                                                "raws": {
+                                                    "before": "",
+                                                    "between": " "
+                                                },
+                                                "source": {
+                                                    "start": {
+                                                        "index": 26
+                                                    },
+                                                    "operator": {
+                                                        "start": {
+                                                            "index": 31
+                                                        },
+                                                        "end": {
+                                                            "index": 32
+                                                        }
+                                                    },
+                                                    "end": {
+                                                        "index": 34
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "raws": {
+                                            "before": " "
+                                        },
+                                        "source": {
+                                            "start": {
+                                                "index": 21
+                                            },
+                                            "end": {
+                                                "index": 35
+                                            }
+                                        }
+                                    },
+                                    "raws": {
+                                        "before": "",
+                                        "between": " "
+                                    },
+                                    "source": {
+                                        "start": {
+                                            "index": 14
+                                        },
+                                        "operator": {
+                                            "start": {
+                                                "index": 19
+                                            },
+                                            "end": {
+                                                "index": 20
+                                            }
+                                        },
+                                        "end": {
+                                            "index": 35
+                                        }
+                                    }
+                                }
+                            ],
+                            "raws": {
+                                "before": " "
+                            },
+                            "source": {
+                                "start": {
+                                    "index": 13
+                                },
+                                "end": {
+                                    "index": 36
+                                }
+                            }
+                        },
+                        "raws": {
+                            "before": "",
+                            "between": " "
+                        },
+                        "source": {
+                            "start": {
+                                "index": 5
+                            },
+                            "operator": {
+                                "start": {
+                                    "index": 11
+                                },
+                                "end": {
+                                    "index": 12
+                                }
+                            },
+                            "end": {
+                                "index": 36
+                            }
+                        }
+                    }
+                ],
+                "raws": {
+                    "before": ""
+                },
+                "source": {
+                    "start": {
+                        "index": 0
+                    },
+                    "end": {
+                        "index": 37
+                    }
+                }
+            }
+        ],
+        "raws": {
+            "after": ""
+        },
+        "source": {
+            "start": {
+                "index": 0
+            },
+            "end": {
+                "index": 37
+            }
+        }
+    }
+]

@@ -1,0 +1,12 @@
+[
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Resolution",
+                "value": 80,
+                "unit": "dpcm"
+            }
+        ]
+    }
+]

@@ -1,0 +1,12 @@
+
+a {
+    width: calc(a-a);
+    width: calc(a -a);
+    width: calc(a- a);
+}
+
+a {
+    width: calc(a+a);
+    width: calc(a +a);
+    width: calc(a+ a);
+}

@@ -1,0 +1,10 @@
+a {
+    width: clamp(1 ,);
+    width: clamp(1 - ,);
+    width: clamp(1 - 1 ,);
+    width: clamp(1 - 1 - ,);
+    width: clamp(1 , 1);
+    width: clamp(1 , - 1);
+    width: clamp(1 , , 1);
+    width: clamp(1 , , - 1);
+}

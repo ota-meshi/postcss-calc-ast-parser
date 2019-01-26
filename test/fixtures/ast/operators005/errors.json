@@ -1,0 +1,45 @@
+[
+    {
+        "errors": []
+    },
+    {
+        "errors": [
+            {
+                "code": "unexpected-calc-token",
+                "index": 8
+            }
+        ]
+    },
+    {
+        "errors": [
+            {
+                "code": "unexpected-calc-token",
+                "index": 9
+            }
+        ]
+    },
+    {
+        "errors": [
+            {
+                "code": "unexpected-calc-token",
+                "index": 5
+            }
+        ]
+    },
+    {
+        "errors": [
+            {
+                "code": "unexpected-calc-token",
+                "index": 5
+            }
+        ]
+    },
+    {
+        "errors": [
+            {
+                "code": "unexpected-calc-token",
+                "index": 5
+            }
+        ]
+    }
+]

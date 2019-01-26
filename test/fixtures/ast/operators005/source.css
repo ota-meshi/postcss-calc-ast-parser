@@ -1,0 +1,11 @@
+a {
+    width: calc(-a-10px);
+    width: calc(-a -10px);
+    width: calc(-a- 10px);
+}
+
+a {
+    width: calc(+a+10px);
+    width: calc(+a +10px);
+    width: calc(+a+ 10px);
+}
