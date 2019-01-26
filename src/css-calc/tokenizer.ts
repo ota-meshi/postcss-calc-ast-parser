@@ -127,7 +127,7 @@ export class Tokenizer {
 
         this.options = Object.assign(
             {
-                allowInlineCommnets: false,
+                allowInlineCommnets: true,
             },
             options || {},
         )

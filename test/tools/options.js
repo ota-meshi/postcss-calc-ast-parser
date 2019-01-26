@@ -7,8 +7,8 @@ module.exports = fileName => {
     if (ext === ".txt") {
         ext = path.extname(fileName.slice(0, -ext.length)) || ext
     }
-    if (ext === ".scss" || ext === ".less") {
-        options = { allowInlineCommnets: true }
+    if (ext !== ".scss" && ext !== ".less") {
+        options = { allowInlineCommnets: false }
     }
     return options
 }

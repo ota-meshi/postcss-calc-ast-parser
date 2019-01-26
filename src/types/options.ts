@@ -3,7 +3,7 @@
  */
 export interface Options {
     /**
-     * Allow inline comments. default `false`
+     * Allow inline comments. default `true`
      */
     allowInlineCommnets: boolean
 }
