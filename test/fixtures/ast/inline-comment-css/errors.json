@@ -3,11 +3,11 @@
         "errors": [
             {
                 "code": "unexpected-calc-token",
-                "index": 27
+                "index": 28
             },
             {
                 "code": "unexpected-calc-token",
-                "index": 50
+                "index": 51
             }
         ]
     }

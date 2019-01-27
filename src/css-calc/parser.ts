@@ -13,7 +13,6 @@ import {
     Parentheses,
     FunctionNode,
     INode,
-    IContainer,
     Other,
 } from "../types/ast"
 
@@ -43,7 +42,7 @@ type TokenSet = {
 }
 
 type StateContainer = {
-    container: IContainer
+    container: Root | FunctionNode | Parentheses
     parent?: StateContainer
     fnName: string
     post(token: PunctuatorToken, before: string): void
@@ -60,8 +59,8 @@ function srcLoc(node: INode): SourceLocation {
 /**
  * checks whether the given node is expression.
  */
-function isExpression(node: Expression | Other): Expression | null {
-    if (node.type !== "Punctuator" && node.type !== "Operator") {
+function isExpression(node: Expression | Other | void): Expression | null {
+    if (node && node.type !== "Punctuator" && node.type !== "Operator") {
         return node
     }
     return null
@@ -310,7 +309,7 @@ export class Parser {
         } = state
         const right = nodes.pop() as Expression | Other
         const op = nodes.pop() as Expression | Other
-        const left = (nodes.pop() || null) as Expression | Other | null
+        const left = nodes.pop() || null
 
         const restore = () => {
             if (left) {
@@ -338,13 +337,13 @@ export class Parser {
         }
 
         if (!left) {
-            reportError(op.type !== "Operator" ? right : op)
+            reportError(isExpression(op) ? right : op)
             restore()
             return null
         }
         const leftExpr = isExpression(left)
         if (!leftExpr) {
-            reportError(left)
+            reportError(isExpression(nodes[nodes.length - 1]) ? op : left)
             restore()
             return null
         }
