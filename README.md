@@ -111,14 +111,15 @@ const parsed = calcAstParser.parse("calc(100% - 20px)")
 Parse the given source code.
 
 ```ts
-calcAstParser.parse(code: string, options?: Options): AST.Root
-
-type Options = {
-    /**
-     * Allow inline comments. default `true`
-     */
-    allowInlineCommnets: boolean
-}
+calcAstParser.parse(
+    code: string,
+    options?: {
+        /**
+         * Allow inline comments. default `true`
+         */
+        allowInlineCommnets: boolean
+    }
+): AST.Root
 ```
 
 ### calcAstParser.stringify(node)
@@ -141,12 +142,25 @@ calcAstParser.getResolvedType(expr: AST.MathExpression):
     | "invalid" // Type can not be resolved.
 ```
 
-### calcAstParser.reduceMathExpression(expr)
+### calcAstParser.reduceExpression(expr)
 
 Returns the calculated value of `MathExpression`. Returns `null` if it can not be resolved.
 
 ```ts
-calcAstParser.reduceMathExpression(expr: AST.MathExpression):
+
+calcAstParser.reduceExpression(expr:
+    | AST.MathExpression
+    | AST.Root
+    | AST.FunctionNode
+    | AST.NumberValue
+    | AST.LengthValue
+    | AST.AngleValue
+    | AST.TimeValue
+    | AST.FrequencyValue
+    | AST.ResolutionValue
+    | AST.PercentageValue
+    | AST.FlexValue
+):
     | {
         value: number,
         type: "Number" | "Length" | "Angle" | "Time" | "Frequency" | "Resolution" | "Percentage" | "Flex",

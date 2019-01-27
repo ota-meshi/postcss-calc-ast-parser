@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 const assert = require("assert")
-const index = require("../../")
+const index = require("../..")
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -151,7 +151,7 @@ describe("reducer", () => {
         describe(test.input, () => {
             const parsed = index.parse(test.input)
             it("should be resolved type to expected.", () => {
-                const actual = index.reduceMathExpression(parsed)
+                const actual = index.reduceExpression(parsed)
                 const expected = test.output
 
                 assert.deepStrictEqual(

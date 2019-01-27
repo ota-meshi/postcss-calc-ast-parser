@@ -4,7 +4,7 @@ import {
     Tokenizer,
     Stringifier,
     getResolvedType,
-    reduceMathExpression,
+    reduceExpression,
 } from "./css-calc"
 import { Options, StringifyOptions } from "./types/options"
 
@@ -37,7 +37,7 @@ export function stringify(
 
 export {
     getResolvedType,
-    reduceMathExpression,
+    reduceExpression,
     Parser,
     Tokenizer,
     Stringifier,
