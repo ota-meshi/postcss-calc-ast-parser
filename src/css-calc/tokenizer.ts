@@ -23,6 +23,7 @@ import {
     RIGHT_PARENTHESIS,
     COMMA,
     FULL_STOP,
+    isLetter,
 } from "./util/unicode"
 import { Options } from "../types/options"
 
@@ -380,19 +381,8 @@ export class Tokenizer {
     private HYPHEN(cc: number): ScanState {
         if (
             this.lastTokenType === "word" || // e.g. 10-
-            isWhitespace(cc) ||
-            isPunctuator(cc) || // `(),`
-            isQuotes(cc) ||
-            cc === ASTERISK || // `*`
-            cc === PLUS_SIGN || // `+`
-            cc === SOLIDUS || // `/`
-            cc === LEFT_SQUARE_BRACKET || // `[`
-            cc === REVERSE_SOLIDUS || // `\`
-            cc === RIGHT_SQUARE_BRACKET || // `]`
-            cc === SOLIDUS || // `/`
-            cc === LEFT_CURLY_BRACKET || // `{`
-            cc === RIGHT_CURLY_BRACKET || // `}`
-            cc === EOF
+            cc === EOF ||
+            (cc !== HYPHEN_MINUS && !maybeNumber(cc) && !isLetter(cc))
         ) {
             this.commitToken("operator", -1)
             return this.back()

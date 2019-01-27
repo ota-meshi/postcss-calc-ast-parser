@@ -63,14 +63,30 @@
                     },
                     {
                         "parent": "Function",
-                        "type": "Word",
-                        "value": "-#{$foo}",
+                        "type": "Operator",
+                        "value": "-",
                         "raws": {
                             "before": " "
                         },
                         "source": {
                             "start": {
                                 "index": 14
+                            },
+                            "end": {
+                                "index": 15
+                            }
+                        }
+                    },
+                    {
+                        "parent": "Function",
+                        "type": "Word",
+                        "value": "#{$foo}",
+                        "raws": {
+                            "before": ""
+                        },
+                        "source": {
+                            "start": {
+                                "index": 15
                             },
                             "end": {
                                 "index": 22
