@@ -75,13 +75,13 @@ export interface NumberValue extends INode {
   - `-10` :  
     ```json
     {
-        type: "Number",
-        value: -10,
-        raws: {
-            before: "",
-            value: {
-                raw: "-10",
-                value: -10
+        "type": "Number",
+        "value": -10,
+        "raws": {
+            "before": "",
+            "value": {
+                "raw": "-10",
+                "value": -10
             }
         }
     }
@@ -89,13 +89,13 @@ export interface NumberValue extends INode {
   - `/*comment*/ +.01` :  
     ```json
     {
-        type: "Number",
-        value: 0.01,
-        raws: {
-            before: "/*comment*/ ",
-            value: {
-                raw: "+.01",
-                value: 0.01
+        "type": "Number",
+        "value": 0.01,
+        "raws": {
+            "before": "/*comment*/ ",
+            "value": {
+                "raw": "+.01",
+                "value": 0.01
             }
         }
     }
@@ -136,27 +136,27 @@ export interface LengthValue extends INode {
   - `-10px` :  
     ```json
     {
-        type: "Length",
-        value: -10,
-        unit: "px",
-        raws: {
-            before: "",
-            value: { ... }
+        "type": "Length",
+        "value": -10,
+        "unit": "px",
+        "raws": {
+            "before": "",
+            "value": { ... }
         }
     }
     ```
   - `-10PX` :  
     ```json
     {
-        type: "Length",
-        value: -10,
-        unit: "px",
-        raws: {
-            before: "",
-            value: { ... },
-            unit: {
-                raw: "PX"
-                value: "px"
+        "type": "Length",
+        "value": -10,
+        "unit": "px",
+        "raws": {
+            "before": "",
+            "value": { ... },
+            "unit": {
+                "raw": "PX"
+                "value": "px"
             }
         }
     }
@@ -365,25 +365,25 @@ export interface Word extends INode {
   - `foo` :  
     ```json
     {
-        type: "Word",
-        value: "foo",
-        raws: { ... }
+        "type": "Word",
+        "value": "foo",
+        "raws": { ... }
     }
     ```
   - `-10foo` :  
     ```json
     {
-        type: "Word",
-        value: "-10foo",
-        raws: { ... }
+        "type": "Word",
+        "value": "-10foo",
+        "raws": { ... }
     }
     ```
   - `#{ foo-bar }` :  
     ```json
     {
-        type: "Word",
-        value: "#{ foo-bar }",
-        raws: { ... }
+        "type": "Word",
+        "value": "#{ foo-bar }",
+        "raws": { ... }
     }
     ```
 
@@ -418,21 +418,21 @@ export interface MathExpression extends INode {
   - `100% - 20px` :  
     ```json
     {
-        type: "MathExpression",
-        left: { type: "Percentage", value: 100, unit: '%', ... },
-        operator: "+",
-        right: { type: "Length", value: 20, ... },
-        raws: { between: " ", ... }
+        "type": "MathExpression",
+        "left": { "type": "Percentage", "value": 100, "unit": "%", ... },
+        "operator": "+",
+        "right": { "type": "Length", "value": 20, ... },
+        "raws": { "between": " ", ... }
     }
     ```
   - `/* a */ 100% /* b */ - /* c */ 20px` :  
     ```json
     {
-        type: "MathExpression",
-        left: { ... , raws: { before: "/* a */ " } },
-        operator: "+",
-        right: { ... , raws: { before: "/* c */ " } },
-        raws: { between: " /* b */ ", ... }
+        "type": "MathExpression",
+        "left": { ... , "raws": { "before": "/* a */ " } },
+        "operator": "+",
+        "right": { ... , "raws": { "before": "/* c */ " } },
+        "raws": { "between": " /* b */ ", ... }
     }
     ```
 
@@ -459,34 +459,34 @@ export interface FunctionNode extends IContainer {
   - `call(100% - 20px)` :  
     ```json
     {
-        type: "Function",
-        name: "call",
-        nodes: [ { type: "MathExpression", ... } ],
-        raws: { ... }
+        "type": "Function",
+        "name": "call",
+        "nodes": [ { "type": "MathExpression", ... } ],
+        "raws": { ... }
     }
     ```
   - `var(--foo-bar)` :  
     ```json
     {
-        type: "Function",
-        name: "var",
-        nodes: [ { type: "Word", value: "--foo-bar" } ],
-        raws: { ... }
+        "type": "Function",
+        "name": "var",
+        "nodes": [ { "type": "Word", "value": "--foo-bar" } ],
+        "raws": { ... }
     }
     ```
   - `/*a*/ var( /*b*/ --foo-bar /*c*/ , /*d*/ 10px /*e*/ )` :  
     ```json
     {
-        type: "Function",
-        name: "var",
-        nodes: [
-            { type: "Word", value: "--foo-bar", raws: { before: " /*b*/ " } },
-            { type: "Punctuator", value: ",", raws: { before: " /*c*/ " } },
-            { type: "Length", value: "10", ... , raws: { before: " /*d*/ ", ... } },
+        "type": "Function",
+        "name": "var",
+        "nodes": [
+            { "type": "Word", "value": "--foo-bar", "raws": { "before": " /*b*/ " } },
+            { "type": "Punctuator", "value": ",", "raws": { "before": " /*c*/ " } },
+            { "type": "Length", "value": "10", ... , "raws": { "before": " /*d*/ ", ... } },
         ],
-        raws: {
-            before: "/*a*/ ",
-            beforeClose: " /*e*/ "
+        "raws": {
+            "before": "/*a*/ ",
+            "beforeClose": " /*e*/ "
         }
     }
     ```
@@ -530,16 +530,16 @@ export interface StringNode extends INode {
   - `'str'` :  
     ```json
     {
-        type: "String",
-        value: "'str'",
+        "type": "String",
+        "value": "'str'",
         ...
     }
     ```
   - `"str"` :  
     ```json
     {
-        type: "String",
-        value: "\"str\"",
+        "type": "String",
+        "value": "\"str\"",
         ...
     }
     ```
