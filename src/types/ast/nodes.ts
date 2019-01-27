@@ -37,7 +37,6 @@ export interface IContainer extends INode {
  * Expression
  */
 export type Expression =
-    | FunctionNode
     | NumberValue
     | LengthValue
     | AngleValue
@@ -48,11 +47,13 @@ export type Expression =
     | FlexValue
     | Word
     | MathExpression
+    | FunctionNode
     | Parentheses
     | StringNode
 
 /**
  * Number value
+ * @see https://drafts.csswg.org/css-values-3/#integers
  * @see https://drafts.csswg.org/css-values-3/#numbers
  */
 export interface NumberValue extends INode {

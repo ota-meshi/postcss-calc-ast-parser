@@ -23,7 +23,6 @@ export interface INode {
 }
 ```
 
-- This AST spec enhances the `Node` nodes.
 - The `source` property is an object which has locations.
 
 ## Expressions
@@ -33,7 +32,6 @@ export interface INode {
  * Expression
  */
 export type Expression =
-    | FunctionNode
     | NumberValue
     | LengthValue
     | AngleValue
@@ -44,10 +42,17 @@ export type Expression =
     | FlexValue
     | Word
     | MathExpression
+    | FunctionNode
     | Parentheses
+    | StringNode
+```
 
+### Number
+
+```ts
 /**
  * Number value
+ * @see https://drafts.csswg.org/css-values-3/#integers
  * @see https://drafts.csswg.org/css-values-3/#numbers
  */
 export interface NumberValue extends INode {
@@ -61,7 +66,44 @@ export interface NumberValue extends INode {
         }
     }
 }
+```
 
+- `Number` is node of real numbers or integers.  
+    https://drafts.csswg.org/css-values-3/#integers  
+    https://drafts.csswg.org/css-values-3/#numbers  
+- Examples :  
+  - `-10` :  
+    ```json
+    {
+        type: "Number",
+        value: -10,
+        raws: {
+            before: "",
+            value: {
+                raw: "-10",
+                value: -10
+            }
+        }
+    }
+    ```
+  - `/*comment*/ +.01` :  
+    ```json
+    {
+        type: "Number",
+        value: 0.01,
+        raws: {
+            before: "/*comment*/ ",
+            value: {
+                raw: "+.01",
+                value: 0.01
+            }
+        }
+    }
+    ```
+
+### Length
+
+```ts
 /**
  * Length value
  * @see https://drafts.csswg.org/css-values-3/#lengths
@@ -69,7 +111,7 @@ export interface NumberValue extends INode {
 export interface LengthValue extends INode {
     type: "Length"
     value: number
-    unit: LengthUnit
+    unit: "em" | "ex" | "ch" | "rem" | "vw" | "vh" | "vmin" | "vmax" | "px" | "mm" | "cm" | "in" | "pt" | "pc" | "Q" | "vm"
     raws: {
         before: string
         value: {
@@ -86,25 +128,43 @@ export interface LengthValue extends INode {
         }
     }
 }
+```
 
-export type LengthUnit =
-    | "em"
-    | "ex"
-    | "ch"
-    | "rem"
-    | "vw"
-    | "vh"
-    | "vmin"
-    | "vmax"
-    | "px"
-    | "mm"
-    | "cm"
-    | "in"
-    | "pt"
-    | "pc"
-    | "Q"
-    | "vm"
+- `Length` is node of numbers with distance units.  
+    https://drafts.csswg.org/css-values-3/#lengths  
+- Examples :  
+  - `-10px` :  
+    ```json
+    {
+        type: "Length",
+        value: -10,
+        unit: "px",
+        raws: {
+            before: "",
+            value: { ... }
+        }
+    }
+    ```
+  - `-10PX` :  
+    ```json
+    {
+        type: "Length",
+        value: -10,
+        unit: "px",
+        raws: {
+            before: "",
+            value: { ... },
+            unit: {
+                raw: "PX"
+                value: "px"
+            }
+        }
+    }
+    ```
 
+### Angle
+
+```ts
 /**
  * Angle value
  * @see https://drafts.csswg.org/css-values-3/#angles
@@ -112,7 +172,7 @@ export type LengthUnit =
 export interface AngleValue extends INode {
     type: "Angle"
     value: number
-    unit: AngleUnit
+    unit: "deg" | "grad" | "turn" | "rad"
     raws: {
         before: string
         value: {
@@ -128,9 +188,14 @@ export interface AngleValue extends INode {
         }
     }
 }
+```
 
-export type AngleUnit = "deg" | "grad" | "turn" | "rad"
+- `Angle` is node of numbers with angle units.  
+    https://drafts.csswg.org/css-values-3/#angles  
 
+### Time
+
+```ts
 /**
  * Time value
  * @see https://drafts.csswg.org/css-values-3/#time
@@ -138,7 +203,7 @@ export type AngleUnit = "deg" | "grad" | "turn" | "rad"
 export interface TimeValue extends INode {
     type: "Time"
     value: number
-    unit: TimeUnit
+    unit: "s" | "ms"
     raws: {
         before: string
         value: {
@@ -154,9 +219,14 @@ export interface TimeValue extends INode {
         }
     }
 }
+```
 
-export type TimeUnit = "s" | "ms"
+- `Time` is node of numbers with duration units.  
+    https://drafts.csswg.org/css-values-3/#time  
 
+### Frequency
+
+```ts
 /**
  * Frequency value
  * @see https://drafts.csswg.org/css-values-3/#frequency
@@ -164,7 +234,7 @@ export type TimeUnit = "s" | "ms"
 export interface FrequencyValue extends INode {
     type: "Frequency"
     value: number
-    unit: FrequencyUnit
+    unit: "Hz" | "kHz"
     raws: {
         before: string
         value: {
@@ -180,9 +250,14 @@ export interface FrequencyValue extends INode {
         }
     }
 }
+```
 
-export type FrequencyUnit = "Hz" | "kHz"
+- `Frequency` is node of numbers with frequency units.  
+    https://drafts.csswg.org/css-values-3/#frequency  
 
+### Resolution
+
+```ts
 /**
  * Resolution value
  * @see https://drafts.csswg.org/css-values-3/#resolution
@@ -190,7 +265,7 @@ export type FrequencyUnit = "Hz" | "kHz"
 export interface ResolutionValue extends INode {
     type: "Resolution"
     value: number
-    unit: ResolutionUnit
+    unit: "dpi" | "dpcm" | "dppm"
     raws: {
         before: string
         value: {
@@ -206,9 +281,14 @@ export interface ResolutionValue extends INode {
         }
     }
 }
+```
 
-export type ResolutionUnit = "dpi" | "dpcm" | "dppm"
+- `Resolution` is node of numbers with resolution units.  
+    https://drafts.csswg.org/css-values-3/#resolution  
 
+### Percentage
+
+```ts
 /**
  * Percentage value
  * @see https://drafts.csswg.org/css-values-3/#percentages
@@ -229,7 +309,14 @@ export interface PercentageValue extends INode {
         }
     }
 }
+```
 
+- `Percentage` is node of numbers with percentages units.  
+    https://drafts.csswg.org/css-values-3/#percentages  
+
+### Flex
+
+```ts
 /**
  * Flex value
  * @see https://www.w3.org/TR/css-grid-1/#fr-unit
@@ -237,7 +324,7 @@ export interface PercentageValue extends INode {
 export interface FlexValue extends INode {
     type: "Flex"
     value: number
-    unit: FlexUnit
+    unit: "fr"
     raws: {
         before: string
         value: {
@@ -253,8 +340,14 @@ export interface FlexValue extends INode {
         }
     }
 }
-export type FlexUnit = "fr"
+```
 
+- `Flex` is node of numbers of the flexible lengths.  
+    https://www.w3.org/TR/css-grid-1/#fr-unit  
+
+### Word
+
+```ts
 /**
  * Unknown value or word
  */
@@ -265,7 +358,38 @@ export interface Word extends INode {
         before: string
     }
 }
+```
 
+- `Word` is node of words or unknown values.  
+- Examples :  
+  - `foo` :  
+    ```json
+    {
+        type: "Word",
+        value: "foo",
+        raws: { ... }
+    }
+    ```
+  - `-10foo` :  
+    ```json
+    {
+        type: "Word",
+        value: "-10foo",
+        raws: { ... }
+    }
+    ```
+  - `#{ foo-bar }` :  
+    ```json
+    {
+        type: "Word",
+        value: "#{ foo-bar }",
+        raws: { ... }
+    }
+    ```
+
+### MathExpression
+
+```ts
 /**
  * Math expression
  */
@@ -282,37 +406,113 @@ export interface MathExpression extends INode {
         between: string
     }
     source?: {
-        operator: SourceLocation
-    } & SourceLocation
+        start: { index: number }
+        operator: { start: { index: number }, end: { index: number } }
+        end: { index: number }
+    }
 }
+```
 
+- `MathExpression` is node of the mathematical expression with a right side and a left side.  
+- Examples :  
+  - `100% - 20px` :  
+    ```json
+    {
+        type: "MathExpression",
+        left: { type: "Percentage", value: 100, unit: '%', ... },
+        operator: "+",
+        right: { type: "Length", value: 20, ... },
+        raws: { between: " ", ... }
+    }
+    ```
+  - `/* a */ 100% /* b */ - /* c */ 20px` :  
+    ```json
+    {
+        type: "MathExpression",
+        left: { ... , raws: { before: "/* a */ " } },
+        operator: "+",
+        right: { ... , raws: { before: "/* c */ " } },
+        raws: { between: " /* b */ ", ... }
+    }
+    ```
+
+### Function
+
+```ts
 /**
  * Function
  */
 export interface FunctionNode extends IContainer {
     type: "Function"
     name: string
-    nodes: Expression[]
+    nodes: (Expression, Punctuator)[]
     raws: {
         before: string
         beforeClose?: string
     }
     unclosed?: boolean
 }
+```
 
+- `Function` is node of the function call expression.  
+- Examples :  
+  - `call(100% - 20px)` :  
+    ```json
+    {
+        type: "Function",
+        name: "call",
+        nodes: [ { type: "MathExpression", ... } ],
+        raws: { ... }
+    }
+    ```
+  - `var(--foo-bar)` :  
+    ```json
+    {
+        type: "Function",
+        name: "var",
+        nodes: [ { type: "Word", value: "--foo-bar" } ],
+        raws: { ... }
+    }
+    ```
+  - `/*a*/ var( /*b*/ --foo-bar /*c*/ , /*d*/ 10px /*e*/ )` :  
+    ```json
+    {
+        type: "Function",
+        name: "var",
+        nodes: [
+            { type: "Word", value: "--foo-bar", raws: { before: " /*b*/ " } },
+            { type: "Punctuator", value: ",", raws: { before: " /*c*/ " } },
+            { type: "Length", value: "10", ... , raws: { before: " /*d*/ ", ... } },
+        ],
+        raws: {
+            before: "/*a*/ ",
+            beforeClose: " /*e*/ "
+        }
+    }
+    ```
+
+### Parentheses
+
+```ts
 /**
  * Parentheses
  */
 export interface Parentheses extends IContainer {
     type: "Parentheses"
-    nodes: Expression[]
+    nodes: (Expression, Punctuator)[]
     raws: {
         before: string
         beforeClose?: string
     }
     unclosed?: boolean
 }
+```
 
+- `Parentheses` is node of the expression enclosed in parentheses.  
+
+### String
+
+```ts
 /**
  * String
  */
@@ -325,6 +525,25 @@ export interface StringNode extends INode {
 }
 ```
 
+- `String` is node of the string.  
+- Examples :  
+  - `'str'` :  
+    ```json
+    {
+        type: "String",
+        value: "'str'",
+        ...
+    }
+    ```
+  - `"str"` :  
+    ```json
+    {
+        type: "String",
+        value: "\"str\"",
+        ...
+    }
+    ```
+
 ## Root
 
 ```ts
@@ -333,7 +552,7 @@ export interface StringNode extends INode {
  */
 export interface Root extends INode {
     type: "Root"
-    nodes: Expression[]
+    nodes: (Expression, Punctuator)[]
     tokens: Token[]
     errors: ParseError[]
     raws: { after: string }
@@ -353,6 +572,8 @@ interface ParseError extends Error {
 
 ## Others
 
+### Punctuator
+
 ```ts
 /**
  * Punctuator
@@ -364,7 +585,13 @@ export interface Punctuator extends INode {
         before: string
     }
 }
+```
 
+- `Punctuator` is node of the punctuator.  
+
+### Operator
+
+```ts
 /**
  * Operator
  */
@@ -376,3 +603,6 @@ export interface Operator extends INode {
     }
 }
 ```
+
+- `Operator` is node of the operator.  
+　   Operators that could not be processed are retained as `Operator` nodes.
