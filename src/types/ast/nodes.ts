@@ -1,4 +1,3 @@
-// import { ScopeManager } from "eslint-scope"
 import { ParseError } from "./errors"
 import { SourceLocation } from "./locations"
 import { Token } from "./tokens"

@@ -14,7 +14,7 @@ import { Options, StringifyOptions } from "./types/options"
  * @param options The parser options.
  * @returns The parsing result.
  */
-export function parse(code: string, options?: Options): AST.Root {
+function parse(code: string, options?: Options): AST.Root {
     const tokenizer = new Tokenizer(code, options)
     return new Parser(tokenizer, options).parse()
 }
@@ -25,7 +25,7 @@ export function parse(code: string, options?: Options): AST.Root {
  * @param options The stringify options.
  * @returns The string result.
  */
-export function stringify(
+function stringify(
     node:
         | AST.Node // nodes
         | AST.Token, // tokens
@@ -36,6 +36,19 @@ export function stringify(
 }
 
 export {
+    parse,
+    stringify,
+    getResolvedType,
+    reduceExpression,
+    Parser,
+    Tokenizer,
+    Stringifier,
+    AST,
+}
+
+export default {
+    parse,
+    stringify,
     getResolvedType,
     reduceExpression,
     Parser,
