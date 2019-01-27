@@ -445,7 +445,7 @@ export interface MathExpression extends INode {
 export interface FunctionNode extends IContainer {
     type: "Function"
     name: string
-    nodes: (Expression, Punctuator)[]
+    nodes: (Expression, Other)[]
     raws: {
         before: string
         beforeClose?: string
@@ -499,7 +499,7 @@ export interface FunctionNode extends IContainer {
  */
 export interface Parentheses extends IContainer {
     type: "Parentheses"
-    nodes: (Expression, Punctuator)[]
+    nodes: (Expression, Other)[]
     raws: {
         before: string
         beforeClose?: string
@@ -552,7 +552,7 @@ export interface StringNode extends INode {
  */
 export interface Root extends INode {
     type: "Root"
-    nodes: (Expression, Punctuator)[]
+    nodes: (Expression, Other)[]
     tokens: Token[]
     errors: ParseError[]
     raws: { after: string }
@@ -572,6 +572,10 @@ interface ParseError extends Error {
 
 ## Others
 
+```ts
+export type Other = Operator | Punctuator
+```
+
 ### Punctuator
 
 ```ts
@@ -587,7 +591,8 @@ export interface Punctuator extends INode {
 }
 ```
 
-- `Punctuator` is node of the punctuator.  
+- `Punctuator` is node of the punctuator.
+- `(`, `)` that could not be processed are retained as `Punctuator` nodes.
 
 ### Operator
 
@@ -605,4 +610,4 @@ export interface Operator extends INode {
 ```
 
 - `Operator` is node of the operator.  
-　   Operators that could not be processed are retained as `Operator` nodes.
+- Operators that could not be processed are retained as `Operator` nodes.
