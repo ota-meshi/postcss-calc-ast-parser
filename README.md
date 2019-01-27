@@ -133,7 +133,7 @@ calcAstParser.stringify(node: AST.Node): string
 ### calcAstParser.getResolvedType(expr)
 
 Get the resolved type of the given math expression.
-> https://drafts.csswg.org/css-values-3/#calc-type-checking
+> https://www.w3.org/TR/css3-values/#calc-type-checking
 
 ```ts
 calcAstParser.getResolvedType(expr: AST.MathExpression):

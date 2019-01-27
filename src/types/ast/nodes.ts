@@ -53,8 +53,8 @@ export type Expression =
 
 /**
  * Number value
- * @see https://drafts.csswg.org/css-values-3/#integers
- * @see https://drafts.csswg.org/css-values-3/#numbers
+ * @see https://www.w3.org/TR/css3-values/#integers
+ * @see https://www.w3.org/TR/css3-values/#numbers
  */
 export interface NumberValue extends INode {
     type: "Number"
@@ -70,7 +70,7 @@ export interface NumberValue extends INode {
 
 /**
  * Length value
- * @see https://drafts.csswg.org/css-values-3/#lengths
+ * @see https://www.w3.org/TR/css3-values/#lengths
  */
 export interface LengthValue extends INode {
     type: "Length"
@@ -113,7 +113,7 @@ export type LengthUnit =
 
 /**
  * Angle value
- * @see https://drafts.csswg.org/css-values-3/#angles
+ * @see https://www.w3.org/TR/css3-values/#angles
  */
 export interface AngleValue extends INode {
     type: "Angle"
@@ -139,7 +139,7 @@ export type AngleUnit = "deg" | "grad" | "turn" | "rad"
 
 /**
  * Time value
- * @see https://drafts.csswg.org/css-values-3/#time
+ * @see https://www.w3.org/TR/css3-values/#time
  */
 export interface TimeValue extends INode {
     type: "Time"
@@ -165,7 +165,7 @@ export type TimeUnit = "s" | "ms"
 
 /**
  * Frequency value
- * @see https://drafts.csswg.org/css-values-3/#frequency
+ * @see https://www.w3.org/TR/css3-values/#frequency
  */
 export interface FrequencyValue extends INode {
     type: "Frequency"
@@ -191,7 +191,7 @@ export type FrequencyUnit = "Hz" | "kHz"
 
 /**
  * Resolution value
- * @see https://drafts.csswg.org/css-values-3/#resolution
+ * @see https://www.w3.org/TR/css3-values/#resolution
  */
 export interface ResolutionValue extends INode {
     type: "Resolution"
@@ -217,7 +217,7 @@ export type ResolutionUnit = "dpi" | "dpcm" | "dppm"
 
 /**
  * Percentage value
- * @see https://drafts.csswg.org/css-values-3/#percentages
+ * @see https://www.w3.org/TR/css3-values/#percentages
  */
 export interface PercentageValue extends INode {
     type: "Percentage"

@@ -52,8 +52,8 @@ export type Expression =
 ```ts
 /**
  * Number value
- * @see https://drafts.csswg.org/css-values-3/#integers
- * @see https://drafts.csswg.org/css-values-3/#numbers
+ * @see https://www.w3.org/TR/css3-values/#integers
+ * @see https://www.w3.org/TR/css3-values/#numbers
  */
 export interface NumberValue extends INode {
     type: "Number"
@@ -69,8 +69,8 @@ export interface NumberValue extends INode {
 ```
 
 - `Number` is node of real numbers or integers.  
-    https://drafts.csswg.org/css-values-3/#integers  
-    https://drafts.csswg.org/css-values-3/#numbers  
+    https://www.w3.org/TR/css3-values/#integers  
+    https://www.w3.org/TR/css3-values/#numbers  
 - Examples :  
   - `-10` :  
     ```json
@@ -106,7 +106,7 @@ export interface NumberValue extends INode {
 ```ts
 /**
  * Length value
- * @see https://drafts.csswg.org/css-values-3/#lengths
+ * @see https://www.w3.org/TR/css3-values/#lengths
  */
 export interface LengthValue extends INode {
     type: "Length"
@@ -131,7 +131,7 @@ export interface LengthValue extends INode {
 ```
 
 - `Length` is node of numbers with distance units.  
-    https://drafts.csswg.org/css-values-3/#lengths  
+    https://www.w3.org/TR/css3-values/#lengths  
 - Examples :  
   - `-10px` :  
     ```json
@@ -167,7 +167,7 @@ export interface LengthValue extends INode {
 ```ts
 /**
  * Angle value
- * @see https://drafts.csswg.org/css-values-3/#angles
+ * @see https://www.w3.org/TR/css3-values/#angles
  */
 export interface AngleValue extends INode {
     type: "Angle"
@@ -191,14 +191,14 @@ export interface AngleValue extends INode {
 ```
 
 - `Angle` is node of numbers with angle units.  
-    https://drafts.csswg.org/css-values-3/#angles  
+    https://www.w3.org/TR/css3-values/#angles  
 
 ### Time
 
 ```ts
 /**
  * Time value
- * @see https://drafts.csswg.org/css-values-3/#time
+ * @see https://www.w3.org/TR/css3-values/#time
  */
 export interface TimeValue extends INode {
     type: "Time"
@@ -222,14 +222,14 @@ export interface TimeValue extends INode {
 ```
 
 - `Time` is node of numbers with duration units.  
-    https://drafts.csswg.org/css-values-3/#time  
+    https://www.w3.org/TR/css3-values/#time  
 
 ### Frequency
 
 ```ts
 /**
  * Frequency value
- * @see https://drafts.csswg.org/css-values-3/#frequency
+ * @see https://www.w3.org/TR/css3-values/#frequency
  */
 export interface FrequencyValue extends INode {
     type: "Frequency"
@@ -253,14 +253,14 @@ export interface FrequencyValue extends INode {
 ```
 
 - `Frequency` is node of numbers with frequency units.  
-    https://drafts.csswg.org/css-values-3/#frequency  
+    https://www.w3.org/TR/css3-values/#frequency  
 
 ### Resolution
 
 ```ts
 /**
  * Resolution value
- * @see https://drafts.csswg.org/css-values-3/#resolution
+ * @see https://www.w3.org/TR/css3-values/#resolution
  */
 export interface ResolutionValue extends INode {
     type: "Resolution"
@@ -284,14 +284,14 @@ export interface ResolutionValue extends INode {
 ```
 
 - `Resolution` is node of numbers with resolution units.  
-    https://drafts.csswg.org/css-values-3/#resolution  
+    https://www.w3.org/TR/css3-values/#resolution  
 
 ### Percentage
 
 ```ts
 /**
  * Percentage value
- * @see https://drafts.csswg.org/css-values-3/#percentages
+ * @see https://www.w3.org/TR/css3-values/#percentages
  */
 export interface PercentageValue extends INode {
     type: "Percentage"
@@ -312,7 +312,7 @@ export interface PercentageValue extends INode {
 ```
 
 - `Percentage` is node of numbers with percentages units.  
-    https://drafts.csswg.org/css-values-3/#percentages  
+    https://www.w3.org/TR/css3-values/#percentages  
 
 ### Flex
 

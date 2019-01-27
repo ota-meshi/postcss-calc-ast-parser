@@ -16,7 +16,7 @@ type ResolvedType =
 /* eslint-disable complexity */
 /**
  * Get the resolved type of a given math expression.
- * @see https://drafts.csswg.org/css-values-3/#calc-type-checking
+ * @see https://www.w3.org/TR/css3-values/#calc-type-checking
  */
 export function getResolvedType(
     expr: MathExpression,
