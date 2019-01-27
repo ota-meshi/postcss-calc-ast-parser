@@ -6,9 +6,9 @@
 
 const fs = require("fs")
 const path = require("path")
-const findValues = require("../test/tools/find-values")
-const tokenizer = require("../test/tools/tokenizer")
-const parser = require("../test/tools/parser")
+const findValues = require("../test-tools/find-values")
+const tokenizer = require("../test-tools/tokenizer")
+const parser = require("../test-tools/parser")
 
 //------------------------------------------------------------------------------
 // Helpers

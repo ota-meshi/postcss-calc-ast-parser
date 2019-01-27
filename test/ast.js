@@ -121,6 +121,7 @@ describe("AST", () => {
 
                 it("should be parsed to valid ast.source", () => {
                     parsed.forEach((ast, i) => {
+                        check(ast, cssValues[i])
                         ast.walk(/.*/u, node => {
                             check(node, cssValues[i])
                         })

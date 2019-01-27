@@ -73,9 +73,8 @@ export function getResolvedType(
 /**
  * Get the type of the given expression type.
  */
-function getTypeFromNodeType(
-    type: Expression["type"] | Other["type"],
-): ResolvedType {
+function getExpressionType(expr: Expression | Other): ResolvedType {
+    const { type } = expr
     if (
         type === "Number" ||
         type === "Length" ||
@@ -118,7 +117,7 @@ function getType(expr: Expression | Other): ResolvedType {
         }
         return "Unknown"
     }
-    return getTypeFromNodeType(expr.type)
+    return getExpressionType(expr)
 }
 
 /**

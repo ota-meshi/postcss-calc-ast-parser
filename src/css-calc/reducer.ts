@@ -1,7 +1,5 @@
 import {
     MathExpression,
-    Expression,
-    Other,
     FunctionNode,
     LengthUnit,
     AngleUnit,
@@ -9,11 +7,12 @@ import {
     FrequencyUnit,
     ResolutionUnit,
     FlexUnit,
+    Node,
 } from "../types/ast"
 import { isCalc } from "./util/calc-notation"
 import { getFunctionArguments } from "./util/utils"
 
-type CalculateValue =
+type ReduceValue =
     | {
           value: number
           type: "Number"
@@ -53,12 +52,20 @@ type CalculateValue =
           unit: FlexUnit
           type: "Flex"
       }
+
 /**
  * Reduce the given expression.
  */
-export function reduce(expr: MathExpression): CalculateValue | null {
-    const left = getNum(expr.left)
-    const right = getNum(expr.right)
+export function reduce(expr: Node): ReduceValue | null {
+    return reduceExpression(expr)
+}
+
+/**
+ * Reduce the given math expression.
+ */
+function reduceMathExpression(expr: MathExpression): ReduceValue | null {
+    const left = reduceExpression(expr.left)
+    const right = reduceExpression(expr.right)
     if (!left || !right) {
         return null
     }
@@ -78,11 +85,11 @@ export function reduce(expr: MathExpression): CalculateValue | null {
 /**
  * Adds or subtracts the given expression.
  */
-export function reduceAddSub(
-    left: CalculateValue,
+function reduceAddSub(
+    left: ReduceValue,
     operator: "+" | "-",
-    right: CalculateValue,
-): CalculateValue | null {
+    right: ReduceValue,
+): ReduceValue | null {
     if (left.type !== right.type) {
         return null
     }
@@ -111,10 +118,10 @@ export function reduceAddSub(
 /**
  * Divides the given expression.
  */
-export function reduceDivision(
-    left: CalculateValue,
-    right: CalculateValue,
-): CalculateValue | null {
+function reduceDivision(
+    left: ReduceValue,
+    right: ReduceValue,
+): ReduceValue | null {
     if (right.type !== "Number") {
         return null
     }
@@ -128,16 +135,16 @@ export function reduceDivision(
         type: left.type,
         value: left.value / right.value,
         unit: left.unit,
-    } as CalculateValue
+    } as ReduceValue
 }
 
 /**
  * Multiply the given expression.
  */
-export function reduceMultiple(
-    left: CalculateValue,
-    right: CalculateValue,
-): CalculateValue | null {
+function reduceMultiple(
+    left: ReduceValue,
+    right: ReduceValue,
+): ReduceValue | null {
     if (left.type === "Number") {
         if (right.type === "Number") {
             return {
@@ -149,13 +156,13 @@ export function reduceMultiple(
             type: right.type,
             value: left.value * right.value,
             unit: right.unit,
-        } as CalculateValue
+        } as ReduceValue
     } else if (right.type === "Number") {
         return {
             type: left.type,
             value: left.value * right.value,
             unit: left.unit,
-        } as CalculateValue
+        } as ReduceValue
     }
     return null
 }
@@ -163,13 +170,25 @@ export function reduceMultiple(
 /**
  * Get number (with unit) the given expression.
  */
-function getNum(expr: Expression | Other): CalculateValue | null {
-    if (expr.type === "MathExpression") {
-        return reduce(expr)
+function reduceExpression(expr: Node): ReduceValue | null {
+    if (
+        expr.type === "Number" ||
+        expr.type === "Length" ||
+        expr.type === "Angle" ||
+        expr.type === "Time" ||
+        expr.type === "Frequency" ||
+        expr.type === "Resolution" ||
+        expr.type === "Percentage" ||
+        expr.type === "Flex"
+    ) {
+        return expr
     }
-    if (expr.type === "Parentheses") {
+    if (expr.type === "MathExpression") {
+        return reduceMathExpression(expr)
+    }
+    if (expr.type === "Parentheses" || expr.type === "Root") {
         if (expr.nodes.length === 1) {
-            return getNum(expr.nodes[0])
+            return reduceExpression(expr.nodes[0])
         }
     } else if (expr.type === "Function") {
         if (expr.type === "Function") {
@@ -185,10 +204,10 @@ function getNum(expr: Expression | Other): CalculateValue | null {
 /**
  * Get the number (with unit) of the given `calc()` function.
  */
-function getCalcNumber(fn: FunctionNode): CalculateValue | null {
+function getCalcNumber(fn: FunctionNode): ReduceValue | null {
     const args = getFunctionArguments(fn)
     if (args && args.length === 1) {
-        return getNum(args[0])
+        return reduceExpression(args[0])
     }
     return null
 }
