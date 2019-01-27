@@ -1,6 +1,6 @@
 {
   "name": "postcss-calc-ast-parser",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Parses calc of css and converts it to AST.",
   "repository": {
     "type": "git",

@@ -312,6 +312,17 @@ export interface Parentheses extends IContainer {
     }
     unclosed?: boolean
 }
+
+/**
+ * String
+ */
+export interface StringNode extends INode {
+    type: "String"
+    value: string
+    raws: {
+        before: string
+    }
+}
 ```
 
 ## Root

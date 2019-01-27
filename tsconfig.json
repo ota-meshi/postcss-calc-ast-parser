@@ -1,17 +1,11 @@
 {
     "compileOnSave": true,
     "compilerOptions": {
-        "allowJs": false,
         "allowSyntheticDefaultImports": true,
-        "allowUnreachableCode": false,
-        "allowUnusedLabels": false,
-        "alwaysStrict": true,
         "baseUrl": ".",
-        "checkJs": false,
         "declaration": true,
         "diagnostics": true,
         "forceConsistentCasingInFileNames": true,
-        // "inlineSources": true,
         "lib": [
             "es2015"
         ],
@@ -26,13 +20,9 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "outDir": "dist",
-        // "outFile": "dist/index.js",
         "paths": {},
         "pretty": true,
         "removeComments": true,
-        "sourceMap": false,
-        // "sourceMap": true,
-        // "sourceRoot": "src",
         "strict": true,
         "strictNullChecks": true,
         "target": "es2015"
