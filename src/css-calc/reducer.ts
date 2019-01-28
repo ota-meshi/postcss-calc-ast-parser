@@ -1,14 +1,4 @@
-import {
-    MathExpression,
-    FunctionNode,
-    LengthUnit,
-    AngleUnit,
-    TimeUnit,
-    FrequencyUnit,
-    ResolutionUnit,
-    FlexUnit,
-    Node,
-} from "../types/ast"
+import * as AST from "../types/ast"
 import { isCalc } from "./util/calc-notation"
 import { getFunctionArguments } from "./util/utils"
 
@@ -19,27 +9,27 @@ type ReduceValue =
       }
     | {
           value: number
-          unit: LengthUnit
+          unit: AST.LengthUnit
           type: "Length"
       }
     | {
           value: number
-          unit: AngleUnit
+          unit: AST.AngleUnit
           type: "Angle"
       }
     | {
           value: number
-          unit: TimeUnit
+          unit: AST.TimeUnit
           type: "Time"
       }
     | {
           value: number
-          unit: FrequencyUnit
+          unit: AST.FrequencyUnit
           type: "Frequency"
       }
     | {
           value: number
-          unit: ResolutionUnit
+          unit: AST.ResolutionUnit
           type: "Resolution"
       }
     | {
@@ -49,21 +39,21 @@ type ReduceValue =
       }
     | {
           value: number
-          unit: FlexUnit
+          unit: AST.FlexUnit
           type: "Flex"
       }
 
 /**
  * Reduce the given expression.
  */
-export function reduce(expr: Node): ReduceValue | null {
+export function reduce(expr: AST.Node): ReduceValue | null {
     return reduceExpression(expr)
 }
 
 /**
  * Reduce the given math expression.
  */
-function reduceMathExpression(expr: MathExpression): ReduceValue | null {
+function reduceMathExpression(expr: AST.MathExpression): ReduceValue | null {
     const left = reduceExpression(expr.left)
     const right = reduceExpression(expr.right)
     if (!left || !right) {
@@ -170,7 +160,7 @@ function reduceMultiple(
 /**
  * Get number (with unit) the given expression.
  */
-function reduceExpression(expr: Node): ReduceValue | null {
+function reduceExpression(expr: AST.Node): ReduceValue | null {
     if (
         expr.type === "Number" ||
         expr.type === "Length" ||
@@ -204,7 +194,7 @@ function reduceExpression(expr: Node): ReduceValue | null {
 /**
  * Get the number (with unit) of the given `calc()` function.
  */
-function getCalcNumber(fn: FunctionNode): ReduceValue | null {
+function getCalcNumber(fn: AST.FunctionNode): ReduceValue | null {
     const args = getFunctionArguments(fn)
     if (args && args.length === 1) {
         return reduceExpression(args[0])

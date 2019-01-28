@@ -5,6 +5,7 @@ import {
     Stringifier,
     getResolvedType,
     reduceExpression,
+    newMathExpression as mathExpr,
 } from "./css-calc"
 import { Options, StringifyOptions } from "./types/options"
 
@@ -40,17 +41,18 @@ export {
     stringify,
     getResolvedType,
     reduceExpression,
+    mathExpr,
     Parser,
     Tokenizer,
     Stringifier,
     AST,
 }
-
 export default {
     parse,
     stringify,
     getResolvedType,
     reduceExpression,
+    mathExpr,
     Parser,
     Tokenizer,
     Stringifier,

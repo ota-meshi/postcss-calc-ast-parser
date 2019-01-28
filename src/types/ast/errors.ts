@@ -34,11 +34,13 @@ export type ErrorCode =
     | "eof-in-string" // e.g `"string`, `'string`
     | "eof-in-comment" // e.g `/* comment`
     | "eof-in-bracket" // e.g `(expression`, `[expression`, `{expression`
+    | "unexpected-parenthesis" // e.g `)`
     | "unexpected-calc-token"
 
 const MESSAGES = {
     "eof-in-string": "Unclosed string",
     "eof-in-comment": "Unclosed comment",
     "eof-in-bracket": "Unclosed bracket",
+    "unexpected-parenthesis": "Unexpected token",
     "unexpected-calc-token": "Unexpected token",
 }

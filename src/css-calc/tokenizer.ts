@@ -1,5 +1,5 @@
 /*eslint-disable no-param-reassign */
-import { ErrorCode, ParseError, Token, TokenType } from "../types/ast"
+import * as AST from "../types/ast"
 import {
     isWhitespace,
     isDigit,
@@ -101,9 +101,9 @@ export class Tokenizer {
 
     // Tokenizing
     private rescan = false
-    private token: Token | null = null
+    private token: AST.Token | null = null
     private nextTokenOffset: number
-    private lastTokenType: TokenType | null = null
+    private lastTokenType: AST.TokenType | null = null
 
     private options: Options
 
@@ -115,7 +115,7 @@ export class Tokenizer {
     /**
      * Syntax errors.
      */
-    public errors: ParseError[] = []
+    public errors: AST.ParseError[] = []
 
     /**
      * Initialize this tokenizer.
@@ -138,7 +138,7 @@ export class Tokenizer {
      * Get the next token.
      * @returns The next token or null.
      */
-    public nextToken(): Token | null {
+    public nextToken(): AST.Token | null {
         while (this.token == null) {
             const cc = this.scan()
             this.state = this[this.state](cc)
@@ -193,8 +193,8 @@ export class Tokenizer {
      * Report an invalid character error.
      * @param code The error code.
      */
-    private reportParseError(code: ErrorCode): void {
-        const error = ParseError.fromCode(code, this.offset)
+    private reportParseError(code: AST.ErrorCode): void {
+        const error = AST.ParseError.fromCode(code, this.offset)
         this.errors.push(error)
     }
 
@@ -208,7 +208,7 @@ export class Tokenizer {
     /**
      * Commit the current token.
      */
-    private commitToken(type: TokenType, indexOffset = 0): void {
+    private commitToken(type: AST.TokenType, indexOffset = 0): void {
         // const type = this.currentTokenType
         if (type == null) {
             throw new Error("Invalid state")
@@ -229,7 +229,7 @@ export class Tokenizer {
             },
         }
 
-        this.token = token as Token
+        this.token = token as AST.Token
         this.nextTokenOffset = offset
 
         this.lastTokenType = type

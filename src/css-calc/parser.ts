@@ -1,29 +1,16 @@
-import {
-    ParseError,
-    Token,
-    Root,
-    Expression,
-    OperatorToken,
-    PunctuatorToken,
-    WordToken,
-    StringToken,
-    SourceLocation,
-    ErrorCode,
-    MathExpression,
-    Parentheses,
-    FunctionNode,
-    INode,
-    Other,
-} from "../types/ast"
+import * as AST from "../types/ast"
 
 import { Tokenizer } from "./tokenizer"
 import { Options } from "../types/options"
-import { RootImpl } from "./util/nodes"
+import * as Impl from "./util/node-impl"
 import {
-    newNode,
-    newParenthesesNode,
-    newFunctionNode,
-    newMathExpressionNode,
+    newWordNode,
+    newFunction,
+    newParentheses,
+    newMathExpression,
+    newString,
+    newOperator,
+    newPunctuator,
 } from "./factory"
 import { isMathFunction } from "./util/calc-notation"
 import { isComma } from "./util/utils"
@@ -37,29 +24,35 @@ const PRECEDENCE = {
 }
 
 type TokenSet = {
-    token: OperatorToken | PunctuatorToken | WordToken | StringToken
+    token:
+        | AST.OperatorToken
+        | AST.PunctuatorToken
+        | AST.WordToken
+        | AST.StringToken
     raws: string
 }
 
 type StateContainer = {
-    container: Root | FunctionNode | Parentheses
+    container: AST.Root | AST.FunctionNode | AST.Parentheses
     parent?: StateContainer
     fnName: string
-    post(token: PunctuatorToken, before: string): void
+    post(token: AST.PunctuatorToken, before: string): void
     eof(): void
 }
 
 /**
  * Get the location from given node
  */
-function srcLoc(node: INode): SourceLocation {
+function srcLoc(node: AST.INode): AST.SourceLocation {
     return node.source || { start: { index: 0 }, end: { index: 0 } }
 }
 
 /**
  * checks whether the given node is expression.
  */
-function isExpression(node: Expression | Other | void): Expression | null {
+function isExpression(
+    node: AST.Expression | AST.Other | void,
+): AST.Expression | null {
     if (node && node.type !== "Punctuator" && node.type !== "Operator") {
         return node
     }
@@ -71,9 +64,9 @@ function isExpression(node: Expression | Other | void): Expression | null {
  */
 export class Parser {
     private tokenizer: Tokenizer
-    private root: Root
-    private tokens: Token[]
-    private errors: ParseError[]
+    private root: AST.Root
+    private tokens: AST.Token[]
+    private errors: AST.ParseError[]
     private reconsumes: TokenSet[]
 
     /**
@@ -84,7 +77,7 @@ export class Parser {
     public constructor(tokenizer: Tokenizer, _options?: Options) {
         this.tokenizer = tokenizer
         // this.options = options
-        this.root = new RootImpl({
+        this.root = new Impl.Root({
             start: {
                 index: 0,
             },
@@ -102,7 +95,7 @@ export class Parser {
      * Parse the `calc()` which was given in this constructor.
      * @returns The result of parsing.
      */
-    public parse(): Root {
+    public parse(): AST.Root {
         let state: StateContainer | null = {
             container: this.root,
             fnName: "",
@@ -132,12 +125,12 @@ export class Parser {
      * Report an invalid character error.
      * @param code The error code.
      */
-    private reportParseError(code: ErrorCode, index = 0): void {
+    private reportParseError(code: AST.ErrorCode, index = 0): void {
         if (this.errors.find(e => e.code === code && e.index === index)) {
             return // duplicate
         }
 
-        const error = ParseError.fromCode(code, index)
+        const error = AST.ParseError.fromCode(code, index)
         this.errors.push(error)
     }
 
@@ -171,14 +164,14 @@ export class Parser {
                             this.reconsume(next)
                         }
                     }
-                    state.container.push(newNode(token, tokenSet.raws))
+                    state.container.push(newWordNode(token, tokenSet.raws))
                     break
                 case "string":
-                    state.container.push(newNode(token, tokenSet.raws))
+                    state.container.push(newString(token, tokenSet.raws))
                     break
                 case "operator":
                     this.checkAndMergeMathExpr(state, PRECEDENCE[token.value])
-                    state.container.push(newNode(token, tokenSet.raws))
+                    state.container.push(newOperator(token, tokenSet.raws))
                     break
                 case "punctuator":
                     this.checkAndMergeMathExpr(state)
@@ -200,9 +193,9 @@ export class Parser {
         currPrecedence?: number,
     ) {
         const { container } = state
-        const stack = container.nodes
-        if (stack.length >= 3) {
-            const bfOp = stack[stack.length - 2] as Expression | Other
+        const { nodes } = container
+        if (nodes.length >= 3) {
+            const bfOp = nodes[nodes.length - 2] as AST.Expression | AST.Other
             if (bfOp.type === "Operator" && PRECEDENCE[bfOp.value]) {
                 if (
                     currPrecedence == null ||
@@ -225,13 +218,13 @@ export class Parser {
      * @returns next processing status
      */
     private processPunctuator(
-        token: PunctuatorToken,
+        token: AST.PunctuatorToken,
         before: string,
         state: StateContainer,
     ): StateContainer {
         const { container, parent } = state
         if (token.value === "(") {
-            const node = newParenthesesNode(token, before)
+            const node = newParentheses(token, before)
             container.push(node)
             return this.createNestedStateContainer(node, state.fnName, state)
         }
@@ -241,12 +234,16 @@ export class Parser {
                 state.post(token, before)
                 return parent
             }
+            this.reportParseError(
+                "unexpected-parenthesis",
+                token.source.start.index,
+            )
         }
         // if (token.value === ",") {
         //     stack.push(newNode(token, before))
         //     return state
         // }
-        container.push(newNode(token, before))
+        container.push(newPunctuator(token, before))
         return state
     }
 
@@ -258,12 +255,12 @@ export class Parser {
      * @returns next processing status
      */
     private processFunction(
-        token: WordToken,
+        token: AST.WordToken,
         before: string,
-        open: PunctuatorToken,
+        open: AST.PunctuatorToken,
         state: StateContainer,
     ): StateContainer {
-        const node = newFunctionNode(token, before, open)
+        const node = newFunction(token, before, open)
         state.container.push(node)
         return this.createNestedStateContainer(node, node.name, state)
     }
@@ -272,7 +269,7 @@ export class Parser {
      * Create new nested StateContainer
      */
     private createNestedStateContainer(
-        node: FunctionNode | Parentheses,
+        node: AST.FunctionNode | AST.Parentheses,
         fnName: string,
         state: StateContainer,
     ): StateContainer {
@@ -303,22 +300,21 @@ export class Parser {
      * Create MathExpression node
      * @returns MathExpression node
      */
-    private mergeMathExpr(state: StateContainer): MathExpression | null {
+    private mergeMathExpr(state: StateContainer): AST.MathExpression | null {
         const {
             container: { nodes },
         } = state
-        const right = nodes.pop() as Expression | Other
-        const op = nodes.pop() as Expression | Other
+        const right = nodes.pop() as AST.Expression | AST.Other
+        const op = nodes.pop() as AST.Expression | AST.Other
         const left = nodes.pop() || null
 
         const restore = () => {
             if (left) {
                 nodes.push(left) // restore
             }
-            nodes.push(op) // restore
-            nodes.push(right) // restore
+            nodes.push(op, right) // restore
         }
-        const reportError = (node: Expression | Other) => {
+        const reportError = (node: AST.Expression | AST.Other) => {
             if (isMathFunction(state.fnName)) {
                 this.reportParseError(
                     "unexpected-calc-token",
@@ -357,7 +353,7 @@ export class Parser {
             restore()
             return null
         }
-        return newMathExpressionNode(leftExpr, op, rightExpr)
+        return newMathExpression(leftExpr, op, rightExpr)
     }
 
     /**
@@ -365,8 +361,8 @@ export class Parser {
      */
     private postStack(state: StateContainer) {
         const { container } = state
-        const stack = container.nodes
-        while (stack.length > 1) {
+        const { nodes } = container
+        while (nodes.length > 1) {
             const math = this.mergeMathExpr(state)
             if (math) {
                 container.push(math)

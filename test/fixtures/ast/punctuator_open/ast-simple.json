@@ -1,0 +1,12 @@
+[
+    {
+        "type": "Root",
+        "nodes": [
+            {
+                "type": "Parentheses",
+                "nodes": [],
+                "unclosed": true
+            }
+        ]
+    }
+]

@@ -73,7 +73,7 @@ export interface NumberValue extends INode {
     https://www.w3.org/TR/css3-values/#numbers  
 - Examples :  
   - `-10` :  
-    ```json
+    ```js
     {
         "type": "Number",
         "value": -10,
@@ -87,7 +87,7 @@ export interface NumberValue extends INode {
     }
     ```
   - `/*comment*/ +.01` :  
-    ```json
+    ```js
     {
         "type": "Number",
         "value": 0.01,
@@ -134,7 +134,7 @@ export interface LengthValue extends INode {
     https://www.w3.org/TR/css3-values/#lengths  
 - Examples :  
   - `-10px` :  
-    ```json
+    ```js
     {
         "type": "Length",
         "value": -10,
@@ -146,7 +146,7 @@ export interface LengthValue extends INode {
     }
     ```
   - `-10PX` :  
-    ```json
+    ```js
     {
         "type": "Length",
         "value": -10,
@@ -155,7 +155,7 @@ export interface LengthValue extends INode {
             "before": "",
             "value": { ... },
             "unit": {
-                "raw": "PX"
+                "raw": "PX",
                 "value": "px"
             }
         }
@@ -363,7 +363,7 @@ export interface Word extends INode {
 - `Word` is node of words or unknown values.  
 - Examples :  
   - `foo` :  
-    ```json
+    ```js
     {
         "type": "Word",
         "value": "foo",
@@ -371,7 +371,7 @@ export interface Word extends INode {
     }
     ```
   - `-10foo` :  
-    ```json
+    ```js
     {
         "type": "Word",
         "value": "-10foo",
@@ -379,7 +379,7 @@ export interface Word extends INode {
     }
     ```
   - `#{ foo-bar }` :  
-    ```json
+    ```js
     {
         "type": "Word",
         "value": "#{ foo-bar }",
@@ -416,7 +416,7 @@ export interface MathExpression extends INode {
 - `MathExpression` is node of the mathematical expression with a right side and a left side.  
 - Examples :  
   - `100% - 20px` :  
-    ```json
+    ```js
     {
         "type": "MathExpression",
         "left": { "type": "Percentage", "value": 100, "unit": "%", ... },
@@ -426,7 +426,7 @@ export interface MathExpression extends INode {
     }
     ```
   - `/* a */ 100% /* b */ - /* c */ 20px` :  
-    ```json
+    ```js
     {
         "type": "MathExpression",
         "left": { ... , "raws": { "before": "/* a */ " } },
@@ -457,7 +457,7 @@ export interface FunctionNode extends IContainer {
 - `Function` is node of the function call expression.  
 - Examples :  
   - `call(100% - 20px)` :  
-    ```json
+    ```js
     {
         "type": "Function",
         "name": "call",
@@ -466,7 +466,7 @@ export interface FunctionNode extends IContainer {
     }
     ```
   - `var(--foo-bar)` :  
-    ```json
+    ```js
     {
         "type": "Function",
         "name": "var",
@@ -475,7 +475,7 @@ export interface FunctionNode extends IContainer {
     }
     ```
   - `/*a*/ var( /*b*/ --foo-bar /*c*/ , /*d*/ 10px /*e*/ )` :  
-    ```json
+    ```js
     {
         "type": "Function",
         "name": "var",
@@ -528,7 +528,7 @@ export interface StringNode extends INode {
 - `String` is node of the string.  
 - Examples :  
   - `'str'` :  
-    ```json
+    ```js
     {
         "type": "String",
         "value": "'str'",
@@ -536,7 +536,7 @@ export interface StringNode extends INode {
     }
     ```
   - `"str"` :  
-    ```json
+    ```js
     {
         "type": "String",
         "value": "\"str\"",
@@ -584,7 +584,7 @@ export type Other = Operator | Punctuator
  */
 export interface Punctuator extends INode {
     type: "Punctuator"
-    value: "," | "(" | ")"
+    value: "," | ")"
     raws: {
         before: string
     }
@@ -592,7 +592,7 @@ export interface Punctuator extends INode {
 ```
 
 - `Punctuator` is node of the punctuator.
-- `(`, `)` that could not be processed are retained as `Punctuator` nodes.
+- `)` that could not be processed are retained as `Punctuator` nodes.
 
 ### Operator
 
