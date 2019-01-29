@@ -1,8 +1,9 @@
-import { HasLocation } from "./locations"
+import { SourceLocation } from "./locations"
 
 export interface IToken {
     type: string
     value: string
+    source: SourceLocation
 }
 /**
  * Enumeration of token types.
@@ -17,31 +18,31 @@ export type TokenType =
     // unstandard
     | "inline-comment"
 
-export interface WhitespaceToken extends IToken, HasLocation {
+export interface WhitespaceToken extends IToken {
     type: "whitespace"
     value: string
 }
-export interface OperatorToken extends IToken, HasLocation {
+export interface OperatorToken extends IToken {
     type: "operator"
     value: "+" | "-" | "*" | "/"
 }
-export interface CommentToken extends IToken, HasLocation {
+export interface CommentToken extends IToken {
     type: "comment"
     value: string
 }
-export interface PunctuatorToken extends IToken, HasLocation {
+export interface PunctuatorToken extends IToken {
     type: "punctuator"
     value: "," | "(" | ")"
 }
-export interface WordToken extends IToken, HasLocation {
+export interface WordToken extends IToken {
     type: "word"
     value: string
 }
-export interface StringToken extends IToken, HasLocation {
+export interface StringToken extends IToken {
     type: "string"
     value: string
 }
-export interface InlineCommnetToken extends IToken, HasLocation {
+export interface InlineCommnetToken extends IToken {
     type: "inline-comment"
     value: string
 }

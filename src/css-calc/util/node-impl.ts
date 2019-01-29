@@ -1,47 +1,17 @@
-import {
-    INode,
-    IContainer,
-    FunctionNode,
-    SourceLocation,
-    IToken,
-    Expression,
-    Parentheses,
-    NumberValue,
-    LengthValue,
-    LengthUnit,
-    AngleValue,
-    AngleUnit,
-    TimeValue,
-    TimeUnit,
-    FrequencyUnit,
-    FrequencyValue,
-    ResolutionUnit,
-    ResolutionValue,
-    PercentageValue,
-    FlexUnit,
-    FlexValue,
-    Word,
-    Punctuator,
-    Operator,
-    MathExpression,
-    Root,
-    Token,
-    ParseError,
-    StringNode,
-} from "../../types/ast"
+import * as AST from "../../types/ast"
 
 import { Stringifier } from "../stringifier"
 type Stringify = (
     node:
-        | INode // nodes
-        | IToken, // tokens
+        | AST.INode // nodes
+        | AST.IToken, // tokens
 ) => string
 let defaultStringifier: Stringifier | null = null
 
 /**
  * Node core API
  */
-export abstract class AbsNode implements INode {
+abstract class Node implements AST.INode {
     public abstract type: string
     public abstract raws:
         | {
@@ -50,7 +20,8 @@ export abstract class AbsNode implements INode {
         | {
               after: string
           }
-    public parent: IContainer | null = null
+    public abstract source: AST.SourceLocation
+    public parent: AST.IContainer | null = null
     /**
      * Returns a CSS string representing the node.
      *
@@ -106,50 +77,63 @@ export abstract class AbsNode implements INode {
  * The container nodes
  * inherit some common methods to help work with their children.
  */
-export abstract class AbsContainer extends AbsNode implements IContainer {
-    public abstract nodes: INode[]
+abstract class Container extends Node implements AST.IContainer {
+    public abstract nodes: AST.INode[]
 
     /**
      * Push Node
      */
-    public push(child: INode): this {
-        child.parent = this
-        this.nodes.push(child)
+    public push(...children: AST.INode[]): this {
+        for (const child of children) {
+            if (child.type === "Root") {
+                this.push(...(child as AST.Root).nodes)
+            } else {
+                child.parent = this
+                this.nodes.push(child)
+            }
+        }
         return this
     }
     /**
      * Unshift Node
      */
-    public unshift(child: INode): this {
-        child.parent = this
-        this.nodes.unshift(child)
+    public unshift(...children: AST.INode[]): this {
+        for (const child of children.reverse()) {
+            if (child.type === "Root") {
+                this.unshift(...(child as AST.Root).nodes)
+            } else {
+                child.parent = this
+                this.nodes.unshift(child)
+            }
+        }
         return this
     }
 
     /**
      * Inserts new nodes to the end of the container.
      */
-    public append(...children: INode[]): this {
-        for (const child of children) {
-            this.push(child)
-        }
-        return this
+    public append(...children: AST.INode[]): this {
+        return this.push(...children)
     }
 
     /**
      * Inserts new nodes to the start of the container.
      */
-    public prepend(...children: INode[]): this {
-        for (const child of children.reverse()) {
-            this.unshift(child)
-        }
-        return this
+    public prepend(...children: AST.INode[]): this {
+        return this.unshift(...children)
     }
 
     /**
      * Insert new node before old node within the container.
      */
-    public insertBefore(exist: INode, add: INode): this {
+    public insertBefore(exist: AST.INode, add: AST.INode): this {
+        if (add.type === "Root") {
+            const { nodes } = add as AST.Root
+            if (nodes.length === 1) {
+                return this.insertBefore(exist, nodes[0])
+            }
+            throw new Error("The given Root node is illegal.")
+        }
         const existIndex = this.nodes.indexOf(exist)
         if (existIndex < 0) {
             throw new Error("The given node could not be found.")
@@ -162,7 +146,14 @@ export abstract class AbsContainer extends AbsNode implements IContainer {
     /**
      * Insert new node after old node within the container.
      */
-    public insertAfter(exist: INode, add: INode): this {
+    public insertAfter(exist: AST.INode, add: AST.INode): this {
+        if (add.type === "Root") {
+            const { nodes } = add as AST.Root
+            if (nodes.length === 1) {
+                return this.insertAfter(exist, nodes[0])
+            }
+            throw new Error("The given Root node is illegal.")
+        }
         const existIndex = this.nodes.indexOf(exist)
         if (existIndex < 0) {
             throw new Error("The given node could not be found.")
@@ -186,7 +177,7 @@ export abstract class AbsContainer extends AbsNode implements IContainer {
     /**
      * remove child node
      */
-    public removeChild(child: INode): this {
+    public removeChild(child: AST.INode): this {
         const index = this.nodes.indexOf(child)
         this.nodes[index].parent = null
         this.nodes.splice(index, 1)
@@ -196,14 +187,14 @@ export abstract class AbsContainer extends AbsNode implements IContainer {
     /**
      * The container’s first child.
      */
-    public get first(): INode | null {
+    public get first(): AST.INode | null {
         return this.nodes[0] || null
     }
 
     /**
      * The container’s last child.
      */
-    public get last(): INode | null {
+    public get last(): AST.INode | null {
         return this.nodes[this.nodes.length - 1] || null
     }
 }
@@ -211,7 +202,7 @@ export abstract class AbsContainer extends AbsNode implements IContainer {
 /**
  * Number value
  */
-export class NumberValueImpl extends AbsNode implements NumberValue {
+export class NumberValue extends Node implements AST.NumberValue {
     public type: "Number"
     public value: number
     public raws: {
@@ -221,12 +212,16 @@ export class NumberValueImpl extends AbsNode implements NumberValue {
             value: number
         }
     }
-    public source?: SourceLocation
+    public source: AST.SourceLocation
 
     /**
      * constructor
      */
-    public constructor(value: string, before = "", source?: SourceLocation) {
+    public constructor(
+        value: string,
+        before: string,
+        source: AST.SourceLocation,
+    ) {
         super()
         const num = parseFloat(value)
         this.type = "Number"
@@ -242,7 +237,7 @@ export class NumberValueImpl extends AbsNode implements NumberValue {
     }
 }
 
-abstract class AbsNumWithUnitValue<T extends string, U> extends AbsNode {
+abstract class NumWithUnitValue<T extends string, U> extends Node {
     public type: T
     public value: number
     public unit: U
@@ -257,7 +252,7 @@ abstract class AbsNumWithUnitValue<T extends string, U> extends AbsNode {
             value: U
         }
     }
-    public source?: SourceLocation
+    public source: AST.SourceLocation
 
     /**
      * constructor
@@ -267,7 +262,7 @@ abstract class AbsNumWithUnitValue<T extends string, U> extends AbsNode {
         value: string,
         unit: U,
         before: string,
-        source?: SourceLocation,
+        source: AST.SourceLocation,
     ) {
         super()
         const num = parseFloat(value)
@@ -288,16 +283,16 @@ abstract class AbsNumWithUnitValue<T extends string, U> extends AbsNode {
 /**
  * Length value
  */
-export class LengthValueImpl extends AbsNumWithUnitValue<"Length", LengthUnit>
-    implements LengthValue {
+export class LengthValue extends NumWithUnitValue<"Length", AST.LengthUnit>
+    implements AST.LengthValue {
     /**
      * constructor
      */
     public constructor(
         value: string,
-        unit: LengthUnit,
-        before = "",
-        source?: SourceLocation,
+        unit: AST.LengthUnit,
+        before: string,
+        source: AST.SourceLocation,
     ) {
         super("Length", value, unit, before, source)
     }
@@ -306,16 +301,16 @@ export class LengthValueImpl extends AbsNumWithUnitValue<"Length", LengthUnit>
 /**
  * Angle value
  */
-export class AngleValueImpl extends AbsNumWithUnitValue<"Angle", AngleUnit>
-    implements AngleValue {
+export class AngleValue extends NumWithUnitValue<"Angle", AST.AngleUnit>
+    implements AST.AngleValue {
     /**
      * constructor
      */
     public constructor(
         value: string,
-        unit: AngleUnit,
-        before = "",
-        source?: SourceLocation,
+        unit: AST.AngleUnit,
+        before: string,
+        source: AST.SourceLocation,
     ) {
         super("Angle", value, unit, before, source)
     }
@@ -324,16 +319,16 @@ export class AngleValueImpl extends AbsNumWithUnitValue<"Angle", AngleUnit>
 /**
  * Time value
  */
-export class TimeValueImpl extends AbsNumWithUnitValue<"Time", TimeUnit>
-    implements TimeValue {
+export class TimeValue extends NumWithUnitValue<"Time", AST.TimeUnit>
+    implements AST.TimeValue {
     /**
      * constructor
      */
     public constructor(
         value: string,
-        unit: TimeUnit,
-        before = "",
-        source?: SourceLocation,
+        unit: AST.TimeUnit,
+        before: string,
+        source: AST.SourceLocation,
     ) {
         super("Time", value, unit, before, source)
     }
@@ -342,17 +337,17 @@ export class TimeValueImpl extends AbsNumWithUnitValue<"Time", TimeUnit>
 /**
  * Frequency value
  */
-export class FrequencyValueImpl
-    extends AbsNumWithUnitValue<"Frequency", FrequencyUnit>
-    implements FrequencyValue {
+export class FrequencyValue
+    extends NumWithUnitValue<"Frequency", AST.FrequencyUnit>
+    implements AST.FrequencyValue {
     /**
      * constructor
      */
     public constructor(
         value: string,
-        unit: FrequencyUnit,
-        before = "",
-        source?: SourceLocation,
+        unit: AST.FrequencyUnit,
+        before: string,
+        source: AST.SourceLocation,
     ) {
         super("Frequency", value, unit, before, source)
     }
@@ -361,17 +356,17 @@ export class FrequencyValueImpl
 /**
  * Resolution value
  */
-export class ResolutionValueImpl
-    extends AbsNumWithUnitValue<"Resolution", ResolutionUnit>
-    implements ResolutionValue {
+export class ResolutionValue
+    extends NumWithUnitValue<"Resolution", AST.ResolutionUnit>
+    implements AST.ResolutionValue {
     /**
      * constructor
      */
     public constructor(
         value: string,
-        unit: ResolutionUnit,
-        before = "",
-        source?: SourceLocation,
+        unit: AST.ResolutionUnit,
+        before: string,
+        source: AST.SourceLocation,
     ) {
         super("Resolution", value, unit, before, source)
     }
@@ -380,16 +375,16 @@ export class ResolutionValueImpl
 /**
  * Percentage value
  */
-export class PercentageValueImpl extends AbsNumWithUnitValue<"Percentage", "%">
-    implements PercentageValue {
+export class PercentageValue extends NumWithUnitValue<"Percentage", "%">
+    implements AST.PercentageValue {
     /**
      * constructor
      */
     public constructor(
         value: string,
         unit: "%",
-        before = "",
-        source?: SourceLocation,
+        before: string,
+        source: AST.SourceLocation,
     ) {
         super("Percentage", value, unit, before, source)
     }
@@ -398,31 +393,28 @@ export class PercentageValueImpl extends AbsNumWithUnitValue<"Percentage", "%">
 /**
  * Flex value
  */
-export class FlexValueImpl extends AbsNumWithUnitValue<"Flex", FlexUnit>
-    implements FlexValue {
+export class FlexValue extends NumWithUnitValue<"Flex", AST.FlexUnit>
+    implements AST.FlexValue {
     /**
      * constructor
      */
     public constructor(
         value: string,
-        unit: FlexUnit,
-        before = "",
-        source?: SourceLocation,
+        unit: AST.FlexUnit,
+        before: string,
+        source: AST.SourceLocation,
     ) {
         super("Flex", value, unit, before, source)
     }
 }
 
-abstract class AbsTokenValue<
-    T extends string,
-    V extends string
-> extends AbsNode {
+abstract class TokenValue<T extends string, V extends string> extends Node {
     public type: T
     public value: V
     public raws: {
         before: string
     }
-    public source?: SourceLocation
+    public source: AST.SourceLocation
 
     /**
      * constructor
@@ -431,7 +423,7 @@ abstract class AbsTokenValue<
         type: T,
         value: V,
         before: string,
-        source?: SourceLocation,
+        source: AST.SourceLocation,
     ) {
         super()
         this.type = type
@@ -446,11 +438,15 @@ abstract class AbsTokenValue<
 /**
  * Unknown value or word
  */
-export class WordImpl extends AbsTokenValue<"Word", string> implements Word {
+export class Word extends TokenValue<"Word", string> implements AST.Word {
     /**
      * constructor
      */
-    public constructor(value: string, before = "", source?: SourceLocation) {
+    public constructor(
+        value: string,
+        before: string,
+        source: AST.SourceLocation,
+    ) {
         super("Word", value, before, source)
     }
 }
@@ -458,12 +454,16 @@ export class WordImpl extends AbsTokenValue<"Word", string> implements Word {
 /**
  * String
  */
-export class StringNodeImpl extends AbsTokenValue<"String", string>
-    implements StringNode {
+export class StringNode extends TokenValue<"String", string>
+    implements AST.StringNode {
     /**
      * constructor
      */
-    public constructor(value: string, before = "", source?: SourceLocation) {
+    public constructor(
+        value: string,
+        before: string,
+        source: AST.SourceLocation,
+    ) {
         super("String", value, before, source)
     }
 }
@@ -474,9 +474,9 @@ export class StringNodeImpl extends AbsTokenValue<"String", string>
 function defineAssessor<O, N extends keyof O>(
     obj: O,
     name: N,
-    postSet: (n: O[N], o?: O[N]) => void,
+    setterProc: (n: O[N], o?: O[N]) => O[N],
 ) {
-    const localName = `_${name}`
+    const localName = Symbol(`${name}`)
     Object.defineProperties(obj, {
         [localName]: { writable: true, enumerable: false },
         [name]: {
@@ -485,8 +485,7 @@ function defineAssessor<O, N extends keyof O>(
             },
             set(n: O[N]) {
                 const o = this[localName]
-                this[localName] = n
-                postSet(n, o)
+                this[localName] = setterProc(n, o)
             },
             enumerable: true,
         },
@@ -496,64 +495,61 @@ function defineAssessor<O, N extends keyof O>(
 /**
  * Math expression
  */
-export class MathExpressionImpl extends AbsNode implements MathExpression {
+export class MathExpression extends Node implements AST.MathExpression {
     public type: "MathExpression"
 
-    public left: Expression
+    public left: AST.Expression
     public operator: "+" | "-" | "*" | "/"
-    public right: Expression
+    public right: AST.Expression
     public raws: {
         before: string
         between: string
     }
-    public source?: {
-        operator: SourceLocation
-    } & SourceLocation
+    public source: {
+        operator: AST.SourceLocation
+    } & AST.SourceLocation
     /**
      * constructor
      */
     public constructor(
-        left: Expression,
-        operator: "+" | "-" | "*" | "/" | Operator,
-        right: Expression,
-        before = "",
-        source?: {
-            operator: SourceLocation
-        } & SourceLocation,
+        left: AST.Expression,
+        operator: AST.Operator,
+        right: AST.Expression,
+        before: string,
+        source: {
+            operator: AST.SourceLocation
+        } & AST.SourceLocation,
     ) {
         super()
-        let ope: "+" | "-" | "*" | "/"
-        let between: string
-        if (typeof operator === "string") {
-            ope = operator
-            between = ""
-        } else {
-            ope = operator.value
-            between = operator.raws.before
-        }
+        const ope = operator.value
+        const between = operator.raws.before
         this.type = "MathExpression"
-        defineAssessor(
-            this,
-            "left",
-            (n: Expression, o?: Expression): void => {
-                n.parent = this
-                if (o) {
-                    o.parent = null
+
+        const setterProc = (
+            n: AST.Expression | AST.Root,
+            o?: AST.Expression | AST.Root,
+        ): AST.Expression => {
+            let e
+            if (n.type === "Root") {
+                const { nodes } = n
+                if (nodes.length === 1) {
+                    e = nodes[0] as AST.Expression
+                } else {
+                    throw new Error("The given Root node is illegal.")
                 }
-            },
-        )
+            } else {
+                e = n
+            }
+            e.parent = this
+            if (o) {
+                o.parent = null
+            }
+            return e
+        }
+        defineAssessor(this, "left", setterProc)
         this.left = left
         this.operator = ope
-        defineAssessor(
-            this,
-            "right",
-            (n: Expression, o?: Expression): void => {
-                n.parent = this
-                if (o) {
-                    o.parent = null
-                }
-            },
-        )
+        defineAssessor(this, "right", setterProc)
         this.right = right
         this.raws = { before, between }
         this.source = source
@@ -563,20 +559,24 @@ export class MathExpressionImpl extends AbsNode implements MathExpression {
 /**
  * FunctionNode
  */
-export class FunctionNodeImpl extends AbsContainer implements FunctionNode {
+export class FunctionNode extends Container implements AST.FunctionNode {
     public type: "Function"
-    public nodes: Expression[]
+    public nodes: AST.Expression[]
     public name: string
     public raws: {
         before: string
         beforeClose?: string
     }
-    public source?: SourceLocation
+    public source: AST.SourceLocation
     public unclosed?: boolean
     /**
      * constructor
      */
-    public constructor(name: string, before = "", source?: SourceLocation) {
+    public constructor(
+        name: string,
+        before: string,
+        source: AST.SourceLocation,
+    ) {
         super()
         this.type = "Function"
         this.name = name
@@ -589,19 +589,19 @@ export class FunctionNodeImpl extends AbsContainer implements FunctionNode {
 /**
  * Parentheses
  */
-export class ParenthesesImpl extends AbsContainer implements Parentheses {
+export class Parentheses extends Container implements AST.Parentheses {
     public type: "Parentheses"
-    public nodes: Expression[]
+    public nodes: AST.Expression[]
     public raws: {
         before: string
         beforeClose?: string
     }
-    public source?: SourceLocation
+    public source: AST.SourceLocation
     public unclosed?: boolean
     /**
      * constructor
      */
-    public constructor(before = "", source?: SourceLocation) {
+    public constructor(before: string, source: AST.SourceLocation) {
         super()
         this.type = "Parentheses"
         this.nodes = []
@@ -612,15 +612,15 @@ export class ParenthesesImpl extends AbsContainer implements Parentheses {
 /**
  * Punctuator
  */
-export class PunctuatorImpl extends AbsTokenValue<"Punctuator", "," | "(" | ")">
-    implements Punctuator {
+export class Punctuator extends TokenValue<"Punctuator", "," | ")">
+    implements AST.Punctuator {
     /**
      * constructor
      */
     public constructor(
-        value: "," | "(" | ")",
-        before = "",
-        source?: SourceLocation,
+        value: "," | ")",
+        before: string,
+        source: AST.SourceLocation,
     ) {
         super("Punctuator", value, before, source)
     }
@@ -629,17 +629,17 @@ export class PunctuatorImpl extends AbsTokenValue<"Punctuator", "," | "(" | ")">
 /**
  * Root
  */
-export class RootImpl extends AbsContainer implements Root {
+export class Root extends Container implements AST.Root {
     public type: "Root"
-    public nodes: Expression[]
-    public tokens: Token[]
-    public errors: ParseError[]
+    public nodes: AST.Expression[]
+    public tokens: AST.Token[]
+    public errors: AST.ParseError[]
     public raws: { after: string }
-    public source?: SourceLocation
+    public source: AST.SourceLocation
     /**
      * constructor
      */
-    public constructor(source?: SourceLocation) {
+    public constructor(source: AST.SourceLocation) {
         super()
         this.type = "Root"
         this.nodes = []
@@ -653,16 +653,15 @@ export class RootImpl extends AbsContainer implements Root {
 /**
  * Operator
  */
-export class OperatorImpl
-    extends AbsTokenValue<"Operator", "+" | "-" | "*" | "/">
-    implements Operator {
+export class Operator extends TokenValue<"Operator", "+" | "-" | "*" | "/">
+    implements AST.Operator {
     /**
      * constructor
      */
     public constructor(
         value: "+" | "-" | "*" | "/",
-        before = "",
-        source?: SourceLocation,
+        before: string,
+        source: AST.SourceLocation,
     ) {
         super("Operator", value, before, source)
     }

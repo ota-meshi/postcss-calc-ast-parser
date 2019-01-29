@@ -12,7 +12,7 @@ export interface INode {
         | {
               after: string
           }
-    source?: SourceLocation
+    source: SourceLocation
     toString(): string
     walk(
         type: string | RegExp,
@@ -287,7 +287,7 @@ export interface MathExpression extends INode {
          */
         between: string
     }
-    source?: {
+    source: {
         operator: SourceLocation
     } & SourceLocation
 }
@@ -348,7 +348,7 @@ export type Other = Operator | Punctuator
  */
 export interface Punctuator extends INode {
     type: "Punctuator"
-    value: "," | "(" | ")"
+    value: "," | ")"
     raws: {
         before: string
     }

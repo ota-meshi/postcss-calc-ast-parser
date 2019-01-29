@@ -1,9 +1,9 @@
-import { Expression, Other, FunctionNode } from "../../types/ast"
+import * as AST from "../../types/ast"
 
 /**
  * checks whether the given node is comma.
  */
-export function isComma(node: Expression | Other): boolean {
+export function isComma(node: AST.Expression | AST.Other): boolean {
     return node.type === "Punctuator" && node.value === ","
 }
 
@@ -11,8 +11,8 @@ export function isComma(node: Expression | Other): boolean {
  * Get the function arguments from the given function node
  */
 export function getFunctionArguments(
-    fn: FunctionNode,
-): (Expression | Other)[] | null {
+    fn: AST.FunctionNode,
+): (AST.Expression | AST.Other)[] | null {
     const { nodes } = fn
     const first = nodes[0]
     if (!first || isComma(first)) {

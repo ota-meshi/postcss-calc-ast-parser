@@ -9,11 +9,3 @@ export interface SourceLocation {
         index: number
     }
 }
-
-/**
- * This AST spec enhances the `Node` nodes.
- * The `source` property is an object which has locations.
- */
-export interface HasLocation {
-    source: SourceLocation
-}

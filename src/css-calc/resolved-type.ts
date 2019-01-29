@@ -1,16 +1,16 @@
-import { MathExpression, Expression, Other, FunctionNode } from "../types/ast"
+import * as AST from "../types/ast"
 import { isCalc, isMin, isMax, isClamp } from "./util/calc-notation"
 import { getFunctionArguments } from "./util/utils"
 
 type ResolvedType =
-    | "Number"
-    | "Length"
-    | "Angle"
-    | "Time"
-    | "Frequency"
-    | "Resolution"
-    | "Percentage"
-    | "Flex"
+    | AST.NumberValue["type"]
+    | AST.LengthValue["type"]
+    | AST.AngleValue["type"]
+    | AST.TimeValue["type"]
+    | AST.FrequencyValue["type"]
+    | AST.ResolutionValue["type"]
+    | AST.PercentageValue["type"]
+    | AST.FlexValue["type"]
     | "Unknown"
 
 /* eslint-disable complexity */
@@ -19,7 +19,7 @@ type ResolvedType =
  * @see https://www.w3.org/TR/css3-values/#calc-type-checking
  */
 export function getResolvedType(
-    expr: MathExpression,
+    expr: AST.MathExpression,
 ): ResolvedType | "invalid" {
     const left = getType(expr.left)
     const right = getType(expr.right)
@@ -73,7 +73,7 @@ export function getResolvedType(
 /**
  * Get the type of the given expression type.
  */
-function getExpressionType(expr: Expression | Other): ResolvedType {
+function getExpressionType(expr: AST.Expression | AST.Other): ResolvedType {
     const { type } = expr
     if (
         type === "Number" ||
@@ -93,7 +93,7 @@ function getExpressionType(expr: Expression | Other): ResolvedType {
 /**
  * Get the type of a given expression.
  */
-function getType(expr: Expression | Other): ResolvedType {
+function getType(expr: AST.Expression | AST.Other): ResolvedType {
     if (expr.type === "MathExpression") {
         const rtype = getResolvedType(expr)
         return rtype === "invalid" ? "Unknown" : rtype
@@ -123,7 +123,7 @@ function getType(expr: Expression | Other): ResolvedType {
 /**
  * Get the type of the given `calc()` function.
  */
-function getCalcFunctionType(fn: FunctionNode): ResolvedType {
+function getCalcFunctionType(fn: AST.FunctionNode): ResolvedType {
     if (fn.nodes.length === 1) {
         return getFunctionArgumentsType(fn)
     }
@@ -133,14 +133,14 @@ function getCalcFunctionType(fn: FunctionNode): ResolvedType {
 /**
  * Get the type of the given `min()` or `max()` function.
  */
-function getMinMaxFunctionType(fn: FunctionNode): ResolvedType {
+function getMinMaxFunctionType(fn: AST.FunctionNode): ResolvedType {
     return getFunctionArgumentsType(fn)
 }
 
 /**
  * Get the type of the given `clamp()` function.
  */
-function getClampFunctionType(fn: FunctionNode): ResolvedType {
+function getClampFunctionType(fn: AST.FunctionNode): ResolvedType {
     if (fn.nodes.length === 5) {
         return getFunctionArgumentsType(fn)
     }
@@ -150,7 +150,7 @@ function getClampFunctionType(fn: FunctionNode): ResolvedType {
 /**
  * Get the type of the given function arguments.
  */
-function getFunctionArgumentsType(fn: FunctionNode): ResolvedType {
+function getFunctionArgumentsType(fn: AST.FunctionNode): ResolvedType {
     const args = getFunctionArguments(fn)
     if (!args) {
         return "Unknown"

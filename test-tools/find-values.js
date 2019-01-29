@@ -1,8 +1,14 @@
+// @ts-check
 "use strict"
 
 const path = require("path")
 const postcss = require("postcss")
 const scss = require("postcss-scss")
+/**
+ * @param {string} css value
+ * @param {string} fileName fileName
+ * @returns {string[]} values
+ */
 module.exports = (css, fileName) => {
     const ext = path.extname(fileName)
     if (ext === ".txt") {

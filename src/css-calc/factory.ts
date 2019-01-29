@@ -3,56 +3,10 @@
 const valueParserUnit = require("postcss-value-parser/lib/unit")
 /* eslint-enable @mysticatea/ts/no-var-requires */
 
-import { QUOTATION_MARK, APOSTROPHE } from "./util/unicode"
-import {
-    WordToken,
-    StringToken,
-    NumberValue,
-    LengthValue,
-    AngleValue,
-    TimeValue,
-    FrequencyValue,
-    ResolutionValue,
-    PercentageValue,
-    FlexValue,
-    Word,
-    SourceLocation,
-    LengthUnit,
-    AngleUnit,
-    TimeUnit,
-    FrequencyUnit,
-    ResolutionUnit,
-    FlexUnit,
-    Punctuator,
-    Operator,
-    PunctuatorToken,
-    OperatorToken,
-    FunctionNode,
-    Parentheses,
-    MathExpression,
-    Expression,
-    INode,
-    StringNode,
-} from "../types/ast"
-import {
-    NumberValueImpl,
-    LengthValueImpl,
-    AngleValueImpl,
-    TimeValueImpl,
-    FrequencyValueImpl,
-    ResolutionValueImpl,
-    FlexValueImpl,
-    PercentageValueImpl,
-    WordImpl,
-    PunctuatorImpl,
-    OperatorImpl,
-    FunctionNodeImpl,
-    ParenthesesImpl,
-    MathExpressionImpl,
-    StringNodeImpl,
-} from "./util/nodes"
+import * as AST from "../types/ast"
+import * as Impl from "./util/node-impl"
 
-const LENGTH_UNITS: LengthUnit[] = [
+const LENGTH_UNITS: AST.LengthUnit[] = [
     "em",
     "ex",
     "ch",
@@ -70,11 +24,11 @@ const LENGTH_UNITS: LengthUnit[] = [
     "Q",
     "vm",
 ]
-const ANGLE_UNITS: AngleUnit[] = ["deg", "grad", "turn", "rad"]
-const TIME_UNITS: TimeUnit[] = ["s", "ms"]
-const FREQUENCY_UNITS: FrequencyUnit[] = ["Hz", "kHz"]
-const RESOLUTION_UNITS: ResolutionUnit[] = ["dpi", "dpcm", "dppm"]
-const FLEX_UNITS: FlexUnit[] = ["fr"]
+const ANGLE_UNITS: AST.AngleUnit[] = ["deg", "grad", "turn", "rad"]
+const TIME_UNITS: AST.TimeUnit[] = ["s", "ms"]
+const FREQUENCY_UNITS: AST.FrequencyUnit[] = ["Hz", "kHz"]
+const RESOLUTION_UNITS: AST.ResolutionUnit[] = ["dpi", "dpcm", "dppm"]
+const FLEX_UNITS: AST.FlexUnit[] = ["fr"]
 
 const L_LENGTH_UNITS = LENGTH_UNITS.map(u => u.toLowerCase())
 const L_ANGLE_UNITS = ANGLE_UNITS.map(u => u.toLowerCase())
@@ -84,168 +38,68 @@ const L_RESOLUTION_UNITS = RESOLUTION_UNITS.map(u => u.toLowerCase())
 const L_FLEX_UNITS = FLEX_UNITS.map(u => u.toLowerCase())
 
 /**
- * checks whether the given node is expression.
- */
-function isString(text: string): boolean {
-    const c = text.charCodeAt(0)
-    return (
-        (c === QUOTATION_MARK || c === APOSTROPHE) &&
-        c === text.charCodeAt(text.length - 1)
-    )
-}
-
-/**
- * Create location
- */
-function initLoc() {
-    return { start: { index: 0 }, end: { index: 0 } }
-}
-
-/**
- * Get the location from given node
- */
-function srcLoc(node: INode): SourceLocation {
-    return node.source || initLoc()
-}
-
-/*eslint-disable no-param-reassign */
-/**
- * Create node
- * @returns word node, number node or number with unit node
- */
-export function newNode(
-    text: string,
-):
-    | NumberValue
-    | LengthValue
-    | AngleValue
-    | TimeValue
-    | FrequencyValue
-    | ResolutionValue
-    | PercentageValue
-    | FlexValue
-    | Word
-    | Punctuator
-    | Operator
-/**
- * Create node
- * @returns word node, number node or number with unit node
- */
-export function newNode(
-    token: WordToken,
-    before: string,
-):
-    | NumberValue
-    | LengthValue
-    | AngleValue
-    | TimeValue
-    | FrequencyValue
-    | ResolutionValue
-    | PercentageValue
-    | FlexValue
-    | Word
-/**
  * Create node
  * @returns punctuator node
  */
-export function newNode(token: PunctuatorToken, before: string): Punctuator
+export function newPunctuator(
+    token: AST.PunctuatorToken,
+    before: string,
+): AST.Punctuator {
+    if (token.value === "," || token.value === ")") {
+        return newTokenNode(Impl.Punctuator, token, token.value, before)
+    }
+    throw new Error(`illegal argument error "${token.value}"`)
+}
 /**
  * Create node
  * @returns operator node
  */
-export function newNode(token: OperatorToken, before: string): Operator
+export function newOperator(
+    token: AST.OperatorToken,
+    before: string,
+): AST.Operator {
+    return newTokenNode(Impl.Operator, token, token.value, before)
+}
 /**
  * Create node
  * @returns string node
  */
-export function newNode(token: StringToken, before: string): StringNode
+export function newString(
+    token: AST.StringToken,
+    before: string,
+): AST.StringNode {
+    return newTokenNode(Impl.StringNode, token, token.value, before)
+}
 /**
  * Create node
  * @returns word node, number node or number with unit node
  */
-export function newNode(
-    arg: string | WordToken | PunctuatorToken | OperatorToken | StringToken,
-    before?: string,
+export function newWordNode(
+    token: AST.WordToken,
+    before: string,
 ):
-    | NumberValue
-    | LengthValue
-    | AngleValue
-    | TimeValue
-    | FrequencyValue
-    | ResolutionValue
-    | PercentageValue
-    | FlexValue
-    | Word
-    | Punctuator
-    | Operator
-    | StringNode {
-    let token: WordToken | StringToken | PunctuatorToken | OperatorToken
-    if (typeof arg === "string" || typeof arg === "number") {
-        const text = `${arg}`
-        token = strToToken(text)
-
-        const r = /^\s+/u.exec(text)
-        before = r ? r[0] : ""
-    } else {
-        token = arg
-    }
-    if (token.type === "word") {
-        return newValueNode(token, before)
-    } else if (token.type === "string") {
-        return newTokenNode(StringNodeImpl, token, before)
-    } else if (token.type === "punctuator") {
-        return newTokenNode(PunctuatorImpl, token, before)
-    } else if (token.type === "operator") {
-        return newTokenNode(OperatorImpl, token, before)
-    }
-    throw new Error("illegal token")
+    | AST.NumberValue
+    | AST.LengthValue
+    | AST.AngleValue
+    | AST.TimeValue
+    | AST.FrequencyValue
+    | AST.ResolutionValue
+    | AST.PercentageValue
+    | AST.FlexValue
+    | AST.Word {
+    return newValueNode(token, before)
 }
 
 /**
  * Create function node
  * @returns function node
  */
-export function newFunctionNode(name: string): FunctionNode
-/**
- * Create function node
- * @returns function node
- */
-export function newFunctionNode(
-    token: WordToken,
+export function newFunction(
+    token: AST.WordToken,
     before: string,
-    open: PunctuatorToken,
-): FunctionNode
-/**
- * Create function node
- * @returns function node
- */
-export function newFunctionNode(
-    arg: WordToken | string,
-    before?: string,
-    open?: PunctuatorToken,
-): FunctionNode {
-    let token: WordToken
-    if (typeof arg === "string") {
-        const text = `${arg}`
-        token = {
-            type: "word",
-            value: text.trim(),
-            source: initLoc(),
-        }
-
-        const r = /^\s+/u.exec(text)
-        before = r ? r[0] : ""
-    } else {
-        token = arg
-    }
-    if (!open) {
-        open = {
-            type: "punctuator",
-            value: "(",
-            source: initLoc(),
-        }
-    }
-    return new FunctionNodeImpl(token.value, before, {
+    open: AST.PunctuatorToken,
+): AST.FunctionNode {
+    return new Impl.FunctionNode(token.value, before, {
         start: token.source.start,
         end: open.source.end,
     })
@@ -255,135 +109,60 @@ export function newFunctionNode(
  * Create parentheses node
  * @returns parentheses node
  */
-export function newParenthesesNode(): Parentheses
-/**
- * Create parentheses node
- * @returns parentheses node
- */
-export function newParenthesesNode(
-    token: PunctuatorToken,
+export function newParentheses(
+    token: AST.PunctuatorToken,
     before: string,
-): Parentheses
-/**
- * Create parentheses node
- * @returns parentheses node
- */
-export function newParenthesesNode(
-    token?: PunctuatorToken,
-    before?: string,
-): Parentheses {
-    const source =
-        (token && {
-            start: token.source.start,
-            end: token.source.end,
-        }) ||
-        initLoc()
-    return new ParenthesesImpl(before, source)
-}
-
-/**
- * Create math expression node
- * @returns math expression node
- */
-export function newMathExpressionNode(
-    left: string,
-    op: string,
-    right: string,
-): MathExpression
-/**
- * Create math expression node
- * @returns math expression node
- */
-export function newMathExpressionNode(
-    left: Expression,
-    op: Operator,
-    right: Expression,
-): MathExpression
-/**
- * Create math expression node
- * @returns math expression node
- */
-export function newMathExpressionNode(
-    left: string | Expression,
-    op: string | Operator,
-    right: string | Expression,
-): MathExpression {
-    const leftExpr = toExpression(left)
-    const opNode = toOperator(op)
-    const rightExpr = toExpression(right)
-    const { before } = leftExpr.raws
-    leftExpr.raws.before = ""
-    return new MathExpressionImpl(leftExpr, opNode, rightExpr, before, {
-        start: srcLoc(leftExpr).start,
-        operator: srcLoc(opNode),
-        end: srcLoc(rightExpr).end,
+): AST.Parentheses {
+    return new Impl.Parentheses(before, {
+        start: token.source.start,
+        end: token.source.end,
     })
 }
 
 /**
- * string to token
+ * Create math expression node
+ * @returns math expression node
  */
-function strToToken(
-    text: string,
-): WordToken | StringToken | PunctuatorToken | OperatorToken {
-    text = text.trim()
-    if (isString(text)) {
-        return {
-            type: "string",
-            value: text,
-            source: initLoc(),
-        }
-    }
-    if (text === "," || text === "(" || text === ")") {
-        return {
-            type: "punctuator",
-            value: text,
-            source: initLoc(),
-        }
-    }
-    if (text === "+" || text === "-" || text === "*" || text === "/") {
-        return {
-            type: "operator",
-            value: text,
-            source: initLoc(),
-        }
-    }
-    return {
-        type: "word",
-        value: text,
-        source: initLoc(),
-    }
-}
-/*eslint-enable no-param-reassign */
-
+export function newMathExpression(
+    left: AST.Expression,
+    op: "+" | "-" | "*" | "/",
+    right: AST.Expression,
+): AST.MathExpression
 /**
- * string to expression
+ * Create math expression node
+ * @returns math expression node
  */
-function toExpression(expr: string | Expression): Expression {
-    if (typeof expr === "string" || typeof expr === "number") {
-        const node = newNode(expr)
-        if (node.type === "Operator" || node.type === "Punctuator") {
-            throw new Error(`illegal text "${expr}"`)
-        }
-        return node
-    }
-
-    return expr
-}
-
+export function newMathExpression(
+    left: AST.Expression,
+    op: AST.Operator,
+    right: AST.Expression,
+): AST.MathExpression
 /**
- * string to operator
+ * Create math expression node
+ * @returns math expression node
  */
-function toOperator(op: string | Operator): Operator {
-    if (typeof op === "string" || typeof op === "number") {
-        const node = newNode(op)
-        if (node.type !== "Operator") {
-            throw new Error(`illegal text "${op}"`)
-        }
-        return node
-    }
+export function newMathExpression(
+    left: AST.Expression,
+    op: "+" | "-" | "*" | "/" | AST.Operator,
+    right: AST.Expression,
+): AST.MathExpression {
+    const opNode =
+        typeof op === "string"
+            ? newTokenNode(
+                  Impl.Operator,
+                  { source: { start: { index: 0 }, end: { index: 0 } } },
+                  op,
+                  " ",
+              )
+            : op
 
-    return op
+    const { before } = left.raws
+    left.raws.before = ""
+    return new Impl.MathExpression(left, opNode, right, before, {
+        start: left.source.start,
+        operator: opNode.source,
+        end: right.source.end,
+    })
 }
 
 /**
@@ -391,18 +170,18 @@ function toOperator(op: string | Operator): Operator {
  * @returns Value node
  */
 function newValueNode(
-    token: WordToken | StringToken,
-    before?: string,
+    token: AST.WordToken | AST.StringToken,
+    before: string,
 ):
-    | NumberValue
-    | LengthValue
-    | AngleValue
-    | TimeValue
-    | FrequencyValue
-    | ResolutionValue
-    | PercentageValue
-    | FlexValue
-    | Word {
+    | AST.NumberValue
+    | AST.LengthValue
+    | AST.AngleValue
+    | AST.TimeValue
+    | AST.FrequencyValue
+    | AST.ResolutionValue
+    | AST.PercentageValue
+    | AST.FlexValue
+    | AST.Word {
     if (token.type === "word") {
         const parsedUnit = valueParserUnit(token.value) as
             | {
@@ -418,7 +197,7 @@ function newValueNode(
         }
     }
 
-    return newTokenNode(WordImpl, token, before)
+    return newTokenNode(Impl.Word, token, token.value, before)
 }
 
 /**
@@ -430,21 +209,21 @@ function newNumNode(
         number: string
         unit: string
     },
-    token: WordToken,
-    before?: string,
+    token: AST.WordToken,
+    before: string,
 ):
-    | NumberValue
-    | LengthValue
-    | AngleValue
-    | TimeValue
-    | FrequencyValue
-    | ResolutionValue
-    | PercentageValue
-    | FlexValue
+    | AST.NumberValue
+    | AST.LengthValue
+    | AST.AngleValue
+    | AST.TimeValue
+    | AST.FrequencyValue
+    | AST.ResolutionValue
+    | AST.PercentageValue
+    | AST.FlexValue
     | null {
     const { source } = token
     if (!parsedUnit.unit) {
-        return new NumberValueImpl(parsedUnit.number, before, source)
+        return new Impl.NumberValue(parsedUnit.number, before, source)
     }
 
     const lunit = parsedUnit.unit.toLowerCase()
@@ -454,19 +233,19 @@ function newNumNode(
      */
     function unitNode<
         T extends
-            | LengthValueImpl
-            | AngleValueImpl
-            | TimeValueImpl
-            | FrequencyValueImpl
-            | ResolutionValueImpl
-            | FlexValueImpl
-            | PercentageValueImpl
+            | AST.LengthValue
+            | AST.AngleValue
+            | AST.TimeValue
+            | AST.FrequencyValue
+            | AST.ResolutionValue
+            | AST.FlexValue
+            | AST.PercentageValue
     >(
         WithUnitValue: new (
             value: string,
             unit: T["unit"],
-            before?: string,
-            source?: SourceLocation,
+            before: string,
+            source: AST.SourceLocation,
         ) => T,
         unit: T["unit"],
     ): T {
@@ -482,25 +261,25 @@ function newNumNode(
 
     let unitIndex
     if ((unitIndex = L_LENGTH_UNITS.indexOf(lunit)) >= 0) {
-        return unitNode(LengthValueImpl, LENGTH_UNITS[unitIndex])
+        return unitNode(Impl.LengthValue, LENGTH_UNITS[unitIndex])
     }
     if ((unitIndex = L_ANGLE_UNITS.indexOf(lunit)) >= 0) {
-        return unitNode(AngleValueImpl, ANGLE_UNITS[unitIndex])
+        return unitNode(Impl.AngleValue, ANGLE_UNITS[unitIndex])
     }
     if ((unitIndex = L_TIME_UNITS.indexOf(lunit)) >= 0) {
-        return unitNode(TimeValueImpl, TIME_UNITS[unitIndex])
+        return unitNode(Impl.TimeValue, TIME_UNITS[unitIndex])
     }
     if ((unitIndex = L_FREQUENCY_UNITS.indexOf(lunit)) >= 0) {
-        return unitNode(FrequencyValueImpl, FREQUENCY_UNITS[unitIndex])
+        return unitNode(Impl.FrequencyValue, FREQUENCY_UNITS[unitIndex])
     }
     if ((unitIndex = L_RESOLUTION_UNITS.indexOf(lunit)) >= 0) {
-        return unitNode(ResolutionValueImpl, RESOLUTION_UNITS[unitIndex])
+        return unitNode(Impl.ResolutionValue, RESOLUTION_UNITS[unitIndex])
     }
     if ((unitIndex = L_FLEX_UNITS.indexOf(lunit)) >= 0) {
-        return unitNode(FlexValueImpl, FLEX_UNITS[unitIndex])
+        return unitNode(Impl.FlexValue, FLEX_UNITS[unitIndex])
     }
     if (lunit === "%") {
-        return unitNode(PercentageValueImpl, "%")
+        return unitNode(Impl.PercentageValue, "%")
     }
     return null
 }
@@ -509,15 +288,18 @@ function newNumNode(
  * Create a node that uses token as it is.
  * @returns node
  */
-function newTokenNode<T extends Word | Punctuator | Operator | StringNode>(
+function newTokenNode<
+    T extends AST.Word | AST.Punctuator | AST.Operator | AST.StringNode
+>(
     TokenValue: new (
         value: T["value"],
-        before?: string,
-        source?: SourceLocation,
+        before: string,
+        source: AST.SourceLocation,
     ) => T,
-    token: { source: SourceLocation; value: T["value"] },
-    before?: string,
+    token: { source: AST.SourceLocation },
+    value: T["value"],
+    before: string,
 ): T {
     const { source } = token
-    return new TokenValue(token.value, before, source)
+    return new TokenValue(value, before, source)
 }

@@ -1,38 +1,10 @@
-import {
-    Expression,
-    Root,
-    FunctionNode,
-    Parentheses,
-    MathExpression,
-    NumberValue,
-    Word,
-    Punctuator,
-    Operator,
-    LengthValue,
-    AngleValue,
-    TimeValue,
-    FrequencyValue,
-    ResolutionValue,
-    FlexValue,
-    PercentageValue,
-    WordToken,
-    PunctuatorToken,
-    OperatorToken,
-    WhitespaceToken,
-    CommentToken,
-    StringToken,
-    InlineCommnetToken,
-    Node,
-    IToken,
-    INode,
-    Other,
-} from "../types/ast"
+import * as AST from "../types/ast"
 import { StringifyOptions } from "../types/options"
 
 /**
  * Get raw value or name value
  */
-function rawVal<T extends Node>(node: T, name: keyof T): string {
+function rawVal<T extends AST.Node>(node: T, name: keyof T): string {
     const r = (node.raws as any)[name]
     return r ? r.raw : `${node[name]}`
 }
@@ -40,7 +12,7 @@ function rawVal<T extends Node>(node: T, name: keyof T): string {
 /**
  * Get raw value or ""
  */
-function raw<T extends Node>(node: T, name: keyof T["raws"]): string {
+function raw<T extends AST.Node>(node: T, name: keyof T["raws"]): string {
     const r = (node.raws as any)[name]
     return r || ""
 }
@@ -48,7 +20,7 @@ function raw<T extends Node>(node: T, name: keyof T["raws"]): string {
 /**
  * Stringify the given expression
  */
-function wrapRaws(node: Expression | Other, inner: string): string {
+function wrapRaws(node: AST.Expression | AST.Other, inner: string): string {
     return `${raw(node, "before")}${inner}`
 }
 
@@ -57,13 +29,13 @@ function wrapRaws(node: Expression | Other, inner: string): string {
  */
 function numWithUnit(
     node:
-        | LengthValue
-        | AngleValue
-        | TimeValue
-        | FrequencyValue
-        | ResolutionValue
-        | FlexValue
-        | PercentageValue,
+        | AST.LengthValue
+        | AST.AngleValue
+        | AST.TimeValue
+        | AST.FrequencyValue
+        | AST.ResolutionValue
+        | AST.FlexValue
+        | AST.PercentageValue,
 ): string {
     return wrapRaws(node, `${rawVal(node, "value")}${rawVal(node, "unit")}`)
 }
@@ -91,15 +63,15 @@ export class Stringifier {
      */
     public stringify(
         node:
-            | INode // nodes
-            | IToken, // tokens
+            | AST.INode // nodes
+            | AST.IToken, // tokens
     ): string {
         return (this as any)[node.type](node)
     }
 
     /* eslint-disable require-jsdoc, class-methods-use-this */
     // nodes
-    protected Root(node: Root): string {
+    protected Root(node: AST.Root): string {
         let s = ""
         for (const c of node.nodes) {
             s += this.stringify(c)
@@ -107,7 +79,7 @@ export class Stringifier {
         s += raw(node, "after")
         return s
     }
-    protected Function(node: FunctionNode): string {
+    protected Function(node: AST.FunctionNode): string {
         let s = `${node.name}(`
         for (const c of node.nodes) {
             s += this.stringify(c)
@@ -118,7 +90,7 @@ export class Stringifier {
         }
         return wrapRaws(node, s)
     }
-    protected Parentheses(node: Parentheses): string {
+    protected Parentheses(node: AST.Parentheses): string {
         let s = "("
         for (const c of node.nodes) {
             s += this.stringify(c)
@@ -129,70 +101,119 @@ export class Stringifier {
         }
         return wrapRaws(node, s)
     }
-    protected MathExpression(node: MathExpression): string {
+    // eslint-disable-next-line complexity
+    protected MathExpression(node: AST.MathExpression): string {
+        let beforeLeft = ""
+        let between = raw(node, "between")
+        let beforeRight = ""
+        let afterRight = ""
+        if (this.options.autofix) {
+            if (!between) {
+                between = " "
+            }
+            if (!node.right.raws.before) {
+                beforeRight = " "
+            }
+
+            if (node.left.type === "MathExpression") {
+                // (X + Y) * Z
+                // (X - Y) * Z
+                // (X + Y) / Z
+                // (X - Y) / Z
+                if (
+                    (node.left.operator === "+" ||
+                        node.left.operator === "-") &&
+                    (node.operator === "*" || node.operator === "/")
+                ) {
+                    beforeLeft += "("
+                    between = `)${between}`
+                }
+            }
+            if (node.right.type === "MathExpression") {
+                if (
+                    // X + (Y - Z)
+                    (node.operator === "+" && node.right.operator === "-") ||
+                    // X - (Y + Z)
+                    // X - (Y - Z)
+                    // X * (Y + Z)
+                    // X * (Y - Z)
+                    ((node.operator === "-" || node.operator === "*") &&
+                        (node.right.operator === "+" ||
+                            node.right.operator === "-")) ||
+                    // X / (Y + Z)
+                    // X / (Y - Z)
+                    // X / (Y * Z)
+                    // X / (Y / Z)
+                    node.operator === "/"
+                ) {
+                    beforeRight += "("
+                    afterRight = `)${afterRight}`
+                }
+            }
+        }
         return wrapRaws(
             node,
-            `${this.stringify(node.left)}${raw(node, "between")}${
+            `${beforeLeft}${this.stringify(node.left)}${between}${
                 node.operator
-            }${this.stringify(node.right)}`,
+            }${beforeRight}${this.stringify(node.right)}${afterRight}`,
         )
     }
-    protected Number(node: NumberValue): string {
+    protected Number(node: AST.NumberValue): string {
         return wrapRaws(node, rawVal(node, "value"))
     }
-    protected Punctuator(node: Punctuator): string {
+    protected Punctuator(node: AST.Punctuator): string {
         return wrapRaws(node, node.value)
     }
-    protected Word(node: Word): string {
+    protected Word(node: AST.Word): string {
         return wrapRaws(node, node.value)
     }
-    protected String(node: Word): string {
+    protected String(node: AST.StringNode): string {
         return wrapRaws(node, node.value)
     }
-    protected Operator(node: Operator): string {
+    protected Operator(node: AST.Operator): string {
         return wrapRaws(node, node.value)
     }
-    protected Length(node: LengthValue): string {
+    protected Length(node: AST.LengthValue): string {
         return numWithUnit(node)
     }
-    protected Angle(node: AngleValue): string {
+    protected Angle(node: AST.AngleValue): string {
         return numWithUnit(node)
     }
-    protected Time(node: TimeValue): string {
+    protected Time(node: AST.TimeValue): string {
         return numWithUnit(node)
     }
-    protected Frequency(node: FrequencyValue): string {
+    protected Frequency(node: AST.FrequencyValue): string {
         return numWithUnit(node)
     }
-    protected Resolution(node: ResolutionValue): string {
+    protected Resolution(node: AST.ResolutionValue): string {
         return numWithUnit(node)
     }
-    protected Percentage(node: PercentageValue): string {
+    protected Percentage(node: AST.PercentageValue): string {
         return numWithUnit(node)
     }
-    protected Flex(node: FlexValue): string {
+    protected Flex(node: AST.FlexValue): string {
         return numWithUnit(node)
     }
     // tokens
-    protected word(node: WordToken): string {
+    protected word(node: AST.WordToken): string {
         return node.value
     }
-    protected punctuator(node: PunctuatorToken): string {
+    protected punctuator(node: AST.PunctuatorToken): string {
         return node.value
     }
-    protected operator(node: OperatorToken): string {
+    protected operator(node: AST.OperatorToken): string {
         return node.value
     }
-    protected whitespace(node: WhitespaceToken): string {
+    protected whitespace(node: AST.WhitespaceToken): string {
         return node.value
     }
-    protected comment(node: CommentToken): string {
+    protected comment(node: AST.CommentToken): string {
         return node.value
     }
-    protected string(node: StringToken): string {
+    protected string(node: AST.StringToken): string {
         return node.value
     }
-    protected "inline-comment"(node: InlineCommnetToken): string {
+    protected "inline-comment"(node: AST.InlineCommnetToken): string {
         return node.value
     }
     /* eslint-enable require-jsdoc, class-methods-use-this */

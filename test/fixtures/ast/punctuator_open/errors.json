@@ -1,0 +1,10 @@
+[
+    {
+        "errors": [
+            {
+                "code": "eof-in-bracket",
+                "index": 1
+            }
+        ]
+    }
+]
