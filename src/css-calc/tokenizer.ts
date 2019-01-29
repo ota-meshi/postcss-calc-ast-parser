@@ -72,8 +72,14 @@ function isQuotes(cc: number): boolean {
     return cc === QUOTATION_MARK || cc === APOSTROPHE
 }
 
-type LeftBracketCode = 0x28 | 0x5b | 0x7b
-type RightBracketCode = 0x29 | 0x5d | 0x7d
+type LeftBracketCode =
+    | typeof LEFT_PARENTHESIS
+    | typeof LEFT_SQUARE_BRACKET
+    | typeof LEFT_CURLY_BRACKET
+type RightBracketCode =
+    | typeof RIGHT_PARENTHESIS
+    | typeof RIGHT_SQUARE_BRACKET
+    | typeof RIGHT_CURLY_BRACKET
 
 /**
  * Gets the right bracket from the given char.
@@ -180,13 +186,12 @@ export class Tokenizer {
     }
 
     /**
-     * Rescan the given state with the current code.
-     * @param state The state.
-     * @returns The state.
+     * Rescan the `"SCAN"` state with the current code.
+     * @returns The `"SCAN"` state.
      */
-    private back<T extends ScanState = "SCAN">(state?: T): T {
+    private back(): "SCAN" {
         this.rescan = true
-        return state || ("SCAN" as T)
+        return "SCAN"
     }
 
     /**
@@ -378,7 +383,7 @@ export class Tokenizer {
         return "SCAN"
     }
 
-    private HYPHEN(cc: number): ScanState {
+    private HYPHEN(cc: number): "SCAN" | "WORD" {
         if (
             this.lastTokenType === "word" || // e.g. 10-
             cc === EOF ||

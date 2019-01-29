@@ -474,9 +474,9 @@ export class StringNode extends TokenValue<"String", string>
 function defineAssessor<O, N extends keyof O>(
     obj: O,
     name: N,
-    preset: (n: O[N], o?: O[N]) => O[N],
+    setterProc: (n: O[N], o?: O[N]) => O[N],
 ) {
-    const localName = `_${name}`
+    const localName = Symbol(`${name}`)
     Object.defineProperties(obj, {
         [localName]: { writable: true, enumerable: false },
         [name]: {
@@ -485,7 +485,7 @@ function defineAssessor<O, N extends keyof O>(
             },
             set(n: O[N]) {
                 const o = this[localName]
-                this[localName] = preset(n, o)
+                this[localName] = setterProc(n, o)
             },
             enumerable: true,
         },
@@ -524,52 +524,32 @@ export class MathExpression extends Node implements AST.MathExpression {
         const ope = operator.value
         const between = operator.raws.before
         this.type = "MathExpression"
-        defineAssessor(
-            this,
-            "left",
-            (
-                n: AST.Expression | AST.Root,
-                o?: AST.Expression | AST.Root,
-            ): AST.Expression => {
-                if (n.type === "Root") {
-                    const { nodes } = n
-                    if (nodes.length === 1) {
-                        n = nodes[0] as AST.Expression // eslint-disable-line no-param-reassign
-                    } else {
-                        throw new Error("The given Root node is illegal.")
-                    }
+
+        const setterProc = (
+            n: AST.Expression | AST.Root,
+            o?: AST.Expression | AST.Root,
+        ): AST.Expression => {
+            let e
+            if (n.type === "Root") {
+                const { nodes } = n
+                if (nodes.length === 1) {
+                    e = nodes[0] as AST.Expression
+                } else {
+                    throw new Error("The given Root node is illegal.")
                 }
-                n.parent = this
-                if (o) {
-                    o.parent = null
-                }
-                return n
-            },
-        )
+            } else {
+                e = n
+            }
+            e.parent = this
+            if (o) {
+                o.parent = null
+            }
+            return e
+        }
+        defineAssessor(this, "left", setterProc)
         this.left = left
         this.operator = ope
-        defineAssessor(
-            this,
-            "right",
-            (
-                n: AST.Expression | AST.Root,
-                o?: AST.Expression | AST.Root,
-            ): AST.Expression => {
-                if (n.type === "Root") {
-                    const { nodes } = n
-                    if (nodes.length === 1) {
-                        n = nodes[0] as AST.Expression // eslint-disable-line no-param-reassign
-                    } else {
-                        throw new Error("The given Root node is illegal.")
-                    }
-                }
-                n.parent = this
-                if (o) {
-                    o.parent = null
-                }
-                return n
-            },
-        )
+        defineAssessor(this, "right", setterProc)
         this.right = right
         this.raws = { before, between }
         this.source = source

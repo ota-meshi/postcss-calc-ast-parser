@@ -5,42 +5,42 @@ import { getFunctionArguments } from "./util/utils"
 type ReduceValue =
     | {
           value: number
-          type: "Number"
+          type: AST.NumberValue["type"]
       }
     | {
           value: number
           unit: AST.LengthUnit
-          type: "Length"
+          type: AST.LengthValue["type"]
       }
     | {
           value: number
           unit: AST.AngleUnit
-          type: "Angle"
+          type: AST.AngleValue["type"]
       }
     | {
           value: number
           unit: AST.TimeUnit
-          type: "Time"
+          type: AST.TimeValue["type"]
       }
     | {
           value: number
           unit: AST.FrequencyUnit
-          type: "Frequency"
+          type: AST.FrequencyValue["type"]
       }
     | {
           value: number
           unit: AST.ResolutionUnit
-          type: "Resolution"
+          type: AST.ResolutionValue["type"]
       }
     | {
           value: number
           unit: "%"
-          type: "Percentage"
+          type: AST.PercentageValue["type"]
       }
     | {
           value: number
           unit: AST.FlexUnit
-          type: "Flex"
+          type: AST.FlexValue["type"]
       }
 
 /**

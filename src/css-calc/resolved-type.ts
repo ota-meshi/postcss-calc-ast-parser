@@ -3,14 +3,14 @@ import { isCalc, isMin, isMax, isClamp } from "./util/calc-notation"
 import { getFunctionArguments } from "./util/utils"
 
 type ResolvedType =
-    | "Number"
-    | "Length"
-    | "Angle"
-    | "Time"
-    | "Frequency"
-    | "Resolution"
-    | "Percentage"
-    | "Flex"
+    | AST.NumberValue["type"]
+    | AST.LengthValue["type"]
+    | AST.AngleValue["type"]
+    | AST.TimeValue["type"]
+    | AST.FrequencyValue["type"]
+    | AST.ResolutionValue["type"]
+    | AST.PercentageValue["type"]
+    | AST.FlexValue["type"]
     | "Unknown"
 
 /* eslint-disable complexity */
