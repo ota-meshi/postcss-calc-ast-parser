@@ -3,27 +3,27 @@ import * as AST from "../types/ast"
 import {
     isWhitespace,
     isDigit,
-    APOSTROPHE,
-    EOF,
-    HYPHEN_MINUS,
-    LEFT_CURLY_BRACKET,
-    LEFT_SQUARE_BRACKET,
-    NULL,
-    QUOTATION_MARK,
-    RIGHT_CURLY_BRACKET,
-    RIGHT_SQUARE_BRACKET,
-    SOLIDUS,
-    REVERSE_SOLIDUS,
-    CARRIAGE_RETURN,
-    LINE_FEED,
-    FORM_FEED,
-    PLUS_SIGN,
-    ASTERISK,
-    LEFT_PARENTHESIS,
-    RIGHT_PARENTHESIS,
-    COMMA,
-    FULL_STOP,
     isLetter,
+    EOF,
+    NULL,
+    CR,
+    LF,
+    FF,
+    DQUOTE,
+    SQUOTE,
+    LPAREN,
+    RPAREN,
+    STAR,
+    PLUS,
+    COMMA,
+    MINUS,
+    DOT,
+    SLASH,
+    LBRACKET,
+    BACKSLASH,
+    RBRACKET,
+    LBRACE,
+    RBRACE,
 } from "./util/unicode"
 import { Options } from "../types/options"
 
@@ -34,12 +34,12 @@ type ScanState =
     | "SCAN"
     | "WORD"
     | "WHITESPACE"
-    | "HYPHEN" // `-`
+    | "MINUS" // `-`
     | "PLUS" // `+`
     | "SLASH" // `/`
     | "COMMENT" // `/*`
-    | "SQUOTE" // `'`
     | "DQUOTE" // `"`
+    | "SQUOTE" // `'`
     | "LBRACKET" // `[`
     | "LBRACE" // `{`
     // unstandard
@@ -51,7 +51,7 @@ type ScanState =
  * @returns `true` if the given char is punctuator
  */
 function isPunctuator(cc: number): boolean {
-    return cc === LEFT_PARENTHESIS || cc === RIGHT_PARENTHESIS || cc === COMMA
+    return cc === LPAREN || cc === RPAREN || cc === COMMA
 }
 
 /**
@@ -60,7 +60,7 @@ function isPunctuator(cc: number): boolean {
  * @returns `true` if the given char is maybe number.
  */
 function maybeNumber(cc: number): boolean {
-    return isDigit(cc) || cc === FULL_STOP
+    return isDigit(cc) || cc === DOT
 }
 
 /**
@@ -69,17 +69,11 @@ function maybeNumber(cc: number): boolean {
  * @returns `true` if the given char quotes
  */
 function isQuotes(cc: number): boolean {
-    return cc === QUOTATION_MARK || cc === APOSTROPHE
+    return cc === DQUOTE || cc === SQUOTE
 }
 
-type LeftBracketCode =
-    | typeof LEFT_PARENTHESIS
-    | typeof LEFT_SQUARE_BRACKET
-    | typeof LEFT_CURLY_BRACKET
-type RightBracketCode =
-    | typeof RIGHT_PARENTHESIS
-    | typeof RIGHT_SQUARE_BRACKET
-    | typeof RIGHT_CURLY_BRACKET
+type LeftBracketCode = typeof LPAREN | typeof LBRACKET | typeof LBRACE
+type RightBracketCode = typeof RPAREN | typeof RBRACKET | typeof RBRACE
 
 /**
  * Gets the right bracket from the given char.
@@ -87,13 +81,13 @@ type RightBracketCode =
  * @returns the right bracket
  */
 function getRightBracket(cc: LeftBracketCode): RightBracketCode {
-    if (cc === LEFT_PARENTHESIS) {
-        return RIGHT_PARENTHESIS
+    if (cc === LPAREN) {
+        return RPAREN
     }
-    if (cc === LEFT_CURLY_BRACKET) {
-        return RIGHT_CURLY_BRACKET
+    if (cc === LBRACE) {
+        return RBRACE
     }
-    return RIGHT_SQUARE_BRACKET
+    return RBRACKET
 }
 
 /**
@@ -147,7 +141,7 @@ export class Tokenizer {
     public nextToken(): AST.Token | null {
         while (this.token == null) {
             const cc = this.scan()
-            this.state = this[this.state](cc)
+            this.state = this[this.state](cc) || "SCAN"
             if (cc === EOF && !this.rescan) {
                 break
             }
@@ -186,12 +180,10 @@ export class Tokenizer {
     }
 
     /**
-     * Rescan the `"SCAN"` state with the current code.
-     * @returns The `"SCAN"` state.
+     * Rescan the next state with the current code.
      */
-    private back(): "SCAN" {
+    private back(): void {
         this.rescan = true
-        return "SCAN"
     }
 
     /**
@@ -214,14 +206,11 @@ export class Tokenizer {
      * Commit the current token.
      */
     private commitToken(type: AST.TokenType, indexOffset = 0): void {
-        // const type = this.currentTokenType
-        if (type == null) {
-            throw new Error("Invalid state")
-        }
         const start = this.nextTokenOffset
         const offset = this.offset + indexOffset + 1
         const value = this.text.slice(start, offset)
-        const token = {
+
+        this.token = {
             type,
             value,
             source: {
@@ -232,9 +221,7 @@ export class Tokenizer {
                     index: offset,
                 },
             },
-        }
-
-        this.token = token as AST.Token
+        } as AST.Token
         this.nextTokenOffset = offset
 
         this.lastTokenType = type
@@ -248,22 +235,22 @@ export class Tokenizer {
         if (isWhitespace(cc)) {
             return "WHITESPACE"
         }
-        if (cc === QUOTATION_MARK) {
+        if (cc === DQUOTE) {
             return "DQUOTE"
         }
-        if (cc === APOSTROPHE) {
+        if (cc === SQUOTE) {
             return "SQUOTE"
         }
-        if (cc === SOLIDUS) {
+        if (cc === SLASH) {
             return "SLASH"
         }
-        if (cc === HYPHEN_MINUS) {
-            return "HYPHEN"
+        if (cc === MINUS) {
+            return "MINUS"
         }
-        if (cc === PLUS_SIGN) {
+        if (cc === PLUS) {
             return "PLUS"
         }
-        if (cc === ASTERISK) {
+        if (cc === STAR) {
             this.commitToken("operator")
             return "SCAN"
         }
@@ -271,10 +258,10 @@ export class Tokenizer {
             this.commitToken("punctuator")
             return "SCAN"
         }
-        if (cc === LEFT_CURLY_BRACKET) {
+        if (cc === LBRACKET) {
             return "LBRACKET"
         }
-        if (cc === LEFT_SQUARE_BRACKET) {
+        if (cc === LBRACE) {
             return "LBRACE"
         }
         if (cc === EOF) {
@@ -283,96 +270,91 @@ export class Tokenizer {
         return "WORD"
     }
 
-    /* eslint-disable require-jsdoc */
-    private WORD(cc: number): "HYPHEN" | "SCAN" {
+    /* eslint-disable require-jsdoc, consistent-return */
+    private WORD(cc: number): "MINUS" | void {
         while (
             !isWhitespace(cc) &&
             !isPunctuator(cc) &&
-            cc !== PLUS_SIGN &&
-            cc !== ASTERISK &&
-            cc !== SOLIDUS &&
+            cc !== PLUS &&
+            cc !== STAR &&
+            cc !== SLASH &&
             !isQuotes(cc) &&
             cc !== EOF
         ) {
-            if (cc === HYPHEN_MINUS) {
+            if (cc === MINUS) {
                 const st = this.getCode()
                 if (
                     maybeNumber(st) ||
-                    ((st === HYPHEN_MINUS || st === PLUS_SIGN) &&
+                    ((st === MINUS || st === PLUS) &&
                         maybeNumber(this.getCode(1)))
                 ) {
                     this.commitToken("word", -1)
-                    return "HYPHEN"
+                    return "MINUS"
                 }
-            } else if (
-                cc === LEFT_CURLY_BRACKET ||
-                cc === LEFT_SQUARE_BRACKET ||
-                cc === LEFT_PARENTHESIS
-            ) {
+            } else if (cc === LBRACE || cc === LBRACKET || cc === LPAREN) {
                 this.skipBrakets(this.next(), getRightBracket(cc))
             }
             cc = this.next()
         }
         this.commitToken("word", -1)
-        return this.back()
+        this.back()
     }
 
     private LBRACKET(cc: number): "WORD" {
-        this.skipBrakets(cc, RIGHT_CURLY_BRACKET)
+        this.skipBrakets(cc, RBRACKET)
         return "WORD"
     }
 
     private LBRACE(cc: number): "WORD" {
-        this.skipBrakets(cc, RIGHT_SQUARE_BRACKET)
+        this.skipBrakets(cc, RBRACE)
         return "WORD"
     }
 
-    private WHITESPACE(cc: number): "SCAN" {
+    private WHITESPACE(cc: number): void {
         while (isWhitespace(cc)) {
             cc = this.next()
         }
         this.commitToken("whitespace", -1)
-        return this.back()
+        this.back()
     }
 
-    private SLASH(cc: number): "COMMENT" | "INLINE_COMMENT" | "SCAN" {
-        if (cc === ASTERISK) {
+    private SLASH(cc: number): "COMMENT" | "INLINE_COMMENT" | void {
+        if (cc === STAR) {
             return "COMMENT"
         }
-        if (cc === SOLIDUS && this.options.allowInlineCommnets) {
+        if (cc === SLASH && this.options.allowInlineCommnets) {
             return "INLINE_COMMENT"
         }
         this.commitToken("operator", -1)
-        return this.back()
+        this.back()
     }
 
-    private COMMENT(cc: number): "SCAN" {
+    private COMMENT(cc: number): void {
         while (cc !== EOF) {
-            if (cc === ASTERISK) {
+            if (cc === STAR) {
                 cc = this.next()
-                if (cc === SOLIDUS) {
+                if (cc === SLASH) {
                     this.commitToken("comment")
-                    return "SCAN"
+                    return
                 }
             }
             cc = this.next()
         }
         this.commitToken("comment", -1)
         this.reportParseError("eof-in-comment")
-        return "SCAN"
     }
 
-    private INLINE_COMMENT(cc: number): "SCAN" {
+    private INLINE_COMMENT(cc: number): void {
         while (cc !== EOF) {
-            if (cc === LINE_FEED || cc === FORM_FEED) {
+            if (cc === LF || cc === FF) {
                 this.commitToken("inline-comment")
-                return "SCAN"
+                return
             }
-            if (cc === CARRIAGE_RETURN) {
+            if (cc === CR) {
                 cc = this.next()
-                if (cc === LINE_FEED) {
+                if (cc === LF) {
                     this.commitToken("inline-comment")
-                    return "SCAN"
+                    return
                 }
                 this.commitToken("inline-comment", -1)
                 return this.back()
@@ -380,23 +362,23 @@ export class Tokenizer {
             cc = this.next()
         }
         this.commitToken("inline-comment", -1)
-        return "SCAN"
     }
 
-    private HYPHEN(cc: number): "SCAN" | "WORD" {
+    private MINUS(cc: number): "WORD" | void {
         if (
             this.lastTokenType === "word" || // e.g. 10-
             cc === EOF ||
-            (cc !== HYPHEN_MINUS && !maybeNumber(cc) && !isLetter(cc))
+            (cc !== MINUS && !maybeNumber(cc) && !isLetter(cc))
         ) {
             this.commitToken("operator", -1)
-            return this.back()
+            this.back()
+            return
         }
         // signed num or var
         return "WORD"
     }
 
-    private PLUS(cc: number): "SCAN" | "WORD" {
+    private PLUS(cc: number): "WORD" | void {
         if (this.lastTokenType !== "word") {
             if (maybeNumber(cc)) {
                 // signed num
@@ -404,65 +386,57 @@ export class Tokenizer {
             }
         }
         this.commitToken("operator", -1)
-        return this.back()
+        this.back()
     }
 
-    private DQUOTE(cc: number): "SCAN" {
-        this.skipString(cc, QUOTATION_MARK)
-        return "SCAN"
+    private DQUOTE(cc: number): void {
+        this.skipString(cc, DQUOTE)
     }
 
-    private SQUOTE(cc: number): "SCAN" {
-        this.skipString(cc, APOSTROPHE)
-        return "SCAN"
+    private SQUOTE(cc: number): void {
+        this.skipString(cc, SQUOTE)
     }
-    /* eslint-enable require-jsdoc */
+    /* eslint-enable require-jsdoc, consistent-return */
 
     /**
      * Skip brackets
      */
-    private skipBrakets(cc: number, end: RightBracketCode): number {
-        const targetBracketsStack: RightBracketCode[] = []
+    private skipBrakets(cc: number, end: RightBracketCode): void {
+        const closeStack: RightBracketCode[] = []
 
         while (cc !== EOF) {
             if (end === cc) {
-                const nextTargetBracket = targetBracketsStack.pop() || null
+                const nextTargetBracket = closeStack.pop() || null
                 if (!nextTargetBracket) {
-                    return cc
+                    return
                 }
                 end = nextTargetBracket
-            } else if (
-                cc === LEFT_CURLY_BRACKET ||
-                cc === LEFT_SQUARE_BRACKET ||
-                cc === LEFT_PARENTHESIS
-            ) {
+            } else if (cc === LBRACE || cc === LBRACKET || cc === LPAREN) {
                 if (end) {
-                    targetBracketsStack.push(end)
+                    closeStack.push(end)
                 }
                 end = getRightBracket(cc)
             }
             cc = this.next()
         }
         this.reportParseError("eof-in-bracket")
-        return cc
     }
 
     /**
      * Skip string
      */
-    private skipString(cc: number, end: number): number {
+    private skipString(cc: number, end: number): void {
         while (cc !== EOF) {
-            if (cc === REVERSE_SOLIDUS) {
+            if (cc === BACKSLASH) {
                 cc = this.next()
             } else if (cc === end) {
                 this.commitToken("string")
-                return cc
+                return
             }
             cc = this.next()
         }
         this.commitToken("string", -1)
         this.reportParseError("eof-in-string")
-        return cc
     }
 }
 

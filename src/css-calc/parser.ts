@@ -67,7 +67,7 @@ export class Parser {
     private root: AST.Root
     private tokens: AST.Token[]
     private errors: AST.ParseError[]
-    private reconsumes: TokenSet[]
+    private rescans: TokenSet[]
 
     /**
      * Initialize this parser.
@@ -85,7 +85,7 @@ export class Parser {
                 index: 0,
             },
         })
-        this.reconsumes = []
+        this.rescans = []
 
         this.tokens = this.root.tokens
         this.errors = this.root.errors
@@ -141,12 +141,12 @@ export class Parser {
      */
     private processExpressions(state: StateContainer): StateContainer | null {
         let tokenSet
-        while ((tokenSet = this.consumeToken())) {
+        while ((tokenSet = this.scan())) {
             const { token } = tokenSet
             switch (token.type) {
                 case "word":
                     if (MAYBE_FUNCTION.test(token.value)) {
-                        const next = this.consumeToken()
+                        const next = this.scan()
                         if (next) {
                             if (
                                 !next.raws &&
@@ -161,7 +161,7 @@ export class Parser {
                                     state,
                                 )
                             }
-                            this.reconsume(next)
+                            this.back(next)
                         }
                     }
                     state.container.push(newWordNode(token, tokenSet.raws))
@@ -373,13 +373,13 @@ export class Parser {
     }
 
     /**
-     * Consume the curr tokenset.
-     * @returns The consumed tokenset or null.
+     * Scan the tokenset.
+     * @returns The scaned tokenset or null.
      */
-    private consumeToken(): TokenSet | null {
-        const result = this.reconsumes.shift()
-        if (result) {
-            return result
+    private scan(): TokenSet | null {
+        const re = this.rescans.shift()
+        if (re) {
+            return re
         }
 
         let raws = ""
@@ -409,10 +409,10 @@ export class Parser {
     }
 
     /**
-     * Directive reconsuming the given tokenset.
+     * Rescan the given tokenset in the next scan.
      * @param tokenset The tokenset.
      */
-    private reconsume(tokenset: TokenSet): void {
-        this.reconsumes.unshift(tokenset)
+    private back(tokenset: TokenSet): void {
+        this.rescans.unshift(tokenset)
     }
 }
