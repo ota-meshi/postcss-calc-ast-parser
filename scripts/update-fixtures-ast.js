@@ -8,7 +8,6 @@
 const fs = require("fs")
 const path = require("path")
 const findValues = require("../test-tools/find-values")
-const tokenizer = require("../test-tools/tokenizer")
 const parser = require("../test-tools/parser")
 
 //------------------------------------------------------------------------------
@@ -72,12 +71,12 @@ for (const name of TARGETS) {
     console.log("Update:", name)
 
     const cssValues = findValues(source, sourceFileName)
-    const tokens = cssValues.map(cssValue =>
-        tokenizer(cssValue, sourceFileName)
-    )
     const parsed = cssValues.map(cssValue => parser(cssValue, sourceFileName))
     const errors = parsed.map(p => ({
         errors: p.errors,
+    }))
+    const tokens = parsed.map(p => ({
+        tokens: p.tokens,
     }))
 
     fs.writeFileSync(tokensPath, JSON.stringify(tokens, tokenReplacer, 4))

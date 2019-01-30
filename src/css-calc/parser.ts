@@ -16,6 +16,7 @@ import { isMathFunction } from "./util/calc-notation"
 import { isComma } from "./util/utils"
 
 const MAYBE_FUNCTION = /^([^-+0-9.]|-[^+0-9.])/u
+const MAYBE_MINUS = /^-[0-9.]/u
 const PRECEDENCE = {
     "*": 3,
     "/": 3,
@@ -78,12 +79,8 @@ export class Parser {
         this.tokenizer = tokenizer
         // this.options = options
         this.root = new Impl.Root({
-            start: {
-                index: 0,
-            },
-            end: {
-                index: 0,
-            },
+            start: { index: 0 },
+            end: { index: 0 },
         })
         this.rescans = []
 
@@ -162,6 +159,25 @@ export class Parser {
                                 )
                             }
                             this.back(next)
+                        }
+                    } else if (
+                        isMathFunction(state.fnName) &&
+                        MAYBE_MINUS.test(token.value)
+                    ) {
+                        const last = state.container.last as
+                            | AST.Expression
+                            | AST.Other
+                            | void
+                        if (last && isExpression(last)) {
+                            // e.g. `cal( ... 10px -10 ... )`
+                            this.back(
+                                ...this.replaceToken(
+                                    tokenSet,
+                                    "-",
+                                    token.value.slice(1),
+                                ),
+                            )
+                            break
                         }
                     }
                     state.container.push(newWordNode(token, tokenSet.raws))
@@ -394,10 +410,7 @@ export class Parser {
             ) {
                 raws += token.value
             } else {
-                return {
-                    token,
-                    raws,
-                }
+                return { token, raws }
             }
             token = this.tokenizer.nextToken()
         }
@@ -410,9 +423,41 @@ export class Parser {
 
     /**
      * Rescan the given tokenset in the next scan.
-     * @param tokenset The tokenset.
+     * @param tokensets The tokensets.
      */
-    private back(tokenset: TokenSet): void {
-        this.rescans.unshift(tokenset)
+    private back(...tokensets: TokenSet[]): void {
+        this.rescans.unshift(...tokensets)
+    }
+
+    /**
+     * Replace the token.
+     */
+    private replaceToken(
+        tokenset: TokenSet,
+        ...newValues: string[]
+    ): TokenSet[] {
+        const result: TokenSet[] = []
+        let raws = tokenset.raws
+        let startLoc = { index: tokenset.token.source.start.index }
+        for (const value of newValues) {
+            const endLoc = { index: startLoc.index + value.length }
+            const source = { start: startLoc, end: endLoc }
+            const token:
+                | AST.OperatorToken
+                | AST.PunctuatorToken
+                | AST.WordToken =
+                value === "-" || value === "+" || value === "*" || value === "/"
+                    ? { value, type: "operator", source }
+                    : value === "," || value === "(" || value === ")"
+                        ? { value, type: "punctuator", source }
+                        : { value, type: "word", source }
+            result.push({ raws, token })
+            raws = ""
+            startLoc = endLoc
+        }
+        const index = this.tokens.indexOf(tokenset.token)
+        this.tokens.splice(index, 1, ...result.map(s => s.token))
+
+        return result
     }
 }
