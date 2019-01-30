@@ -3,12 +3,7 @@
         "errors": []
     },
     {
-        "errors": [
-            {
-                "code": "unexpected-calc-token",
-                "index": 8
-            }
-        ]
+        "errors": []
     },
     {
         "errors": [

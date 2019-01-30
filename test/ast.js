@@ -9,7 +9,6 @@ const assert = require("assert")
 const fs = require("fs")
 const path = require("path")
 const findValues = require("../test-tools/find-values")
-const tokenizer = require("../test-tools/tokenizer")
 const parser = require("../test-tools/parser")
 const stringifier = require("../test-tools/stringifier")
 
@@ -57,10 +56,13 @@ describe("AST", () => {
         const cssValues = findValues(source, sourceFileName)
 
         describe(`'test/fixtures/ast/${name}/${sourceFileName}'`, () => {
+            const parsed = cssValues.map(cssValue =>
+                parser(cssValue, sourceFileName)
+            )
             describe("tokens", () => {
-                const tokens = cssValues.map(cssValue =>
-                    tokenizer(cssValue, sourceFileName)
-                )
+                const tokens = parsed.map(p => ({
+                    tokens: p.tokens,
+                }))
                 it("should be parsed to valid tokens.", () => {
                     const tokensPath = path.join(ROOT, `${name}/tokens.json`)
                     const expected = fs.readFileSync(tokensPath, "utf8")
@@ -71,9 +73,9 @@ describe("AST", () => {
                     )
                 })
                 it("should be parsed to valid token.source.", () => {
-                    tokens.forEach((parsed, i) => {
+                    tokens.forEach((tkns, i) => {
                         let start = 0
-                        for (const token of parsed.tokens) {
+                        for (const token of tkns.tokens) {
                             assert.strictEqual(
                                 start,
                                 token.source.start.index,
@@ -89,27 +91,23 @@ describe("AST", () => {
                     })
                 })
                 it("should be parsed to valid token.value.", () => {
-                    tokens.forEach((parsed, i) => {
+                    tokens.forEach((tkns, i) => {
                         assert.strictEqual(
                             cssValues[i],
-                            parsed.tokens.map(t => t.value).join("")
+                            tkns.tokens.map(t => t.value).join("")
                         )
                     })
                 })
                 it("should be parsed to valid token.value. 2", () => {
-                    tokens.forEach((parsed, i) => {
+                    tokens.forEach((tkns, i) => {
                         assert.strictEqual(
                             cssValues[i],
-                            parsed.tokens.map(stringifier).join("")
+                            tkns.tokens.map(stringifier).join("")
                         )
                     })
                 })
             })
             describe("ast", () => {
-                const parsed = cssValues.map(cssValue =>
-                    parser(cssValue, sourceFileName)
-                )
-
                 it("should be parsed to valid ast.", () => {
                     const astPath = path.join(ROOT, `${name}/ast.json`)
                     const expected = fs.readFileSync(astPath, "utf8")

@@ -22,13 +22,17 @@
                 "name": "calc",
                 "nodes": [
                     {
-                        "type": "Word",
-                        "value": "-a"
-                    },
-                    {
-                        "type": "Length",
-                        "value": -10,
-                        "unit": "px"
+                        "type": "MathExpression",
+                        "left": {
+                            "type": "Word",
+                            "value": "-a"
+                        },
+                        "operator": "-",
+                        "right": {
+                            "type": "Length",
+                            "value": 10,
+                            "unit": "px"
+                        }
                     }
                 ]
             }
