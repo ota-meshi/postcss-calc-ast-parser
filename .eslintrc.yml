@@ -18,6 +18,7 @@ overrides:
           }
       }]
       "@mysticatea/ts/no-use-before-define": "off"
+      "@mysticatea/ts/interface-name-prefix": "off"
   - files: "*.js"
     parserOptions:
         sourceType: "script"

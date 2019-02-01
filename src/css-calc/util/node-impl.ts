@@ -237,6 +237,9 @@ export class NumberValue extends Node implements AST.NumberValue {
     }
 }
 
+/**
+ * Abstract class of number with unit values.
+ */
 abstract class NumWithUnitValue<T extends string, U> extends Node {
     public type: T
     public value: number
@@ -408,6 +411,9 @@ export class FlexValue extends NumWithUnitValue<"Flex", AST.FlexUnit>
     }
 }
 
+/**
+ * Abstract class of token values.
+ */
 abstract class TokenValue<T extends string, V extends string> extends Node {
     public type: T
     public value: V

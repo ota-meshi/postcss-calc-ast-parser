@@ -254,7 +254,7 @@ function newNumNode(
             n.raws.unit = {
                 raw: parsedUnit.unit,
                 value: unit,
-            } as any
+            }
         }
         return n
     }

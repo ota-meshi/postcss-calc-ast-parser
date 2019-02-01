@@ -210,7 +210,7 @@ export class Tokenizer {
         const offset = this.offset + indexOffset + 1
         const value = this.text.slice(start, offset)
 
-        this.token = {
+        this.token = ({
             type,
             value,
             source: {
@@ -221,7 +221,7 @@ export class Tokenizer {
                     index: offset,
                 },
             },
-        } as AST.Token
+        } as any) as AST.Token
         this.nextTokenOffset = offset
 
         this.lastTokenType = type

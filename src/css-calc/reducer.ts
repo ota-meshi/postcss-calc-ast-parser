@@ -121,11 +121,11 @@ function reduceDivision(
             value: left.value / right.value,
         }
     }
-    return {
+    return ({
         type: left.type,
         value: left.value / right.value,
         unit: left.unit,
-    } as ReduceValue
+    } as any) as ReduceValue
 }
 
 /**
@@ -142,17 +142,17 @@ function reduceMultiple(
                 value: left.value * right.value,
             }
         }
-        return {
+        return ({
             type: right.type,
             value: left.value * right.value,
             unit: right.unit,
-        } as ReduceValue
+        } as any) as ReduceValue
     } else if (right.type === "Number") {
-        return {
+        return ({
             type: left.type,
             value: left.value * right.value,
             unit: left.unit,
-        } as ReduceValue
+        } as any) as ReduceValue
     }
     return null
 }
