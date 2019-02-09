@@ -3,7 +3,9 @@ import * as AST from "../../types/ast"
 /**
  * checks whether the given node is comma.
  */
-export function isComma(node: AST.Expression | AST.Other): boolean {
+export function isComma(
+    node: AST.Expression | AST.Other,
+): node is AST.Punctuator & { value: "," } {
     return node.type === "Punctuator" && node.value === ","
 }
 

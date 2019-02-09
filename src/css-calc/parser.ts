@@ -53,11 +53,11 @@ function srcLoc(node: AST.INode): AST.SourceLocation {
  */
 function isExpression(
     node: AST.Expression | AST.Other | void,
-): AST.Expression | null {
-    if (node && node.type !== "Punctuator" && node.type !== "Operator") {
-        return node
-    }
-    return null
+): node is AST.Expression {
+    return (
+        (node && node.type !== "Punctuator" && node.type !== "Operator") ||
+        false
+    )
 }
 
 /**
@@ -338,9 +338,8 @@ export class Parser {
                 )
             }
         }
-        const rightExpr = isExpression(right)
         if (isComma(op)) {
-            if (!rightExpr) {
+            if (!isExpression(right)) {
                 // e.g `, - `, `, + `
                 reportError(right)
             }
@@ -353,8 +352,7 @@ export class Parser {
             restore()
             return null
         }
-        const leftExpr = isExpression(left)
-        if (!leftExpr) {
+        if (!isExpression(left)) {
             reportError(isExpression(nodes[nodes.length - 1]) ? op : left)
             restore()
             return null
@@ -364,12 +362,12 @@ export class Parser {
             restore()
             return null
         }
-        if (!rightExpr) {
+        if (!isExpression(right)) {
             reportError(right)
             restore()
             return null
         }
-        return newMathExpression(leftExpr, op, rightExpr)
+        return newMathExpression(left, op, right)
     }
 
     /**

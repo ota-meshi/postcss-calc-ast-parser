@@ -26,7 +26,9 @@ export const RBRACE = 0x7d // }
  * @param cc The char code to check.
  * @returns `true` if the char code is a whitespace.
  */
-export function isWhitespace(cc: number): boolean {
+export function isWhitespace(
+    cc: number,
+): cc is 0x09 | 0x0a | 0x0c | 0x0d | 0x20 {
     return cc === TAB || cc === LF || cc === FF || cc === CR || cc === SPACE
 }
 
@@ -35,7 +37,9 @@ export function isWhitespace(cc: number): boolean {
  * @param cc The char code to check.
  * @returns `true` if the char code is a digit character.
  */
-export function isDigit(cc: number): boolean {
+export function isDigit(
+    cc: number,
+): cc is 0x30 | 0x31 | 0x32 | 0x33 | 0x34 | 0x35 | 0x36 | 0x37 | 0x38 | 0x39 {
     return cc >= 0x30 /* 0 */ && cc <= 0x39 /* 9 */
 }
 

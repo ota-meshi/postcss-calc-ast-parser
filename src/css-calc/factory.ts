@@ -45,10 +45,12 @@ export function newPunctuator(
     token: AST.PunctuatorToken,
     before: string,
 ): AST.Punctuator {
-    if (token.value === "," || token.value === ")") {
-        return newTokenNode(Impl.Punctuator, token, token.value, before)
-    }
-    throw new Error(`illegal argument error "${token.value}"`)
+    return newTokenNode(
+        Impl.Punctuator,
+        token,
+        token.value as "," | ")",
+        before,
+    )
 }
 /**
  * Create node
@@ -283,6 +285,50 @@ function newNumNode(
     }
     return null
 }
+
+function newTokenNode(
+    TokenValue: new (
+        value: AST.Word["value"],
+        before: string,
+        source: AST.SourceLocation,
+    ) => AST.Word,
+    token: { source: AST.SourceLocation },
+    value: AST.Word["value"],
+    before: string,
+): AST.Word
+
+function newTokenNode(
+    TokenValue: new (
+        value: AST.Punctuator["value"],
+        before: string,
+        source: AST.SourceLocation,
+    ) => AST.Punctuator,
+    token: { source: AST.SourceLocation },
+    value: AST.Punctuator["value"],
+    before: string,
+): AST.Punctuator
+
+function newTokenNode(
+    TokenValue: new (
+        value: AST.Operator["value"],
+        before: string,
+        source: AST.SourceLocation,
+    ) => AST.Operator,
+    token: { source: AST.SourceLocation },
+    value: AST.Operator["value"],
+    before: string,
+): AST.Operator
+
+function newTokenNode(
+    TokenValue: new (
+        value: AST.StringNode["value"],
+        before: string,
+        source: AST.SourceLocation,
+    ) => AST.StringNode,
+    token: { source: AST.SourceLocation },
+    value: AST.StringNode["value"],
+    before: string,
+): AST.StringNode
 
 /**
  * Create a node that uses token as it is.

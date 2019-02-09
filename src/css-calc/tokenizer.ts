@@ -50,7 +50,7 @@ type ScanState =
  * @param cc char
  * @returns `true` if the given char is punctuator
  */
-function isPunctuator(cc: number): boolean {
+function isPunctuator(cc: number): cc is 0x28 | 0x29 | 0x2c {
     return cc === LPAREN || cc === RPAREN || cc === COMMA
 }
 
@@ -59,7 +59,20 @@ function isPunctuator(cc: number): boolean {
  * @param cc char
  * @returns `true` if the given char is maybe number.
  */
-function maybeNumber(cc: number): boolean {
+function maybeNumber(
+    cc: number,
+): cc is
+    | 0x2e
+    | 0x30
+    | 0x31
+    | 0x32
+    | 0x33
+    | 0x34
+    | 0x35
+    | 0x36
+    | 0x37
+    | 0x38
+    | 0x39 {
     return isDigit(cc) || cc === DOT
 }
 
@@ -68,7 +81,7 @@ function maybeNumber(cc: number): boolean {
  * @param cc char
  * @returns `true` if the given char quotes
  */
-function isQuotes(cc: number): boolean {
+function isQuotes(cc: number): cc is 0x22 | 0x27 {
     return cc === DQUOTE || cc === SQUOTE
 }
 

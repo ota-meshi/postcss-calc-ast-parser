@@ -35,6 +35,6 @@ export function isClamp(name: string): boolean {
  * checks whether the given name is math functions.
  * @see https://www.w3.org/TR/css-values-4/#calc-notation
  */
-export function isMathFunction(name: string) {
+export function isMathFunction(name: string): boolean {
     return isCalc(name) || isClamp(name) || isMin(name) || isMax(name)
 }
